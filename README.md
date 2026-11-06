@@ -8,10 +8,15 @@ milik pengguna: konsep, praktik, hasil, dan latihan. Peta topik merujuk
 
 **Belum paham IT sama sekali? Mulai dari [pra-bab: mulai dari nol](materi/pra-00-mulai-dari-nol.md).**
 
-**Coba langsung: [simulasi interaktif Laundry Aman](simulator/index.html).**
-Di komputer, buka folder `simulator`, lalu klik dua kali `index.html`. Tidak perlu
-Python, akun, internet, atau instalasi untuk simulasi. Jika membaca lewat GitHub,
-unduh ZIP dan ekstrak dahulu; GitHub menampilkan sumber HTML, bukan menjalankan game.
+**[Mainkan simulasi Laundry Aman di HP atau komputer](https://kvnlhm.github.io/tutorial-cybersecurity/).**
+Buka tautan itu di browser, tanpa akun atau instalasi. Pada HP, ketuk **Pilih
+misi dan mode** untuk membuka daftar latihan. Untuk mengetik, gunakan kotak di
+dalam halaman; ketuk **Jalankan perintah** setelah mengisi perintah.
+
+Ingin bermain offline di komputer? [Unduh ZIP](https://github.com/kvnlhm/tutorial-cybersecurity/archive/refs/heads/main.zip),
+ekstrak, buka folder `simulator`, lalu klik dua kali `index.html`. Tidak perlu
+Python untuk simulasi. [Berkas simulator lokal](simulator/index.html) menampilkan
+kode jika dibuka di GitHub; gunakan tautan bermain di atas untuk menjalankannya.
 [Panduan bermain](simulator/README.md) menjelaskan langkah dan cara menyimpan hasil.
 
 **Buku lengkap: [Tutorial-Cybersecurity.md](Tutorial-Cybersecurity.md).**
@@ -25,7 +30,7 @@ dengan data buatan. Jalur utama tidak memerlukan layanan berbayar atau kartu kre
 
 | Kondisimu | Mulai dari |
 |---|---|
-| Belum mengenal komputer/IT | [Pra-bab](materi/pra-00-mulai-dari-nol.md), lalu [simulasi pertama](simulator/index.html) |
+| Belum mengenal komputer/IT | [Pra-bab](materi/pra-00-mulai-dari-nol.md), lalu [simulasi pertama](https://kvnlhm.github.io/tutorial-cybersecurity/) |
 | Sudah bisa membuka file, belum memakai terminal | [Bab 00: orientasi](materi/00-orientasi.md), lalu Bab 01–08 berurutan |
 | Sudah paham jaringan dan pemrograman | Buktikan latihan Bab 03–08, lalu masuk Bab 09 |
 | Ingin praktik tanpa instal banyak alat | [Panduan empat lab offline](labs/README.md) |
@@ -109,7 +114,12 @@ playwright-cli -s=laundry-qa close
 ```
 
 Script `tests/browser-resilience.js` memeriksa storage, offline, keyboard, dan
-layar kecil; sesuaikan URL `file:///` di script dengan lokasi checkout bila
-folder dipindah. Gunakan profil tes terpisah: suite menghapus hanya kunci progres
+layar kecil pada URL yang sedang dibuka; jalankan pada server lokal sesuai
+[panduan QA](docs/ai/simulator-qa.md). Gunakan profil tes terpisah:
+suite menghapus hanya kunci progres
 simulator pada profil tes sebelum berjalan. Tidak ada langkah ini yang wajib
 bagi pembaca untuk bermain.
+
+GitHub Pages menyajikan branch `main` dari root folder. Berkas `.nojekyll` menjaga
+HTML/CSS/JS tetap statis; `index.html` mengarahkan pengunjung ke simulator.
+Setelah mengubah berkas, jalankan pemeriksaan di atas lalu push ke `main`.

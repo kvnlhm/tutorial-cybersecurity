@@ -5,7 +5,20 @@ misi meminta Anda melakukan tindakan, melihat hasil, lalu menjelaskan keputusan.
 Semua file, email, pengguna, koneksi, dan log di dalam simulasi adalah data buatan.
 Tidak ada scan, pengiriman email, atau perintah yang dijalankan pada komputer Anda.
 
-## Buka tanpa instalasi
+## Mainkan dari HP atau komputer
+
+Buka **[simulator Laundry Aman](https://kvnlhm.github.io/tutorial-cybersecurity/)**
+di browser. Tidak perlu akun, ZIP, atau instalasi. Internet diperlukan untuk
+membuka halaman online. Pada HP, ketuk **Pilih misi dan mode** bila ingin
+mengganti latihan. Ketuk kotak perintah, isi `pwd`, lalu ketuk **Jalankan perintah**.
+Anda tidak perlu membuka terminal sistem atau memakai keyboard komputer.
+
+Gunakan posisi tegak atau mendatar yang nyaman. Tautan **Baca bab dan praktik
+lanjutannya** membuka materi di GitHub; tombol Kembali pada browser membawa
+Anda kembali ke latihan. Simpan tautan bermain sebagai bookmark agar mudah
+dibuka lagi. Lab Python dan latihan VM di buku tetap membutuhkan komputer.
+
+## Buka offline di komputer
 
 1. Jika file masih berbentuk ZIP, klik kanan ZIP dan pilih **Extract All / Ekstrak semua**.
 2. Buka folder hasil ekstraksi, lalu folder `simulator`.
@@ -51,6 +64,8 @@ kasus ujian, lalu praktikkan bab yang ditautkan. Kembalilah setelah 48 jam dan
 ## Progres dan catatan
 
 Browser mencoba menyimpan progres pada perangkat yang sama melalui localStorage.
+Progres versi online, file lokal, browser lain, dan HP/komputer tidak saling
+tersinkron. Pakai browser yang sama dan unduh catatan sebagai salinan.
 Penyimpanan `file://` berbeda antarbrowser. Mode privat, membersihkan data browser,
 atau memindah folder dapat menghilangkan progres. Halaman memberi pesan jika
 penyimpanan ditolak dan tetap mengizinkan latihan dalam tab yang sedang terbuka.
@@ -68,7 +83,7 @@ sebelum mengulang.
 
 | Gejala | Langkah |
 |---|---|
-| Yang terlihat kode HTML di GitHub | Unduh ZIP, ekstrak, buka file lokal |
+| Yang terlihat kode HTML di GitHub | Gunakan tautan bermain online di atas, atau unduh ZIP dan buka file lokal |
 | Pesan memuat tidak hilang | Pastikan kelima file HTML/CSS/JS ada di folder yang sama dan JavaScript aktif |
 | Nama file muncul `index.html.txt` | Aktifkan tampilan ekstensi file dan periksa file asli hasil ekstraksi |
 | Progres kembali kosong | Periksa mode belajar/ujian, browser/profil, lokasi file, dan mode privat |

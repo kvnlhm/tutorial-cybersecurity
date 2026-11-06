@@ -4,6 +4,12 @@
   const engine = window.LaundryEngine;
   const $ = (selector) => document.querySelector(selector);
   const escape = (value) => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function updateReadingLinks() {
+    if (location.hostname !== 'kvnlhm.github.io') return;
+    document.querySelectorAll('a[href^="../"][href$=".md"]').forEach(link => {
+      link.href = 'https://github.com/kvnlhm/tutorial-cybersecurity/blob/main/' + link.getAttribute('href').slice(3);
+    });
+  }
   const key = 'laundry-aman-training-v1';
   const view = { current: 'terminal', mode: 'guided', theme: 'light', records: {} };
   let storageOK = true;
@@ -136,6 +142,7 @@
       <section class="reflection"><label for="reflection">Jelaskan dengan kata-kata Anda</label><p class="small" id="reflection-help">Apa yang Anda ubah, apa buktinya, dan apa yang belum bisa disimpulkan? Catatan ini untuk refleksi; isi tulisan tidak dinilai otomatis.</p><textarea id="reflection" maxlength="3000" aria-describedby="reflection-help" placeholder="Saya mengamati… Lalu saya mencoba… Hasilnya…">${escape(record.reflection)}</textarea></section>
       ${state.completed?`<section class="completion"><h2>Kasus ini selesai.</h2><p>${record.hints?'Anda menyelesaikannya dengan bantuan. Ulangi melalui kasus ujian untuk memeriksa pemahaman.':'Anda berhasil pada aturan kasus ini. Jelaskan alasannya dan lanjutkan praktik di bab terkait.'}</p></section>`:''}
       <div class="next-step"><a href="${escape(mission.chapter)}">Baca bab dan praktik lanjutannya</a><button id="reset-open">Ulangi misi ini</button>${state.completed?'<button id="next" class="primary">'+(missions.indexOf(mission)===missions.length-1?'Unduh ringkasan hasil':'Lanjut ke misi berikutnya')+'</button>':''}</div>`;
+    updateReadingLinks();
     bindMission();
     if(focusId) document.getElementById(focusId)?.focus({preventScroll:true});
   }
@@ -219,5 +226,5 @@
     $('#reset-confirm').addEventListener('click',()=>{delete states[recordKey()];delete view.records[recordKey()];lastFeedback=null;$('#reset-dialog').close();save();render();$('#workspace').focus();});
   }
   try { initialize(); }
-  catch (_) { $('#mission').innerHTML='<div class="fatal"><h1>Latihan belum bisa dimuat</h1><p>Ekstrak seluruh folder simulator. Pastikan index.html, styles.css, scenarios.js, engine.js, dan app.js berada di folder yang sama, lalu buka kembali index.html.</p><a href="../README.md">Baca panduan membuka tutorial</a></div>'; }
+  catch (_) { $('#mission').innerHTML='<div class="fatal"><h1>Latihan belum bisa dimuat</h1><p>Muat ulang halaman. Jika memakai unduhan, ekstrak seluruh folder simulator dan pastikan index.html, styles.css, scenarios.js, engine.js, dan app.js berada di folder yang sama.</p><a href="../README.md">Baca panduan membuka tutorial</a></div>'; updateReadingLinks(); }
 })();

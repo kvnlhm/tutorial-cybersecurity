@@ -63,7 +63,11 @@ playwright-cli -s=laundry-qa run-code $qaScript
 playwright-cli -s=laundry-qa close
 ```
 
-Sesuaikan URL file lokal dalam script resilience jika lokasi folder berubah.
+Script resilience memakai URL yang sedang dibuka; tidak ada path komputer penulis.
+Gunakan URL HTTP(S) pada runner yang membatasi navigasi file lokal. Pemeriksaan
+file lokal tanggal 6 November tercatat di atas; percobaan ulang lewat perintah
+CLI `goto` pada 7 November ditolak oleh pembatasan protokol runner, sehingga
+tidak dihitung sebagai uji file lokal yang berhasil pada sesi publikasi.
 Gunakan profil QA terpisah; script menghapus kunci progres simulator pada profil
 tersebut. Hentikan server dengan Ctrl+C setelah selesai. Pembaca tidak perlu
 menjalankan rangkaian QA ini untuk bermain.

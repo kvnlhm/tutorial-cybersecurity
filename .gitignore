@@ -3,6 +3,8 @@ __pycache__/
 .venv/
 .env
 .env.local
+.env.*
+!.env.example
 hasil-belajar/
 .claude/backups/
 .claude/settings.local.json

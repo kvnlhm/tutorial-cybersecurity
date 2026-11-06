@@ -2,8 +2,9 @@
 
 Repositori materi belajar berbahasa Indonesia untuk pembaca awam hingga spesialis.
 Format utama Markdown; contoh lokal memakai Python standard library. Tidak ada
-database produksi, autentikasi layanan, atau deployment. Simulator browser
-offline di simulator/ memakai HTML/CSS/JavaScript tanpa dependency; baca DESIGN.md.
+database produksi atau autentikasi layanan. Simulator browser di simulator/
+memakai HTML/CSS/JavaScript tanpa dependency; baca DESIGN.md. Versi publik memakai
+GitHub Pages dari branch main/root; folder unduhan tetap dapat dimainkan offline.
 
 Pertahankan studi kasus Laundry Aman, definisikan istilah sebelum memakainya,
 dan sertakan prasyarat, langkah praktik, hasil, troubleshooting, latihan, serta

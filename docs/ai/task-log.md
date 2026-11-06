@@ -62,3 +62,15 @@ Windows. Rincian UI dan batas pemeriksaan: [laporan QA](simulator-qa.md).
 | Lint/typecheck framework | NOT_RUN | Tidak ada framework/linter/typechecker terpasang di proyek | Tidak dikonfigurasi | Syntax check Node dan test dipakai; tidak mengklaim lint lulus |
 | Studi pengguna awam | NOT_RUN | Belum ada peserta awam yang menjalankan sesi observasi | Memerlukan peserta nyata | Tidak mengklaim jaminan penguasaan 100% atau validasi usability manusia |
 | Browser/OS lain dan lab eksternal | NOT_RUN | Tidak menjalankan Firefox/Safari atau memasang VM/platform challenge | Di luar lingkungan verifikasi ini | Batas tetap tercantum di panduan |
+
+## Publikasi GitHub dan akses HP
+
+Tanggal: 7 November 2026. Pengguna mengizinkan push dan meminta akses HP.
+
+| TASK | STATUS (PASS/FAIL/NOT_RUN) | EVIDENCE | BLOCKER | RESULT |
+|---|---|---|---|---|
+| Audit berkas publikasi | PASS | Pemeriksaan nama berkas dan pola credential pada staged files; review 51 referensi lokal | Pencarian pola bukan jaminan tidak ada secret | Tidak ditemukan kandidat kunci/token; hasil latihan, cache, screenshot dan backup diabaikan Git |
+| Push awal | PASS | `gh repo create kvnlhm/tutorial-cybersecurity --public --source . --remote origin --push`; commit 697e771 | Tidak ada | Repo publik dibuat, branch main mengikuti origin/main |
+| Test sebelum publikasi | PASS | `node --test tests/simulator.test.cjs`: 35/35; `py -m unittest discover -s tests -v`: 16/16; `py tools/check_docs.py`: 45 dokumen/69 tautan, sinkron | Tidak ada | Materi dan lab lolos pemeriksaan |
+| Regresi UI lokal | PASS | Callback tests/browser-resilience.js pada localhost: blocked/corrupt/normal, 8 misi pada 390px, Escape/Tab, offline | Chrome emulasi | Script memakai URL aktif dan tidak lagi menyimpan path komputer penulis |
+| Ulang QA file lokal | NOT_RUN | Perintah Playwright CLI `goto file:///...` ditolak runner | Pembatasan protokol file pada perintah CLI | Tidak mengklaim pengujian ulang file lokal berhasil; hasil historis 6 November tetap terpisah |

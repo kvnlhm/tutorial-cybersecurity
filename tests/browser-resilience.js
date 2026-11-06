@@ -2,13 +2,15 @@ async (page) => {
   const assert=(condition,message)=>{if(!condition)throw new Error(message);};
   const results=[];
   const browser=page.context().browser();
-  for(const mode of ['blocked','corrupt','file']) {
+  const target=page.url();
+  await page.evaluate(()=>localStorage.removeItem('laundry-aman-training-v1'));
+  await page.reload();
+  for(const mode of ['blocked','corrupt','normal']) {
     const context=await browser.newContext();
     const tab=await context.newPage();
     try {
       if(mode==='blocked')await tab.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Disabled','SecurityError');};});
       if(mode==='corrupt')await tab.addInitScript(()=>{localStorage.setItem('laundry-aman-training-v1','{broken');});
-      const target=mode==='file'?'file:///C:/laragon/www/cybesecurity-sampai-jago/simulator/index.html':'http://127.0.0.1:8765/simulator/';
       await tab.goto(target);
       assert(await tab.locator('#command').isVisible(),mode+': app tetap bisa dibuka');
       if(mode==='blocked')assert((await tab.locator('#storage-status').innerText()).includes('tidak mengizinkan'), 'Pesan storage ditolak terlihat');

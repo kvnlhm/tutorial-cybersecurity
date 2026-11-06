@@ -88,3 +88,23 @@ Engine lulus 35 unit test; 16 test lab Python tetap lulus. Playwright CLI
 menjalankan seluruh misi pada kedua mode, kasus gagal, file lokal, kegagalan
 storage, serta tampilan desktop/ponsel. Detail dan batas bukti ada di
 [laporan QA simulator](simulator-qa.md). Tidak memasang tool atau layanan baru.
+
+## Publikasi GitHub dan akses HP (7 November 2026)
+
+Pengguna meminta push ke repo, penyesuaian, dan akses dari HP. Repo tujuan
+`kvnlhm/tutorial-cybersecurity` bersifat publik, mengikuti repo tutorial AI Engineer.
+GitHub Pages menyajikan branch `main` dari root dengan `.nojekyll`; halaman masuk
+mengarah ke `simulator/index.html`. Tidak ada backend, akun belajar, atau DB baru.
+HTML/CSS/JS yang sama melayani browser ponsel dan unduhan offline di komputer.
+
+README dan panduan memberikan tautan bermain langsung serta ZIP. Pada host
+`kvnlhm.github.io`, tautan bab mengarah ke tampilan dokumen GitHub. Pada file lokal
+dan localhost, tautan relatif dipertahankan. Penyimpanan tetap di browser masing-
+masing; hasil pada HP, komputer, online, dan file lokal tidak tersinkron otomatis.
+Tidak memasang service worker atau mengklaim akses offline pertama dari tautan web.
+
+Verifikasi publikasi: baca ulang repo/branch/commit melalui API, pastikan build
+Pages selesai, uji URL publik beserta asetnya, dan jalankan misi melalui emulasi
+ponsel dengan sentuhan. Periksa menu, pergantian mode, hasil, tautan bab, console,
+serta overflow. Jangan menyamakan emulasi dengan pengujian perangkat fisik.
+Rujukan konfigurasi: [GitHub Pages publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
