@@ -1,0 +1,88 @@
+async (page) => {
+  const passed = [];
+  const assert = (condition, message) => { if (!condition) throw new Error(message); };
+  const check = async (message) => { assert(await page.locator('.completion').count() === 1, message); passed.push(message); };
+  const unfinished = async (message) => { assert(await page.locator('.completion').count() === 0, message); passed.push(message); };
+  const mission = async id => { await page.locator('#mission-navigation').evaluate(el => el.open = true); await page.locator(`[data-mission="${id}"]`).click(); };
+  const command = async value => { await page.locator('#command').fill(value); await page.locator('#command').press('Enter'); };
+  const select = async (id,value) => page.locator('#'+id).selectOption(value);
+  const request = async (actor,order) => { await select('actor',actor);await select('order',order);await page.locator('#access-form button').click(); };
+  await page.evaluate(() => localStorage.removeItem('laundry-aman-training-v1'));
+  await page.reload();
+  await page.locator('#help-open').click();
+  assert(await page.locator('#help-dialog').isVisible(),'Dialog petunjuk terbuka');
+  await page.keyboard.press('Escape');
+  assert(!await page.locator('#help-dialog').isVisible(),'Escape menutup dialog');
+  await page.locator('#hint').click();
+  assert((await page.locator('.hint-list').innerText()).includes('pwd'),'Petunjuk tahap pertama');
+  await command('ls; whoami');
+  assert((await page.locator('#feedback').innerText()).includes('Tindakan belum sesuai'),'Input shell sungguhan ditolak');
+  await unfinished('Perintah tak didukung tidak meluluskan misi');
+  await page.locator('#reset-open').click();
+  await page.locator('#reset-cancel').click();
+  assert(await page.locator('.hint-list li').count() === 1,'Batal reset menjaga petunjuk');
+  await page.locator('#reset-open').click();await page.locator('#reset-confirm').click();
+  assert(await page.locator('.hint-list li').count() === 0,'Reset menghapus bantuan misi aktif');
+  for (const mode of ['guided','exam']) {
+    await page.locator(`input[name="mode"][value="${mode}"]`).check();
+    await mission('terminal');
+    if(mode==='exam')assert(await page.locator('#hint').count()===0,'Mode ujian tanpa tombol hint');
+    for(const value of (mode==='guided'?['pwd','ls','cd catatan','cat jadwal.txt']:['pwd','ls','cd ../serah-terima','cat tutup.txt'])) await command(value);
+    await check(mode+': terminal selesai melalui input nyata');
+    await page.locator('#reflection').fill('Saya membaca lokasi dan daftar sebelum menentukan file.');
+    await page.reload();
+    await check(mode+': reload mempertahankan hasil berdasarkan riwayat');
+    assert((await page.locator('#reflection').inputValue()).includes('lokasi'),'Refleksi tersimpan');
+    await mission('phishing');
+    const messages=mode==='guided'?[['diskon','phishing','secret-domain'],['jadwal','legit','confirmed']]:[['invoice','phishing','unsafe-file'],['air','legit','confirmed']];
+    for(const [id,classification,reason] of messages){await page.locator(`#inspect-${id}`).click();await select('classification-'+id,classification);await select('reason-'+id,reason);await page.locator(`form[data-message="${id}"] button`).click();}
+    await check(mode+': dua pesan dan alasan dinilai');
+    assert(!(await page.locator('.evidence').innerText()).includes('Belum ada bukti'),'Bukti pesan terlihat');
+    await mission('network');
+    await page.locator('#network-test').click();await unfinished(mode+': konfigurasi jaringan awal gagal sesuai kebutuhan');
+    if(mode==='guided') await page.locator('#flow-guest-pos').uncheck();
+    else {await page.locator('#flow-branch-app').check();await page.locator('#flow-backup-store').check();}
+    await page.locator('#network-test').click();await check(mode+': aliran sah berjalan, akses terlarang tertutup');
+    await mission('access');
+    assert(await page.locator('#actor option').filter({hasText:'Tanpa login'}).count()===1,'Satu pilihan anonim valid');
+    const [actor,own,other]=mode==='guided'?['alice','LA-101','LA-102']:['rani','N-4Z7','N-8Q2'];
+    await request(actor,other);await unfinished(mode+': reproduksi kebocoran belum dianggap selesai');
+    await page.locator('#owner-policy').check();
+    await request(actor,own);await request(actor,other);await request('anonymous',own);
+    await check(mode+': pemilik, lintas pemilik, dan anonim diuji');
+    assert((await page.locator('.response').innerText()).includes('DITOLAK'),'Respons anonim ditolak terlihat');
+    await mission('query');
+    await select('query-case','attack');await page.locator('#query-form button').click();
+    await page.locator('input[name="query-mode"][value="parameter"]').check();
+    assert(await page.evaluate(()=>document.activeElement.id)==='feedback','Fokus hasil tidak hilang setelah penggantian DOM');
+    for(const id of ['normal','apostrophe','attack']){await select('query-case',id);await page.locator('#query-form button').click();}
+    await check(mode+': query parameter diuji dengan tiga masukan');
+    await mission('incident');
+    for(const id of mode==='guided'?['gagal','sukses','konteks']:['login','export','owner'])await page.locator('#event-'+id).click();
+    await select('conclusion',mode==='guided'?'unknown':'unauthorized');await select('containment','erase');await page.locator('#incident-form button').click();await unfinished(mode+': penghapusan bukti tidak meluluskan');
+    await select('containment',mode==='guided'?'verify':'revoke');await page.locator('#incident-form button').click();await check(mode+': kesimpulan dan respons sesuai bukti');
+    await mission('backup');
+    await select('backup-id',mode==='guided'?'terbaru':'replica');await page.locator('#restore-form button').click();await page.locator('#verify-backup').click();await unfinished(mode+': cadangan terbaru rusak tidak lulus');
+    await select('backup-id',mode==='guided'?'sebelum':'offline');await page.locator('#restore-form button').click();await unfinished(mode+': restore perlu verifikasi');
+    await page.locator('#verify-backup').click();await check(mode+': cadangan benar dipulihkan dan diperiksa');
+    await mission('capstone');
+    const decisions=mode==='guided'?{fix:'owner',evidence:'minimum',retest:'both',restore:'verified-copy'}:{fix:'branch',contain:'revoke',claim:'supported',restore:'separate'};
+    for(const [id,value] of Object.entries(decisions))await select('decision-'+id,value);
+    await select('decision-fix',mode==='guided'?'hide':'global');await page.locator('#capstone-form button').click();await unfinished(mode+': keputusan capstone salah gagal');
+    assert((await page.locator('.test-results').innerText()).includes('perlu diperbaiki'),'Penjelasan kesalahan capstone terlihat');
+    await select('decision-fix',decisions.fix);await page.locator('#capstone-form button').click();await check(mode+': capstone empat keputusan lengkap');
+    assert((await page.locator('#progress-text').innerText()).includes('8 dari 8'),'Delapan misi tercatat di mode '+mode);
+  }
+  const downloadPromise=page.waitForEvent('download');await page.locator('#export').click();const download=await downloadPromise;
+  assert(download.suggestedFilename()==='catatan-laundry-aman.json','Ekspor benar-benar mengunduh file');
+  await page.locator('#theme').click();assert(await page.locator('html').getAttribute('data-theme')==='dark','Tema gelap aktif');
+  await page.reload();assert(await page.locator('html').getAttribute('data-theme')==='dark','Tema bertahan setelah reload');
+  await page.locator('#theme').click();
+  await page.locator('input[name="mode"][value="guided"]').check();await mission('terminal');
+  await page.locator('#reset-open').click();await page.locator('#reset-confirm').click();
+  assert((await page.locator('#progress-text').innerText()).includes('7 dari 8'),'Reset hanya satu misi guided');
+  await page.locator('input[name="mode"][value="exam"]').check();
+  assert((await page.locator('#progress-text').innerText()).includes('8 dari 8'),'Reset tidak menghapus mode lain');
+  await page.locator('input[name="mode"][value="guided"]').check();
+  return {status:'PASS',recordedFlows:passed.length,flows:passed};
+}

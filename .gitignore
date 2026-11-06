@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.local
+hasil-belajar/
+.claude/backups/
+.claude/settings.local.json
+CLAUDE.local.md
+artifacts/
+.playwright-cli/
+.impeccable/
