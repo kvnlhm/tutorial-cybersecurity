@@ -51,10 +51,13 @@ Pola konsep–praktik–latihan mengikuti [tutorial AI Engineer](https://github.
 milik pengguna. Penjelasan, data, dan eksperimen disusun untuk buku ini.
 
 **Mulai dari pra-bab jika belum paham IT.** Panduannya menjelaskan file, browser,
-terminal, serta percobaan pertama tanpa instalasi. Buka [simulator Laundry Aman](simulator/index.html)
-di browser setelah mengekstrak seluruh folder. Delapan misi menawarkan petunjuk
+terminal, serta percobaan pertama tanpa instalasi. Buka [simulator Laundry Aman](https://kvnlhm.github.io/tutorial-cybersecurity/)
+langsung di browser HP atau komputer. Pada HP, ketuk kotak perintah di dalam
+halaman dan gunakan tombol **Jalankan perintah**. Delapan misi menawarkan petunjuk
 bertahap, respons terhadap kesalahan, bukti tindakan, dan kasus ujian berbeda.
-[Panduan simulasi](simulator/README.md) menjelaskan cara bermain dan batas model.
+[Panduan simulasi](simulator/README.md) juga menjelaskan cara mengunduh untuk
+bermain offline di komputer. Latihan Python, terminal sistem, dan VM berikutnya
+memerlukan komputer.
 
 Belum perlu Kali Linux atau laptop mahal. Jalur utama
 menggunakan alat gratis dan data buatan; empat lab Python bekerja offline.

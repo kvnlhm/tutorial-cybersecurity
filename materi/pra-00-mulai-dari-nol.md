@@ -4,7 +4,7 @@
 
 Anda boleh mulai tanpa mengetahui arti IP, kode, server, atau terminal. Target pertama adalah menemukan file, membuka simulator, dan menjelaskan hasil satu tindakan. Kita menggunakan **Laundry Aman**, toko rekaan yang mempunyai komputer kasir dan catatan pesanan. Data pelanggan dalam latihan juga rekaan.
 
-Siapkan laptop atau komputer yang dapat membuka browser. **Browser** adalah aplikasi untuk membuka halaman, misalnya Edge, Chrome, Firefox, atau Safari. Untuk sesi pertama, Anda belum perlu memasang Python, Linux, atau alat keamanan. Ponsel dapat membantu membaca materi dan mencoba bagian simulator yang sesuai layarnya; latihan file dan terminal nyata dalam buku lebih nyaman dikerjakan dengan komputer serta keyboard.
+Siapkan HP atau komputer yang dapat membuka browser. **Browser** adalah aplikasi untuk membuka halaman, misalnya Edge, Chrome, Firefox, atau Safari. Sesi pertama dan delapan misi simulator bisa dimulai dari HP tanpa memasang Python, Linux, atau alat keamanan. Untuk latihan file, terminal sistem, Python, dan VM pada tahap berikutnya, gunakan komputer serta keyboard. Anda dapat memulai simulasi sekarang dan melanjutkan praktik komputer saat perangkatnya tersedia.
 
 Bagilah pra-bab menjadi beberapa sesi 15–25 menit. Anda tidak perlu menyelesaikan semuanya hari ini. Waktu tersebut merupakan saran pembagian kerja, bukan batas kecepatan. Jika belum dapat menemukan kembali file yang baru dibuat, ulangi bagian itu sebelum berpindah ke pemrograman.
 
@@ -46,7 +46,18 @@ Di simulator, terminal yang Anda lihat adalah **model latihan di halaman**. Peri
 
 ### Sesi 1: hasil pertama dalam kira-kira lima menit
 
-Lima menit merupakan target kecil untuk percobaan awal setelah folder tersedia. Menemukan folder atau mengunduhnya pertama kali dapat membutuhkan waktu tambahan.
+Lima menit merupakan target kecil untuk percobaan awal, bukan batas waktu. Pilih salah satu cara membuka di bawah ini.
+
+**Dari HP atau browser komputer:**
+
+1. Buka [simulator Laundry Aman](https://kvnlhm.github.io/tutorial-cybersecurity/). Internet diperlukan untuk membuka versi online. Anda tidak perlu membuat akun atau mengunduh ZIP.
+2. Halaman pertama menampilkan tugas **Temukan catatan toko**. Mode belajar sudah dipilih. Pada HP, **Pilih misi dan mode** membuka daftar latihan bila Anda membutuhkannya.
+3. Ketuk kotak berlabel **Ketik perintah di sini**, isi `pwd`, lalu ketuk **Jalankan perintah**. Jangan mengetik `pwd` di bilah alamat browser.
+4. Baca lokasi yang muncul pada kotak hasil. Jelaskan: “Saya meminta lokasi folder, simulator menunjukkan ….” Gunakan kalimat Anda sendiri.
+5. Coba `ls` dengan cara yang sama. Jika belum mengerti hasilnya, buka **Pahami istilah dan konsep misi**, lalu gunakan petunjuk bertahap di bawah meja praktik.
+6. Simpan tautan bermain sebagai bookmark atau favorit browser agar dapat dibuka lagi. Progres disimpan di browser ini; berpindah HP, komputer, atau browser tidak memindahkannya secara otomatis.
+
+**Alternatif: file offline di komputer setelah mengunduh:**
 
 1. Buka pengelola file. Pada Windows, tekan tombol bergambar Windows dan huruf `E` bersama-sama untuk membuka File Explorer. Anda juga dapat memilih ikonnya dari menu Start.
 2. Temukan folder tutorial. Jika seseorang sudah menyiapkan proyek di komputer Anda, buka lokasi yang diberikan. Jangan mengetik contoh path milik penulis sebagai lokasi komputer Anda.
@@ -56,7 +67,7 @@ Lima menit merupakan target kecil untuk percobaan awal setelah folder tersedia. 
 6. Pilih mode belajar dan misi pertama. Baca tugas sebelum menekan tombol atau mengetik. Gunakan petunjuk yang tersedia jika Anda belum mengetahui langkahnya.
 7. Lakukan satu tindakan, baca hasil di layar, lalu jelaskan: “Saya meminta …, simulator menunjukkan ….” Jangan menilai kemajuan hanya dari warna tombol atau skor.
 
-Anda telah menyelesaikan hasil pertama jika berhasil membuka simulator dan dapat membedakan instruksi Anda dari jawaban simulator. Tidak perlu membuka semua misi sekaligus. Simpan nama folder atau lokasi dalam catatan agar Anda dapat membukanya lagi besok.
+Anda telah menyelesaikan hasil pertama jika berhasil membuka simulator dan dapat membedakan instruksi Anda dari jawaban simulator. Tidak perlu membuka semua misi sekaligus. Jika memakai unduhan, simpan nama folder atau lokasinya agar Anda dapat membukanya lagi besok. Sesi berikutnya berlatih memakai komputer; pembaca yang saat ini hanya memegang HP dapat melanjutkan misi simulator terlebih dahulu.
 
 Simulator memakai kasus buatan. Membuka nota virtual di sana tidak berarti Anda mengakses data pelanggan nyata. Hasil misi menunjukkan kemampuan pada kasus latihan itu. Nanti Anda akan memindahkan konsep ke file lokal dan kasus baru dengan batas izin yang jelas.
 

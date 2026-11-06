@@ -120,6 +120,11 @@ suite menghapus hanya kunci progres
 simulator pada profil tes sebelum berjalan. Tidak ada langkah ini yang wajib
 bagi pembaca untuk bermain.
 
+Script `tests/browser-mobile.js` memeriksa sentuhan, form, pergantian mode,
+progres, orientasi layar, serta tautan bacaan pada emulasi HP. Jalankan melalui
+Playwright CLI pada URL simulator yang sedang dibuka, dengan folder `artifacts`
+tersedia. Emulasi tidak menggantikan pengujian HP fisik.
+
 GitHub Pages menyajikan branch `main` dari root folder. Berkas `.nojekyll` menjaga
 HTML/CSS/JS tetap statis; `index.html` mengarahkan pengunjung ke simulator.
 Setelah mengubah berkas, jalankan pemeriksaan di atas lalu push ke `main`.

@@ -1,4 +1,5 @@
 async (page) => {
+  await page.setViewportSize({width: 1440, height: 1000});
   const passed = [];
   const assert = (condition, message) => { if (!condition) throw new Error(message); };
   const check = async (message) => { assert(await page.locator('.completion').count() === 1, message); passed.push(message); };

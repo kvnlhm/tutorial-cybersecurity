@@ -5,13 +5,14 @@ percobaan pertama tanpa instalasi, kemudian memindahkan pemahaman ke lab nyata.
 Pengguna meminta simulasi seperti pekerjaan nyata dan perbaikan tutorial hingga
 tuntas. Semua identitas dan data kasus merupakan fiksi pendidikan.
 
-Keputusan produk: simulator lokal tanpa dependency, akun, biaya, atau telemetri.
+Keputusan produk: simulator statis tanpa dependency, akun, biaya, atau telemetri.
 Satu misi per layar, penjelasan sebelum tindakan, umpan balik sebab-akibat,
-petunjuk bertahap, serta kasus ujian berbeda. Jangan menjanjikan keahlian100%.
+petunjuk bertahap, serta kasus ujian berbeda. Jangan menjanjikan keahlian 100%.
 Ukuran keberhasilan adalah bukti penyelesaian tugas tertentu dan transfer
 pemahaman, bukan skor universal cybersecurity.
 
-Asumsi desain: mayoritas belajar lewat laptop Windows; ponsel tetap dapat
-memakai simulator melalui hosting lokal yang sudah tersedia atau membuka file
-jika browser mendukung. Bahasa antarmuka Indonesia. Asumsi ini belum diuji
-dengan peserta pemula manusia.
+Pengguna meminta akses HP pada 7 November 2026. Jalur masuk utama memakai tautan
+GitHub Pages yang dapat dibuka langsung dari browser HP atau komputer. Unduhan
+offline tetap tersedia untuk komputer. Materi menjelaskan kapan praktik nyata
+memerlukan komputer, sehingga simulasi ponsel tidak dianggap menjalankan OS atau
+alat pentest sungguhan. Bahasa antarmuka Indonesia. Belum ada studi peserta awam.

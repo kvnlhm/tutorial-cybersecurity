@@ -1,11 +1,12 @@
 # Tool registry proyek
 
-Audit: 6 November 2026. Tidak memasang paket atau tool baru.
+Audit terakhir: 7 November 2026. Tidak memasang paket atau tool baru.
 
 | Tool | Status | Bukti dan penggunaan |
 |---|---|---|
 | Python | AVAILABLE | `py --version`: Python 3.14.0; menjalankan lab dan unittest |
 | GitHub CLI | AVAILABLE | `gh api repos/kvnlhm/tutorial-ai-engineer/contents/Tutorial-AI-Engineer.md` berhasil membaca sumber |
+| GitHub repository/Pages | AVAILABLE | Repo publik kvnlhm/tutorial-cybersecurity; branch main/root, HTTPS aktif, Pages build sukses; pengujian URL publik dan sentuhan ponsel lulus |
 | Context7 | AVAILABLE | Dokumentasi `/python/cpython` untuk sqlite3 dan `/mdn/content` untuk localStorage/file lokal dibaca |
 | Web browsing | AVAILABLE | Roadmap, repo contoh, PortSwigger, OWASP, pwn.college, Bandit dibaca |
 | RTK | AVAILABLE | Get-Command menemukan executable; instruksi RTK.md dibaca |

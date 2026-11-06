@@ -79,3 +79,21 @@ selain Chrome, OS lain, serta praktik VM/platform eksternal. Tidak ada dasar
 untuk menjamin semua pembaca menguasai 100% cybersecurity. Pra-bab, latihan
 bertahap, kasus ujian, pemeriksaan retensi, dan panduan pendamping memberi cara
 menilai kemajuan yang lebih nyata daripada sekadar menandai bab telah dibaca.
+
+## Publikasi dan HP, 7 November 2026
+
+URL publik: [Laundry Aman](https://kvnlhm.github.io/tutorial-cybersecurity/).
+GitHub Pages build `42280991304` berhasil untuk commit `f837e4d`; root mengarah ke
+simulator, dan keenam URL halaman/aset yang diperiksa memberi HTTP 200.
+Seluruh 16 kasus belajar/ujian lulus pada URL publik lewat browser-simulator.js.
+
+Callback `tests/browser-mobile.js` memakai konteks Chrome dengan sentuhan dan
+viewport ponsel: terminal belajar/ujian, form phishing, menu, reload, orientasi
+mendatar, serta membuka bab di GitHub dan Kembali berhasil. Lebar 320, 360, 390,
+dan 768 piksel tidak meluber. Console utama dan error JavaScript konteks ponsel
+bersih. Screenshot lokal: `artifacts/published-mobile.png`.
+
+Untuk mengulang pemeriksaan sentuhan, buka URL publik dalam sesi QA lalu jalankan
+isi `tests/browser-mobile.js` melalui `playwright-cli run-code`. Buat folder
+`artifacts` terlebih dahulu. Suite memakai konteks browser sementara dan
+menutupnya setelah selesai. Pengujian perangkat HP fisik/Safari tetap NOT_RUN.

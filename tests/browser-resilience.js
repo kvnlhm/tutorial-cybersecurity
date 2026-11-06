@@ -21,7 +21,7 @@ async (page) => {
     } finally {await context.close();}
   }
   await page.setViewportSize({width:390,height:844});await page.reload();
-  assert(!await page.locator('#mission-navigation').getAttribute('open'),'Navigasi ringkas saat ponsel');
+  assert(await page.locator('#mission-navigation').evaluate(el=>!el.open),'Navigasi ringkas saat ponsel');
   for(const id of ['terminal','phishing','network','access','query','incident','backup','capstone']){
     await page.locator('#mission-navigation summary').click();await page.locator(`[data-mission="${id}"]`).click();
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),id+': tidak overflow pada390px');
