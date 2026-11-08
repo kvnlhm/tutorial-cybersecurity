@@ -10,10 +10,10 @@ async(page) => {
     });
     for(const item of values){if(!Number.isFinite(item.ratio)||item.ratio<4.5)throw Error(theme+' '+item.pair+' contrast '+item.ratio);ratios.push({theme,...item});}
   }
-  await contrast('light');await page.screenshot({path:'artifacts/desktop-light.png',fullPage:true});
-  await page.locator('#theme').click();await contrast('dark');await page.screenshot({path:'artifacts/desktop-dark.png',fullPage:true});
-  await page.setViewportSize({width:390,height:844});await page.reload();await page.screenshot({path:'artifacts/mobile-dark.png',fullPage:true});
-  await page.locator('#theme').click();await page.screenshot({path:'artifacts/mobile-light.png',fullPage:true});
+  await contrast('dark');await page.screenshot({path:'artifacts/desktop-dark.png',fullPage:true});
+  await page.locator('#theme').click();await contrast('light');await page.screenshot({path:'artifacts/desktop-light.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});await page.reload();await page.screenshot({path:'artifacts/mobile-light.png',fullPage:true});
+  await page.locator('#theme').click();await page.screenshot({path:'artifacts/mobile-dark.png',fullPage:true});
   for(const width of [320,390,768,1440]){
     await page.setViewportSize({width,height:900});
     for(const id of ['terminal','phishing','network','access','query','incident','backup','capstone']){

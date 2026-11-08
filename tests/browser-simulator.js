@@ -76,8 +76,8 @@ async (page) => {
   }
   const downloadPromise=page.waitForEvent('download');await page.locator('#export').click();const download=await downloadPromise;
   assert(download.suggestedFilename()==='catatan-laundry-aman.json','Ekspor benar-benar mengunduh file');
-  await page.locator('#theme').click();assert(await page.locator('html').getAttribute('data-theme')==='dark','Tema gelap aktif');
-  await page.reload();assert(await page.locator('html').getAttribute('data-theme')==='dark','Tema bertahan setelah reload');
+  await page.locator('#theme').click();assert(await page.locator('html').getAttribute('data-theme')==='light','Tema terang aktif dari bawaan gelap');
+  await page.reload();assert(await page.locator('html').getAttribute('data-theme')==='light','Tema bertahan setelah reload');
   await page.locator('#theme').click();
   await page.locator('input[name="mode"][value="guided"]').check();await mission('terminal');
   await page.locator('#reset-open').click();await page.locator('#reset-confirm').click();

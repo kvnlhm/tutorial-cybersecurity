@@ -11,7 +11,7 @@
     });
   }
   const key = 'laundry-aman-training-v1';
-  const view = { current: 'terminal', mode: 'guided', theme: 'light', records: {} };
+  const view = { current: 'terminal', mode: 'guided', theme: 'dark', records: {} };
   let storageOK = true;
   let storageMessage = '';
   let lastFeedback = null;
@@ -52,7 +52,7 @@
       if (!loaded || typeof loaded !== 'object' || !loaded.records || typeof loaded.records !== 'object') throw new Error('Format progres tidak dikenal');
       view.current = missions.some(m => m.id === loaded.current) ? loaded.current : 'terminal';
       view.mode = loaded.mode === 'exam' ? 'exam' : 'guided';
-      view.theme = loaded.theme === 'dark' ? 'dark' : 'light';
+      view.theme = loaded.theme === 'light' ? 'light' : 'dark';
       let recovered = false;
       for (const mission of missions) for (const mode of ['guided', 'exam']) {
         const id = mission.id + ':' + mode;
@@ -80,7 +80,7 @@
     const transcript = state.history.filter(h => h.action && h.action.type === 'command').map(h => '$ ' + h.action.value + '\n' + (h.output ?? h.feedback.message)).join('\n\n');
     return `<p>${escape(scenario.task)}</p><div class="file-map"><strong>Peta berkas virtual</strong>${Object.keys(scenario.files).map(p => `<code>${escape(p)}</code>`).join('')}</div>
       <pre class="terminal" aria-label="Hasil terminal virtual">${escape(transcript || 'Terminal virtual siap. Ketik pwd untuk melihat lokasi, lalu tekan Enter.')}</pre>
-      <form id="terminal-form"><div class="field"><label for="command">Ketik perintah di sini</label><div class="terminal-input"><input id="command" type="text" maxlength="200" autocomplete="off" spellcheck="false" placeholder="Contoh: pwd" required aria-describedby="command-help"><button class="primary">Jalankan perintah</button></div><p id="command-help" class="small">Hanya perintah virtual pwd, ls, cd, cat, dan help. Tidak menyentuh berkas komputer Anda.</p></div></form>
+      <form id="terminal-form"><div class="field"><label for="command">Ketik perintah di sini</label><div class="terminal-input"><span class="prompt" aria-hidden="true">$</span><input id="command" type="text" maxlength="200" autocomplete="off" spellcheck="false" placeholder="Contoh: pwd" required aria-describedby="command-help"><span class="cursor" aria-hidden="true"></span><button class="primary">Jalankan perintah</button></div><p id="command-help" class="small">Hanya perintah virtual pwd, ls, cd, cat, dan help. Tidak menyentuh berkas komputer Anda.</p></div></form>
       ${view.mode === 'guided' ? '<div class="quick-commands" aria-label="Isi contoh perintah"><button data-command="pwd">Isi pwd</button><button data-command="ls">Isi ls</button><button data-command="help">Isi help</button></div>' : ''}`;
   }
 
@@ -136,7 +136,7 @@
     const feedback = lastFeedback || state.history.at(-1)?.feedback;
     $('#mission').innerHTML = `<header><p class="mission-meta">Misi ${missions.indexOf(mission)+1} / ${missions.length} · ${view.mode==='guided'?'Belajar':'Ujian kasus berbeda'} · ${escape(scenario.label)}</p><h1>${escape(mission.title)}</h1><p class="brief">${escape(mission.brief)}</p><div class="objective"><strong>Tugas Anda</strong><p>${escape(mission.objective)}</p></div><details class="concept"><summary>Pahami istilah dan konsep misi</summary><p>${escape(mission.concept)}</p></details></header>
       <section class="workbench" aria-label="Meja praktik"><div class="bench-title"><h2>Meja praktik</h2><span>Data buatan · bebas mencoba</span></div><div class="bench-content">${renderer(state,scenario)}</div></section>
-      <section id="feedback" tabindex="-1" class="feedback ${feedback && !feedback.ok?'error':''}"><h2>${escape(feedback?.title || 'Mulai dengan satu tindakan')}</h2><p>${escape(feedback?.message || 'Baca tugas, lakukan percobaan, lalu lihat perubahan hasil. Belum ada tindakan yang dinilai.')}</p></section>
+      <section id="feedback" tabindex="-1" class="feedback ${feedback && !feedback.ok?'error':''}${feedback?'':' pending'}"><h2>${escape(feedback?.title || 'Mulai dengan satu tindakan')}</h2><p>${escape(feedback?.message || 'Baca tugas, lakukan percobaan, lalu lihat perubahan hasil. Belum ada tindakan yang dinilai.')}</p></section>
       <section class="support"><h2>Butuh arah?</h2>${view.mode==='guided'?`<p class="small">Petunjuk dicatat sebagai bantuan. Anda masih perlu menjalankan tindakan sendiri.</p><button id="hint" ${record.hints>=mission.hints.length?'disabled':''}>${record.hints>=mission.hints.length?'Semua petunjuk sudah dibuka':'Buka petunjuk berikutnya ('+record.hints+'/'+mission.hints.length+')'}</button>${hints.length?`<ol class="hint-list">${hints.map(h=>`<li>${escape(h)}</li>`).join('')}</ol>`:''}`:'<p>Mode ujian tidak menyediakan petunjuk. Anda bisa pindah ke mode belajar; progres kedua mode terpisah.</p>'}</section>
       <section class="evidence"><h2>Bukti tindakan Anda</h2>${evidence.length?`<ul>${evidence.map(e=>`<li>${escape(e)}</li>`).join('')}</ul>`:'<p class="empty">Belum ada bukti. Jalankan tindakan pada meja praktik untuk mulai mencatat hasil.</p>'}<p class="small">${state.attempts} tindakan · ${record.hints} petunjuk dibuka</p></section>
       <section class="reflection"><label for="reflection">Jelaskan dengan kata-kata Anda</label><p class="small" id="reflection-help">Apa yang Anda ubah, apa buktinya, dan apa yang belum bisa disimpulkan? Catatan ini untuk refleksi; isi tulisan tidak dinilai otomatis.</p><textarea id="reflection" maxlength="3000" aria-describedby="reflection-help" placeholder="Saya mengamati… Lalu saya mencoba… Hasilnya…">${escape(record.reflection)}</textarea></section>

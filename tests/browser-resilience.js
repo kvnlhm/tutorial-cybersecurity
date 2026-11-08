@@ -32,7 +32,7 @@ async (page) => {
   assert(await page.evaluate(()=>document.activeElement.tagName!=='BODY'),'Navigasi keyboard bekerja');
   results.push('mobile390,8misi,Escape,Tab: PASS');
   await page.context().setOffline(true);
-  try {await page.locator('#theme').click();assert(await page.locator('html').getAttribute('data-theme')==='dark','Interaksi offline tanpa request');results.push('interaksi offline: PASS');}
+  try {await page.locator('#theme').click();assert(await page.locator('html').getAttribute('data-theme')==='light','Interaksi offline tanpa request');results.push('interaksi offline: PASS');}
   finally {await page.context().setOffline(false);}
   await page.locator('#theme').click();
   return results;
