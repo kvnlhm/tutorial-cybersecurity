@@ -64,7 +64,7 @@ Jangan menganggap penyalinan folder memperoleh seluruh bukti disk, termasuk data
 **Akuisisi** berarti proses memperoleh bukti, termasuk pengambilan data memori dengan alat khusus.
 Pengambilan bukti memori dan disk memerlukan alat serta latihan khusus.
 
-**Image disk** adalah salinan representasi disk untuk pemeriksaan, yang cakupannya berbeda dari sekadar menyalin folder.
+**Image disk** adalah hasil perekaman isi media untuk pemeriksaan. Metode akuisisi menentukan cakupannya; hasilnya berbeda dari sekadar menyalin folder.
 Pembuatan image memerlukan alat dan latihan khusus.
 
 <details>
@@ -135,7 +135,8 @@ Copy-Item -LiteralPath hasil-belajar/forensik-demo/auth.bukti.jsonl -Destination
 Get-FileHash -LiteralPath labs/data/auth.jsonl,hasil-belajar/forensik-demo/auth.bukti.jsonl,hasil-belajar/forensik-demo/auth.kerja.jsonl -Algorithm SHA256
 ```
 
-Ketiga hash seharusnya sama. Simpan nilai beserta nama file dalam catatan kasus.
+Ketiga hash seharusnya sama untuk isi yang disalin. Ini tidak membuktikan nama file, waktu pembuatan, atau metadata lain ikut sama.
+Simpan nilai beserta nama file dalam catatan kasus.
 
 **Linux/macOS**
 
@@ -151,6 +152,7 @@ Perintah membaca byte file dan menghitung SHA-256 tanpa mengubah isinya. Tiga ni
 Simpan nilai beserta nama file dalam catatan kasus.
 
 Untuk kedua jalur, jangan mengedit fixture asli atau salinan bukti. Gunakan salinan kerja untuk analisis.
+Catat waktu aktual dan pelaksana saat membuat serta menyerahkan salinan; gunakan catatan itu untuk chain of custody.
 
 ### 3. Analisis salinan kerja
 
@@ -173,7 +175,7 @@ Di catatan kasus, pisahkan tiga hal berikut:
 
 - Pengamatan: pada 08.02.00–08.02.20 UTC, satu sumber tercatat gagal pada tiga akun.
 - Dugaan: terjadi percobaan terhadap beberapa akun.
-- Batas: kumpulan data kecil, tanpa password, informasi perangkat, atau aktivitas sebelum rentang tersebut.
+- Batas: kumpulan data kecil, tanpa password, informasi perangkat, atau aktivitas di luar tujuh kejadian yang tersedia.
 
 Kamu boleh menilai kejadian mencurigakan sambil menjelaskan batas itu. Tunjuk baris sumber untuk setiap pengamatan.
 
@@ -188,7 +190,7 @@ Jika hash berbeda, hentikan klaim bahwa salinan masih identik. Selidiki perubaha
 
 ## Hasil yang diharapkan
 
-Kamu mempunyai dua salinan identik, tabel kronologi dengan nomor baris, dan catatan asal bukti.
+Kamu mempunyai dua salinan dengan isi identik, tabel kronologi dengan nomor baris, dan catatan asal bukti.
 Hasil peringkas sama dengan fixture awal. Hash salinan bukti sesudah analisis cocok dengan catatan awal.
 Laporan menyatakan cakupannya: analisis satu log sintetis, tanpa akuisisi disk atau memori.
 

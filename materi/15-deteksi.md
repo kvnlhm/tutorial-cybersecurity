@@ -113,7 +113,7 @@ Di editor, buka `labs/data/auth.jsonl` dari folder utama tutorial, yaitu folder 
 Objek memakai kurung kurawal `{}` dan pasangan nama serta nilai yang dipisahkan titik dua.
 Teks memakai kutip ganda; koma memisahkan pasangan.
 
-**JSONL** menyimpan satu objek JSON pada tiap baris.
+**JSONL** memisahkan satu nilai JSON per baris; dataset log ini memakai objek pada tiap barisnya.
 Contoh data berikut mencatat satu kejadian. Kejadian berikutnya berada pada baris baru, tanpa koma penghubung antarbaris:
 
 ```json
@@ -165,6 +165,7 @@ Bandingkan hasil program dengan contoh berikut:
 ```
 
 Program menghitung kejadian. Program tidak menentukan penyerang atau menghubungkan kejadian berdasarkan waktu.
+Pemeriksaannya memastikan field wajib berisi teks dan jenis event dikenal; program belum memvalidasi format waktu atau alamat IP.
 Cocokkan dengan hitungan manual. Selidiki selisih satu baris sebelum mengandalkan angka pada layar ringkasan.
 
 ### 3. Tulis aturan deteksi dalam kalimat
@@ -193,7 +194,7 @@ Di catatan latihan, isi nama aturan, tujuan, log yang dibutuhkan, kondisi, kemun
 Tambahkan contoh aktivitas sah yang memicu aturan, misalnya pelatihan pegawai dari satu jaringan bersama.
 
 **Fixture** adalah data latihan tetap yang dipakai untuk memeriksa hasil, seperti lembar contoh yang menjadi pembanding.
-Buat salinan sebelum menambahkan kasus baru. Jangan mengubah fixture asli agar test bawaan tetap konsisten.
+Buat salinan sebelum menambahkan kasus baru. Pertahankan fixture asli sebagai pembanding hasil, bukan sebagai tempat menambah percobaan.
 
 ## Hasil yang diharapkan
 

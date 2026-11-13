@@ -78,8 +78,8 @@ Kasir sedang login ketika membuka situs lain. Situs itu memicu permintaan peruba
 Browser mengirim permintaan memakai sesi kasir, padahal kasir tidak bermaksud mengubah alamat.
 
 Bayangkan kasir memberi tanda pemeriksaan pada formulir yang ia keluarkan, lalu memeriksa tanda itu saat formulir kembali.
-Pada aplikasi, **token anti-CSRF** adalah nilai pemeriksaan yang membantu melindungi permintaan dari pemicu lintas situs.
-Pengembang menerapkannya sesuai rancangan; perbandingan formulir hanya menjelaskan tujuan pemeriksaan, bukan cara membuat token.
+Pada aplikasi, **token anti-CSRF** adalah nilai rahasia yang sulit ditebak dan harus diverifikasi server sesuai sesi pengguna.
+Situs lain seharusnya tidak dapat membaca atau menebaknya. Perbandingan formulir hanya menjelaskan tujuan pemeriksaan.
 
 #### Cukup kenali dulu
 
@@ -98,10 +98,10 @@ Kasir mengunduh nota. Aplikasi seharusnya mengambil file hanya dari folder nota 
 Misalnya, fitur unduh nota justru membaca file dari folder lain.
 Pengembang dapat memetakan ID nota ke file yang boleh diakses.
 
-Bayangkan petunjuk pengambilan pakaian: masuk gudang, lalu kembali ke ruang depan.
+Bayangkan berangkat dari ruang depan: masuk gudang, lalu kembali ke ruang depan.
 Tujuan akhirnya tetap ruang depan.
 
-**Jalur kanonis** menyatakan lokasi acuan file setelah bagian-bagian jalurnya diselesaikan, termasuk perpindahan ke folder induk.
+**Jalur kanonis** menyatakan lokasi file setelah bagian jalur dan tautan simbolik diselesaikan, termasuk perpindahan ke folder induk.
 Pengembang memeriksa apakah lokasi akhir tetap di direktori yang diizinkan dan apakah pengguna berhak membaca nota itu.
 Perbandingan ruangan membantu mengikuti jalur; pemeriksaan tetap harus memakai lokasi file yang sebenarnya.
 
@@ -122,8 +122,8 @@ Laundry Aman memberi kupon sekali pakai. Pemakaian kedua seharusnya ditolak.
 Contohnya, kupon sekali pakai bisa dipakai berulang karena cara aplikasi memperbarui statusnya keliru.
 
 **Atomik** berarti suatu operasi berlaku sebagai satu kesatuan.
-Pada contoh tadi, aplikasi gagal memperbarui status kupon secara atomik.
-Pemeriksaan dan perubahan status perlu mengikuti rancangan yang menjaga aturan sekali pakai.
+Pada contoh, pemeriksaan dan pemakaian kupon tidak dijaga sebagai satu kesatuan.
+Perbaikan harus mencegah dua permintaan lolos pemeriksaan dan memakai kupon yang sama.
 
 **Race condition** terjadi ketika hasil bergantung pada urutan pelaksanaan operasi yang waktunya berdekatan.
 Dua permintaan kupon yang datang berdekatan dapat memunculkan masalah ini.

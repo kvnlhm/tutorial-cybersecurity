@@ -31,10 +31,12 @@ Kita memakai istilah kerja berikut dalam latihan. Organisasi menyesuaikan proses
 - **Preparation**: menyiapkan orang, alat, dan prosedur sebelum kejadian.
 - **Identification**: mengenali masalah dan menilai cakupannya dari bukti.
 
-Ketika akun operator terkonfirmasi disalahgunakan, pengelola dapat mencabut sesinya.
+Pencabutan sesi akun yang terkonfirmasi disalahgunakan adalah contoh pembatasan akses.
 **Containment** berarti membatasi kerugian, seperti menahan pemakaian kunci yang dicurigai sambil menyelidiki masalahnya.
+Pembatasan sementara juga dapat dipilih saat dugaan sudah beralasan, dengan mempertimbangkan dampak dan persetujuan pihak berwenang.
 
-Setelah dampak dibatasi, pengelola memperbaiki bug dan mengganti kredensial yang bocor melalui prosedur resmi.
+Setelah dampak dibatasi, pengelola menangani jalur masuk yang ditemukan.
+Contohnya, memperbaiki bug jika terbukti ada dan mengganti kredensial yang bocor melalui prosedur resmi.
 **Eradication** berarti menghilangkan penyebab, seperti menangani cara kunci toko jatuh ke tangan yang salah.
 Mengganti password tanpa mencabut sesi lama atau memahami jalur masuk dapat meninggalkan akses aktif.
 
@@ -150,8 +152,9 @@ Di catatan pemulihan, tulis syarat yang harus diperiksa:
 - Izin akun sudah diperbaiki dan log berjalan.
 - Pemilik aplikasi menerima hasil pengujian.
 
-Rencanakan pengujian fungsi sah kasir dan satu kasus akses terlarang.
-Tentukan masa pemantauan tambahan serta orang yang meninjau hasilnya. Catat rancangan pengujian sebagai simulasi, tanpa mengklaim layanan nyata sudah diuji.
+Uji rancangan pemulihan dalam tabletop memakai fungsi sah kasir dan satu kasus akses terlarang.
+Catat keputusan untuk kedua kasus, lalu tentukan masa pemantauan tambahan serta orang yang meninjau hasilnya.
+Hasilnya adalah pengujian rancangan dalam simulasi; kamu belum membuktikan layanan nyata telah pulih.
 
 ### 6. Lakukan satu hunt
 
