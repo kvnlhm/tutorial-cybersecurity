@@ -7,7 +7,7 @@ Tahap 5 dari 6: Memeriksa program dan lingkungan
 Kamu akan menilai konfigurasi cloud tanpa membuka akun atau menyalakan sumber daya berbayar.
 Kemampuan ini membantumu mengaudit penyimpanan data cadangan dan layanan aplikasi Laundry Aman.
 
-Bekal utamamu adalah [jaringan dari Bab 03](03-jaringan.md) serta [pengerasan akun dari Bab 09](09-identitas.md) dan [Bab 10](10-hardening.md).
+Bekal utamamu adalah [jaringan dari Bab 03](03-jaringan.md) serta [identitas dari Bab 09](09-identitas.md) dan [hardening Bab 10](10-hardening.md).
 Pahami juga [pembacaan format data JSON dari Bab 15](15-deteksi.md).
 Pahami prinsip least privilege untuk membatasi wewenang seminimal mungkin.
 Praktik dilakukan dengan membaca dokumen JSON serta rancangan konfigurasi di komputermu sendiri.
@@ -23,19 +23,24 @@ Kita akan mempelajari tanggung jawab bersama, izin cloud, dan pengamanan contain
 
 ### Memahami model layanan dan tanggung jawab bersama
 
-Layanan komputasi modern menyediakan infrastruktur siap pakai melalui internet.
+Laundry Aman ingin menyimpan backup tanpa membeli server baru.
 
-Teknologi **cloud** menyediakan kemampuan komputasi melalui layanan penyedia.
+Teknologi **cloud** menyediakan kemampuan komputasi melalui layanan penyedia, seperti menyewa fasilitas kerja sesuai kebutuhan.
+
 Dalam **IaaS** (*Infrastructure as a Service*), pelanggan mengelola lebih banyak lapisan, termasuk sistem operasi mesin virtual.
+Bayangkan menyewa ruang kerja yang masih perlu kamu atur sendiri.
 
 Model **PaaS** (*Platform as a Service*) memindahkan sebagian pengelolaan platform kepada penyedia.
+Seperti menyewa ruang dengan peralatan dasar, kamu lebih berfokus pada aplikasi.
+
 Model **SaaS** (*Software as a Service*) menyediakan aplikasi siap pakai bagi pengguna akhir.
+Seperti memakai layanan pencatatan siap pakai, kamu tetap menentukan akun dan data yang boleh masuk.
 Pemilik akun tetap perlu mengatur akses, klasifikasi data, serta konfigurasi yang menjadi tanggung jawabnya.
 
 Model **shared responsibility** membagi tanggung jawab antara penyedia dan pelanggan.
 Pembagiannya bergantung pada jenis layanan yang dipilih.
 
-Penyedia menjaga keamanan fisik fasilitas, server keras, dan lapisan jaringan dasar.
+Penyedia menjaga keamanan fisik fasilitas dan perangkat keras; rincian pembagian tetap mengikuti layanan yang dipilih.
 Pelanggan bertanggung jawab mengelola akun, data, dan pengaturan izin.
 Memindahkan backup Laundry Aman ke cloud tidak menentukan siapa yang boleh mengunduh backup itu; administrator masih harus menetapkan izin.
 
@@ -43,15 +48,16 @@ Memindahkan backup Laundry Aman ke cloud tidak menentukan siapa yang boleh mengu
 
 - **Penyedia cloud**: perusahaan pengelola infrastruktur komputasi awan.
 - **Bucket**: wadah penyimpanan objek file di lingkungan penyimpanan cloud.
-- **Multi-tenancy**: pemakaian infrastruktur fisik yang sama oleh banyak pelanggan secara terisolasi.
+- **Multi-tenancy**: pemakaian sumber daya bersama oleh beberapa pelanggan dengan pemisahan sesuai rancangan layanan.
 
 ### Mengatur hak akses dengan IAM dan ARN
 
-Untuk membatasi siapa saja yang boleh mengakses data toko, kita menggunakan sistem identitas cloud.
+Laundry Aman ingin aplikasi laporan hanya membaca berkas yang diperlukan.
 
 Sistem **IAM**, singkatan dari *Identity and Access Management*, mengatur identitas dan izinnya.
 Sebuah kebijakan menjawab siapa boleh melakukan aksi apa pada sumber daya mana.
-Kebijakan izin ditulis dalam dokumen teks terstruktur berformat JSON, seperti yang kamu pelajari di Bab 15.
+Contoh kebijakan AWS di sini memakai JSON dari Bab 15: nama kolom dipasangkan dengan nilai.
+Pada contoh nanti, kolom efek menentukan izinkan/tolak, kolom aksi menentukan tindakan, dan kolom sumber daya menentukan sasaran.
 
 Dalam ekosistem AWS, kode **ARN** (*Amazon Resource Name*) adalah nama pengenal sumber daya.
 Penyedia lain memiliki konsep setara dengan format berbeda.
@@ -66,22 +72,30 @@ Hindari pemakaian tanda bintang tanpa batas pada penulisan kebijakan hak akses.
 
 ### Mengisolasi aplikasi dengan container dan serverless
 
-Aplikasi modern sering dikemas agar dapat dipindahkan dengan mudah antarsistem.
+Laundry Aman ingin memindahkan aplikasi laporan tanpa menyiapkan ulang seluruh lingkungan aplikasi.
 
 Teknologi **container** mengemas aplikasi beserta lingkungan pengguna yang dibutuhkannya.
 Container pada umumnya berbagi kernel host, sehingga batasnya berbeda dari VM.
+Kernel adalah inti sistem operasi; host adalah komputer yang menjalankan container.
 Menjalankannya dengan hak istimewa atau memasang direktori host dapat memperluas dampak kesalahan.
+Mode privileged memberi container wewenang tambahan terhadap host.
 
 Praktik **Infrastructure as Code**, atau IaC, menyimpan rancangan infrastruktur sebagai kode agar tim bisa meninjau dan mengulang perubahan.
-Arsitektur **Serverless** mengurangi pengelolaan server langsung, tetapi fungsi tetap mempunyai identitas, input, dependency, dan akses jaringan.
+
+Arsitektur **Serverless** mengurangi pengelolaan server langsung, tetapi fungsi tetap mempunyai identitas, input, komponen tambahan, dan akses jaringan.
 Rahasia yang tertulis di kode fungsi tetap menjadi masalah meskipun penyedia mengurus servernya.
 
 <details>
 <summary>Pendalaman opsional: audit kluster Kubernetes</summary>
 
-Untuk Kubernetes, pelajari Pod Security Standards, service account, RBAC, serta NetworkPolicy.
-Sebuah namespace membantu pengelolaan tetapi tidak otomatis menyediakan seluruh isolasi keamanan.
-Kamu tidak perlu memasang cluster untuk menyelesaikan audit rancangan ini.
+**Kubernetes** mengelola container pada sekumpulan komputer atau kluster.
+Kamu tidak perlu memasangnya untuk audit rancangan ini. Kenali perlindungan berikut saat mengambil jalur tersebut:
+
+- **Pod Security Standards**: aturan keamanan untuk unit aplikasi Kubernetes yang disebut Pod.
+- **Service account**: identitas bagi pekerjaan yang berjalan dalam kluster.
+- **RBAC**: pengaturan hak akses berdasarkan peran.
+- **NetworkPolicy**: aturan komunikasi jaringan untuk Pod, yang memerlukan dukungan sistem jaringan kluster.
+- **Namespace**: pengelompokan sumber daya; pengelompokan ini belum menyediakan seluruh isolasi keamanan.
 
 </details>
 
@@ -94,8 +108,8 @@ Kamu tidak perlu memasang cluster untuk menyelesaikan audit rancangan ini.
 
 ### Cek pemahaman
 
-1. Apa tanggung jawab pelanggan yang tidak pernah dipindahkan ke penyedia dalam model IaaS maupun SaaS?
-2. Mengapa tanda bintang `*` pada resource dokumen IAM dianggap berisiko tinggi?
+1. Apa yang tetap perlu diatur pemilik akun setelah memilih layanan cloud?
+2. Mengapa tanda bintang `*` tanpa batas sumber daya perlu diperiksa terhadap kebutuhan aplikasi?
 3. Mengapa sebuah container yang dibobol dapat berdampak lebih luas jika dijalankan dengan opsi privileged?
 
 ## Praktik
@@ -106,6 +120,8 @@ Ia tidak memberi kebutuhan menghapus, menulis, atau membaca backup pelanggan.
 ### 1. Periksa kebijakan yang terlalu luas
 
 Berikut usulan kebijakan awal yang terlalu luas dan berbahaya:
+
+Baca blok JSON ini di editor sebagai dokumen usulan. Jangan menempelkannya ke terminal atau memasangnya pada akun cloud.
 
 ```json
 {
@@ -171,24 +187,21 @@ network: menerima koneksi dari semua alamat
 ```
 
 Hubungkan tiap temuan dengan kemungkinan dampak:
-Tag bergerak menyulitkan mengetahui artefak yang dipasang.
-Hak root dan privileged memperluas kewenangan.
-Mount root host membuka akses ke data host sesuai izin yang berlaku.
-Secret di sumber dapat menyebar ke riwayat Git.
-Akses jaringan perlu mengikuti kebutuhan layanan.
+
+- Image adalah paket aplikasi; tag seperti latest dapat menunjuk isi berbeda sehingga artefak yang dipasang sulit dilacak.
+- Pengguna root mempunyai wewenang tinggi di container; mode privileged memperluas kewenangan terhadap host.
+- Mount menghubungkan folder host ke container; mount root host membuka akses ke data host sesuai izin yang berlaku.
+- Secret atau rahasia di sumber dapat menyebar ke riwayat Git.
+- Akses jaringan perlu mengikuti kebutuhan layanan.
 
 Usulkan perbaikan konfigurasi:
-Gunakan image dengan digest yang terverifikasi.
+Gunakan image dengan digest, yaitu pengenal berdasarkan hash isi, yang sudah diverifikasi.
 Terapkan pengguna non-root dan hapus privilese yang tidak diperlukan.
 Hilangkan mount host dan kelola secret melalui mekanisme yang aman.
 Batasi koneksi jaringan sesuai kebutuhan tugas.
 
 Konfigurasi ini perlu uji aplikasi: beberapa program memerlukan direktori sementara yang tetap dapat ditulis.
-Read-only filesystem tanpa rancangan penyimpanan bisa membuat aplikasi gagal.
-
-Untuk Kubernetes, pelajari Pod Security Standards, service account, RBAC, serta NetworkPolicy.
-Sebuah namespace membantu pengelolaan tetapi tidak otomatis menyediakan seluruh isolasi keamanan.
-Kamu tidak perlu memasang cluster untuk menyelesaikan audit rancangan ini.
+Filesystem read-only melarang penulisan; tanpa rancangan penyimpanan sementara, aplikasi dapat gagal.
 
 ## Hasil yang diharapkan
 
@@ -215,7 +228,7 @@ Buat enam kasus uji lintas peran, termasuk akses ke backup yang harus ditolak.
 
 Gunakan ARN terpisah untuk masing-masing cabang, misalnya `laporan/cabang-a/*` dan `laporan/cabang-b/*`.
 Akun audit mendapat izin `s3:GetObject` dengan sumber daya mencakup kedua awalan tersebut.
-Pastikan tidak ada pernyataan yang mengizinkan aksi `s3:DeleteObject` atau akses ke direktori cadangan `backup/*`.
+Periksa seluruh kebijakan yang berlaku agar tidak ada izin efektif untuk `s3:DeleteObject` atau akses ke awalan cadangan `backup/*`.
 
 </details>
 
@@ -224,7 +237,7 @@ Pastikan tidak ada pernyataan yang mengizinkan aksi `s3:DeleteObject` atau akses
 - [ ] Saya menyimpan diagram aliran data, tabel tanggung jawab, usulan kebijakan JSON, dan matriks izin.
 - [ ] Saya dapat membedakan batas IAM, kontrol jaringan, enkripsi, dan backup sebagai mekanisme terpisah.
 - [ ] Saya dapat menjelaskan bahaya pemakaian hak root dan mount host pada rancangan container.
-- [ ] Saya memahami alasan mengapa hasil audit konfigurasi luring ditandai `NOT_RUN` sebelum diuji pada cloud berizin.
+- [ ] Saya mencatat hasil review luring terpisah dari validasi akses cloud yang masih `NOT_RUN`.
 
 ### Lanjut belajar
 

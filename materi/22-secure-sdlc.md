@@ -4,7 +4,7 @@ Tahap 5 dari 6: Memeriksa program dan lingkungan
 
 ## Tujuan dan prasyarat
 
-Kamu akan mengubah temuan keamanan menjadi requirement, test, perubahan kode, serta bukti rilis.
+Kamu akan mengubah temuan keamanan menjadi syarat fitur, test, perubahan kode, serta bukti rilis.
 Kemampuan ini membantumu memastikan aplikasi Laundry Aman dibangun dan dirilis secara bertanggung jawab.
 
 Bekal utamamu adalah [Git dari Bab 06](06-pemrograman.md) serta [kriptografi dari Bab 08](08-kriptografi.md).
@@ -21,42 +21,52 @@ Kita akan mempelajari siklus aplikasi, rantai pasok kode, dan pengujian keamanan
 
 ### Mengintegrasikan keamanan ke dalam siklus SDLC
 
-Keamanan perangkat lunak adalah bagian dari seluruh tahapan pembuatan aplikasi.
+Laundry Aman ingin menambah fitur ekspor tanpa membuka data cabang lain.
 
 Kerangka kerja **SDLC**, singkatan dari *Software Development Life Cycle*, mencakup pekerjaan sejak kebutuhan aplikasi sampai pemeliharaannya.
 Tim memasukkan keamanan pada tahap desain, implementasi, pengujian, rilis, dan respons terhadap temuan.
 Menemukan bug setelah rilis tetap penting, tetapi keputusan awal sering menentukan berapa sulit memperbaikinya.
 
+**Security requirement** adalah syarat keamanan fitur, seperti kasir hanya boleh mengekspor transaksi cabangnya.
+Seperti syarat penyerahan pakaian kepada pemiliknya, syarat fitur perlu mempunyai cara pemeriksaan yang jelas.
+
 #### Cukup kenali dulu
 
-- **Security requirement**: syarat keamanan yang wajib dipenuhi oleh suatu fitur baru.
 - **Rancangan aman**: keputusan arsitektur yang membatasi hak akses sejak awal pembuatan program.
-- **Regression test**: pengujian ulang otomatis untuk memastikan perbaikan tidak merusak fitur lain.
+- **Regression test**: pengujian agar perubahan tidak mengembalikan bug atau merusak perilaku lain.
 
 ### Mengamankan rantai pasok perangkat lunak
 
-Aplikasi modern memanfaatkan banyak pustaka dan modul luar yang saling terhubung.
+Pengembang Laundry Aman memakai pustaka luar untuk membuat berkas ekspor.
+Dependency berarti komponen yang dibutuhkan aplikasi, seperti pustaka pembentuk berkas ekspor.
+
+Build adalah proses membentuk paket aplikasi yang akan dipasang.
 
 Konsep **supply chain perangkat lunak** mencakup kode, dependency, pembuat paket, sistem build, dan jalur distribusi.
-Aplikasi aman dapat menerima risiko dari paket yang keliru, akun maintainer yang diambil alih, atau build yang berubah tanpa review.
+Aplikasi dapat menerima risiko dari paket keliru, akun pengelola paket yang diambil alih, atau build yang berubah tanpa review.
 Mengetahui asal sebuah berkas membantu penyelidikan, tetapi asal tepercaya tidak membuktikan seluruh kodenya bebas cacat.
 
 #### Cukup kenali dulu
 
-- **Kunci versi**: penguncian versi pustaka luar agar proses build selalu menghasilkan kode identik.
-- **Pipeline build**: alur otomatis yang menguji dan membangun paket kode di lingkungan terisolasi.
+- **Kunci versi**: penetapan versi pustaka; hasil build identik juga memerlukan sumber, lingkungan, serta instruksi build yang sesuai.
+- **Pipeline build**: alur otomatis yang menguji dan membangun paket kode; isolasi lingkungannya perlu dirancang.
 - **Integritas paket**: verifikasi sidik hash paket untuk memastikan file tidak diubah di perjalanan.
 
 ### Memilih alat bantu pengujian keamanan kode
 
-Untuk memeriksa keamanan aplikasi, tim menggunakan beragam alat bantu pengujian:
+Tim Laundry Aman ingin memeriksa fitur ekspor dan asal komponen pembentuknya.
+Pilih alat berdasarkan pertanyaan yang perlu dijawab:
 
-Pendekatan **SAST** memeriksa pola berisiko yang tampak pada teks kode sumber sebelum program dijalankan.
-Pendekatan **DAST** mengamati perilaku berisiko yang tampak ketika aplikasi sedang berjalan di lingkungan uji.
+**SAST**, *Static Application Security Testing*, memeriksa pola berisiko pada kode, seperti membaca rancangan mesin sebelum menyalakannya.
 
-Analisis **SCA** memeriksa komponen pihak ketiga yang dipakai dan diketahui memiliki kerentanan.
-Dokumen **SBOM** menyajikan daftar bahan lengkap penyusun komponen perangkat lunak.
-Bukti **Provenance** menjelaskan dari sumber repositori dan proses build mana artefak berasal.
+**DAST**, *Dynamic Application Security Testing*, memeriksa perilaku aplikasi berjalan, seperti menguji mesin yang sudah menyala.
+
+**SCA**, *Software Composition Analysis*, memeriksa komponen pihak ketiga dan kerentanan yang diketahui, seperti mencocokkan suku cadang dengan pemberitahuan masalah pemasok.
+
+**SBOM**, *Software Bill of Materials*, memuat daftar komponen perangkat lunak, seperti daftar bahan untuk menelusuri isi paket.
+Kelengkapannya bergantung pada proses penyusunan daftar itu.
+
+**Provenance** menjelaskan sumber dan proses build asal artefak, yaitu berkas hasil build, seperti catatan asal barang dari pemasok.
 
 Bandingkan fokus kelima pendekatan tersebut pada tabel berikut:
 
@@ -70,16 +80,8 @@ Bandingkan fokus kelima pendekatan tersebut pada tabel berikut:
 
 Alat tersebut menjawab pertanyaan berbeda.
 Pemindai dependency tidak membuktikan otorisasi pesanan benar.
-Signature dapat membantu memverifikasi penerbit atau integritas sesuai mekanismenya, tetapi tidak menjamin bahwa kode yang ditandatangani aman.
-
-<details>
-<summary>Pendalaman opsional: mengamankan masukan model AI</summary>
-
-Untuk aplikasi yang memakai model AI, perlakukan jawaban model dan dokumen yang diambilnya sebagai input tak tepercaya.
-Pemeriksaan izin serta pembatasan alat tetap berada pada kode aplikasi.
-Isi dokumen pelanggan tidak boleh mengubah hak pengguna atau kebijakan ekspor.
-
-</details>
+Signature atau tanda tangan digital dari Bab 08 membantu memverifikasi penerbit atau integritas sesuai mekanismenya.
+Tanda tangan tidak menjamin bahwa kode yang ditandatangani aman.
 
 ### Ringkasan
 
@@ -96,7 +98,7 @@ Isi dokumen pelanggan tidak boleh mengubah hak pengguna atau kebijakan ekspor.
 
 ## Praktik
 
-Laundry Aman akan menambah fitur ekspor transaksi.
+Di editor, buat catatan rancangan fitur ekspor transaksi Laundry Aman.
 Mulai dari kebutuhan: kasir boleh mengekspor transaksi cabangnya, supervisor boleh mengekspor cabang yang dikelolanya, dan pelanggan tidak mendapat fitur ekspor seluruh transaksi.
 
 ### 1. Tetapkan invariant aturan bisnis
@@ -125,7 +127,7 @@ Buat rancangan test berikut sebelum menulis fungsi:
 | Ekspor sah selesai | Audit event tercatat tanpa isi pelanggan |
 
 Gunakan `labs/access_demo.py` untuk mengulang konsep pemeriksaan pemilik objek.
-Jalankan dari folder proyek dengan:
+Pilih jalur sesuai perangkatmu. Buka terminal di folder utama tutorial, lalu jalankan perintah berikut:
 
 **Windows PowerShell**
 
@@ -178,6 +180,10 @@ Jangan memasukkan secret ke commit, hasil test, atau screenshot.
 Jika secret benar-benar bocor, penghapusan teks dari commit terakhir tidak mencabut nilainya.
 Pemilik perlu melakukan pencabutan atau rotasi, meninjau pemakaian, dan membersihkan lokasi penyimpanan yang relevan.
 
+Untuk aplikasi yang memakai model AI, perlakukan jawaban model dan dokumen yang diambilnya sebagai input tak tepercaya.
+Pemeriksaan izin serta pembatasan alat tetap berada pada kode aplikasi.
+Isi dokumen pelanggan tidak boleh mengubah hak pengguna atau kebijakan ekspor.
+
 ## Hasil yang diharapkan
 
 Kamu menghasilkan aturan fitur yang bisa diuji, matriks izin, serta diagram rilis dengan bukti sumber dan artefak.
@@ -188,8 +194,8 @@ Kamu dapat menjelaskan siapa yang menangani temuan setelah produk dipakai.
 
 | Yang terlihat | Pemeriksaan atau langkah aman |
 |---|---|
-| Test hanya menguji akses berhasil | Tambahkan kasus negatif: perpindahan cabang, peran palsu, dan sesi kedaluwarsa |
-| Pemindai memberi ratusan peringatan | Validasi keterjangkauan dan dampak nyata sebelum menentukan skala prioritas |
+| Test hanya menguji akses berhasil | Tambahkan kasus negatif: perpindahan pengguna, cabang, peran palsu, dan sesi kedaluwarsa |
+| Pemindai memberi ratusan peringatan | Validasi keterjangkauan serta dampak sebelum menentukan prioritas; simpan alasan penundaan |
 | Versi pustaka terkunci usang | Lakukan pembaruan terencana secara berkala dan pantau advisori keamanan resmi |
 
 ## Latihan
@@ -201,16 +207,16 @@ Susun test untuk menghindari penghapusan lintas cabang serta test bahwa kegagala
 <details>
 <summary>Pembahasan setelah mencoba: fitur pembatalan transaksi</summary>
 
-Pembatalan transaksi memerlukan verifikasi cabang dan peran supervisor.
-Pengujian negatif memastikan kasir cabang lain atau kasir biasa tidak dapat membatalkan pesanan.
-Pemeriksaan konsistensi memastikan status pesanan diperbarui secara atomik bersamaan dengan pencatatan log audit.
+Gunakan aturan peran dan umur transaksi yang kamu tetapkan sendiri untuk menentukan siapa yang boleh membatalkan.
+Uji bahwa pengguna di luar izin, termasuk cabang lain, ditolak.
+Periksa bahwa kegagalan tidak meninggalkan perubahan sebagian dan jejak audit tetap sesuai hasil tindakan.
 
 </details>
 
 ## Bukti kelulusan
 
 - [ ] Saya menyimpan berkas threat model kecil, rancangan test positif dan negatif, serta catatan rilis.
-- [ ] Saya dapat menghubungkan satu risiko keamanan ke requirement fitur dan pengujian otomatisnya.
+- [ ] Pemeriksa lain dapat menautkan satu risiko ke syarat fitur, perubahan, dan bukti test yang menutupnya.
 - [ ] Saya dapat menerangkan peran SAST, DAST, SCA, SBOM, dan provenance dalam alur build.
 - [ ] Saya memahami langkah penanganan saat secret atau kunci API tidak sengaja masuk ke repositori.
 

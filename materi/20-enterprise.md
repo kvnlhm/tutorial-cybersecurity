@@ -15,26 +15,33 @@ Kamu tidak membutuhkan Windows Server berbayar atau akses domain kantor nyata.
 ## Konsep
 
 Laundry Aman kini mengelola belasan cabang toko di berbagai kota.
-Mengatur akun kasir secara terpisah di setiap toko menjadi sangat merepotkan.
+Mengatur akun kasir secara terpisah di setiap toko mulai merepotkan.
 Jaringan perusahaan membutuhkan pengelolaan identitas pengguna secara terpusat.
-Hubungan grup bertingkat sering membuka jalur akses rahasia tanpa disadari.
+Hubungan grup bertingkat dapat memberi akses yang tidak sesuai tugas.
 Kita akan mempelajari direktori perusahaan, tiket masuk, dan penelusuran izin akses.
 
 ### Mengelola identitas terpusat dengan Active Directory
 
-Mengelola akun satu per satu di setiap komputer cabang memicu ketidakteraturan izin akses.
+Petugas Laundry Aman ingin mengelola akun cabang dari satu tempat agar pencabutan akses tidak terlewat.
 
-Layanan **directory service** menyimpan identitas dan hubungan organisasi secara terpusat dalam satu basis data.
+Layanan **directory service** menyimpan identitas dan hubungan organisasi secara terpusat, seperti buku induk akun seluruh cabang.
+
 Layanan **Active Directory Domain Services**, disingkat AD DS, adalah sistem dari Microsoft untuk memenuhi kebutuhan tersebut.
+
 Server pengendali yang menjalankan layanan direktori ini disebut **domain controller**.
 
 Struktur Active Directory disusun secara bertingkat untuk memudahkan pembagian wewenang:
 
-Sebuah **domain** mengelompokkan identitas dan batas administrasi dalam satu jaringan organisasi.
-Struktur **forest** dapat memuat beberapa domain dengan hubungan kepercayaan timbal balik.
-Pengaturan **Group Policy** membantu administrator menerapkan aturan keamanan ke pengguna atau komputer secara massal.
-Wadah **Organizational Unit**, atau OU, dipakai untuk mengelompokkan akun demi kemudahan delegasi tugas.
-Wadah OU bukan pengganti grup izin file NTFS.
+Sebuah **domain** mengelompokkan identitas dan pengelolaannya, seperti satu bagian buku induk akun.
+Domain tidak harus terbatas pada satu jaringan fisik.
+
+Struktur **forest** dapat memuat beberapa domain dengan hubungan kepercayaan, seperti kumpulan buku induk yang saling mengenali akun.
+Kepercayaan membantu pengenalan identitas; izin mengakses file tetap perlu diperiksa.
+
+Pengaturan **Group Policy** membantu administrator menerapkan aturan ke pengguna atau komputer, seperti instruksi kerja bersama untuk cabang.
+
+Wadah **Organizational Unit**, atau OU, mengelompokkan objek untuk administrasi, seperti map akun cabang yang dikelola petugas tertentu.
+Wadah OU bukan pengganti grup izin file.
 
 #### Cukup kenali dulu
 
@@ -44,20 +51,23 @@ Wadah OU bukan pengganti grup izin file NTFS.
 
 ### Membuktikan identitas lewat tiket Kerberos
 
-Klien jaringan membutuhkan protokol komunikasi untuk mencari informasi dan membuktikan izinnya.
+Laptop kasir Laundry Aman perlu mencari informasi akun, lalu membuktikan identitas saat membuka layanan.
 
 Protokol **LDAP** adalah aturan komunikasi untuk membaca dan mencari informasi di dalam direktori.
-Sementara itu, mekanisme **Kerberos** membantu membuktikan identitas pengguna melalui sistem tiket digital.
-Bayangkan loket bioskop: petugas memverifikasi tiket masukmu, lalu memberimu gelang pengenal untuk memasuki ruangan teater tertentu.
+Seperti petugas yang mencari nama di buku induk, klien meminta informasi yang diizinkan untuk dibaca.
+
+Mekanisme **Kerberos** membantu membuktikan identitas pengguna melalui sistem tiket digital.
+Bayangkan loket yang memeriksa identitas, lalu memberikan tiket untuk meminta tiket layanan tertentu.
 
 Pusat penerbit tiket disebut **KDC** (*Key Distribution Center*), yang berada pada domain controller dalam lingkungan AD DS.
-Saat berhasil login, pengguna menerima tiket **TGT** (*Ticket Granting Ticket*).
+
+Saat berhasil login, pengguna menerima **TGT** (*Ticket Granting Ticket*), tiket untuk meminta tiket layanan tanpa menyerahkan ulang password ke tiap layanan.
 
 Tiket TGT dipakai untuk meminta tiket layanan tertentu saat kasir membuka server aplikasi atau file bersama.
-Server layanan kemudian memeriksa tiket yang sesuai sebelum mengizinkan akses.
+Server layanan memeriksa tiket untuk mengenali identitas, lalu tetap memeriksa izin tindakan yang diminta.
 Penjelasan ini menyederhanakan proses pertukaran kunci kriptografi yang terjadi di baliknya.
 
-Layanan DNS membantu klien menemukan domain controller terdekat di jaringan.
+Layanan DNS membantu klien menemukan layanan domain, termasuk domain controller.
 Sinkronisasi waktu jam sangat penting untuk memeriksa masa berlaku tiket Kerberos.
 Gangguan login karena DNS atau waktu tidak otomatis berarti serangan; periksa konfigurasi dan log sebelum menyimpulkan penyebab.
 
@@ -69,7 +79,7 @@ Gangguan login karena DNS atau waktu tidak otomatis berarti serangan; periksa ko
 
 ### Menelusuri tiga jenis hubungan izin akses
 
-Dalam meninjau keamanan jaringan perusahaan, ada tiga hubungan izin yang perlu kamu bedakan:
+Saat meninjau akses vendor Laundry Aman, bedakan tiga jenis hubungan berikut:
 
 - **Keanggotaan:** akun mewarisi hak dari grup, termasuk grup di dalam grup lain secara bersarang.
 - **Kontrol:** akun dapat mengubah anggota grup atau mengatur ulang akun lain.
@@ -79,14 +89,12 @@ Izin tampak kecil dapat membentuk jalur menuju aset besar.
 Seorang operator yang boleh mengubah anggota grup administrator mungkin memperoleh pengaruh lebih luas daripada hak baca direktori biasa.
 Penilaian perlu mengikuti hubungan, bukan hanya nama jabatan akun semata.
 
-<details>
-<summary>Pendalaman opsional: struktur graf dan pencarian antrean</summary>
+Untuk mengikuti hubungan tadi, kita memakai **graf**, gambar titik dan penghubung, seperti peta jalur antarcabang.
+Tiap titik atau simpul mewakili akun atau grup; panah berarti keanggotaan.
+Dictionary Python memetakan tiap nama ke daftar grup induknya.
 
-Di Bab 06, kita mempelajari struktur dictionary untuk menyimpan pasangan nilai.
-Di bab ini, dictionary memetakan nama akun ke daftar grup induknya sebagai representasi graf.
-Antrean memeriksa jalur langkah demi langkah, sementara set `pernah` mencatat simpul yang sudah dikunjungi agar tidak terjadi perulangan tanpa henti.
-
-</details>
+Skrip memakai antrean, daftar pekerjaan yang diperiksa dari urutan depan.
+Set `pernah` menyimpan nama yang sudah diperiksa tanpa duplikasi, sehingga hubungan melingkar tidak membuat pemeriksaan berulang tanpa henti.
 
 ### Ringkasan
 
@@ -148,7 +156,7 @@ for akun in ("vendor.lama", "svc.laporan", "rani.kasir"):
     print(akun, jalur_ke_admin(akun))
 ```
 
-Jalankan perintah berikut:
+Pilih jalur sesuai perangkatmu. Buka terminal di folder utama tutorial, lalu jalankan perintah berikut:
 
 **Windows PowerShell**
 
@@ -182,6 +190,7 @@ Rancang perbaikan bertahap untuk menata ulang struktur izin:
 
 Uji rancangan pada data Python dengan mengganti hubungan yang berlebih.
 Tambahkan uji positif: pekerjaan laporan tetap mendapat hak baca yang sah.
+Skrip ini hanya mencari jalur admin. Pemeriksaan hak baca memerlukan model izin tambahan atau lab berizin; simpan hasilnya secara terpisah.
 Audit yang hanya mencabut izin dapat merusak layanan jika tidak memeriksa kebutuhan operasional secara menyeluruh.
 
 ### 4. Pendalaman lingkungan AD DS berizin
@@ -189,6 +198,15 @@ Audit yang hanya mencabut izin dapat merusak layanan jika tidak memeriksa kebutu
 Pada lingkungan AD DS berizin, perluas latihan menjadi pemeriksaan kebijakan akun layanan, pembatasan administrator, protokol lama, serta log perubahan grup.
 Teknik seperti password spraying, pass-the-hash, dan penyalahgunaan tiket menjelaskan risiko identitas; pembelajaran operasionalnya perlu lab khusus dan cakupan tertulis.
 Materi ini melatih cara menemukan dan menutup jalur izin tanpa mencoba kredensial pihak lain.
+
+<details>
+<summary>Pendalaman opsional: istilah risiko identitas</summary>
+
+- **Password spraying**: mencoba sedikit password pada banyak akun.
+- **Pass-the-hash**: menyalahgunakan hash autentikasi untuk bertindak sebagai akun tanpa mengetahui password aslinya.
+- **Penyalahgunaan tiket**: memakai tiket autentikasi di luar hak atau tujuan yang sah.
+
+</details>
 
 ## Hasil yang diharapkan
 
@@ -224,7 +242,7 @@ Untuk memodelkan hubungan kontrol, kamu memerlukan struktur data relasi tambahan
 - [ ] Saya menyimpan data inventaris, peta akses sebelum dan sesudah perbaikan, serta tiga temuan risiko.
 - [ ] Saya dapat menjelaskan cara kerja tiket Kerberos menggunakan bahasa sendiri.
 - [ ] Saya dapat membedakan hasil audit graf sederhana dari penilaian domain Active Directory lengkap.
-- [ ] Saya memastikan fungsi bisnis yang sah tetap berjalan setelah perbaikan izin diterapkan.
+- [ ] Saya menyimpan hasil uji bahwa fungsi bisnis yang sah tetap berjalan setelah perbaikan izin.
 
 ### Lanjut belajar
 
