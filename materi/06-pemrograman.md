@@ -23,7 +23,7 @@ Kita akan mempelajari cara menulis program kecil, menguji hasilnya, dan menyimpa
 
 ### Mengolah data toko dengan aturan yang konsisten
 
-Pemrograman membantu mengulang pekerjaan dengan aturan yang konsisten.
+Kasir Laundry Aman ingin menghitung status login dengan aturan yang sama setiap sore.
 Kita menggunakan wadah dan aturan dasar untuk menyimpan serta mengolah data.
 
 Sebuah **variabel** memberi nama pada suatu nilai, seperti menempel label pada toples detergen.
@@ -36,11 +36,16 @@ Sebuah **integer** menyimpan bilangan bulat, seperti jumlah pesanan baju.
 
 Sebuah **list** menyimpan urutan nilai, seperti daftar status pesanan pakaian.
 
+Kasir dapat menaruh beberapa status dalam satu list, lalu memeriksa anggotanya satu per satu.
+Ia tidak perlu membuat variabel terpisah untuk setiap kejadian.
+
 Sebuah **dictionary** menghubungkan kunci dengan nilai, mirip label pada laci penyimpanan nota.
 
 Sebuah **loop** mengulangi langkah kerja untuk setiap data di dalam kelompok.
 
 Sebuah **kondisi** memilih tindakan berdasarkan syarat yang ditentukan.
+
+Misalnya, kasir hanya menambah hitungan jika status yang dibaca sama dengan teks gagal.
 
 Sebuah **fungsi** mengemas pekerjaan agar dapat dipanggil dan diuji dengan masukan berbeda.
 Perintah `assert` memeriksa dugaan hasil di latihan dan menghentikan program jika hasilnya tidak cocok.
@@ -49,7 +54,7 @@ Perintah `assert` memeriksa dugaan hasil di latihan dan menghentikan program jik
 
 - **Tipe data**: kategori nilai di komputer, seperti teks, angka bulat, atau daftar.
 - **Kunci dan nilai**: pasangan data di dictionary untuk mencari informasi dengan cepat.
-- **Parameter**: nilai masukan yang diterima oleh fungsi untuk diolah.
+- **Parameter**: nama penerima masukan dalam definisi fungsi; pada contoh nanti, namanya hasil_login.
 
 ### Memilih alat pemrograman untuk keamanan
 
@@ -87,10 +92,11 @@ Oleh karena itu, cegah rahasia seperti password masuk ke Git sejak awal.
 <details>
 <summary>Pendalaman opsional: mengapa rahasia tidak boleh masuk Git</summary>
 
-Saat kamu membuat commit, Git mencatat isi file secara permanen ke dalam basis datanya.
+Saat kamu membuat commit, Git menyimpan potret isi file dalam riwayat.
 Menghapus file pada commit berikutnya tidak menghapus catatan lama dari riwayat.
-Siapa pun yang memiliki akses ke repository dapat membuka commit lama dan menemukan password tersebut.
-Gunakan file pengecualian atau simpan rahasia di luar folder yang dilacak Git.
+Orang yang mempunyai commit lama dapat menemukan password di dalamnya.
+Simpan rahasia di luar file yang dilacak Git.
+File pengecualian `.gitignore` membantu mengabaikan file yang belum dilacak; menambahkannya tidak menghapus rahasia dari riwayat.
 
 </details>
 
@@ -109,7 +115,7 @@ Gunakan file pengecualian atau simpan rahasia di luar folder yang dilacak Git.
 
 ## Praktik
 
-Siapkan editor teks dan buka terminal di folder latihan komputermu.
+Siapkan komputer dan Python dari Bab 01. Buka folder utama tutorial di editor dan terminal.
 Ikuti langkah-langkah berikut secara berurutan.
 
 ### 1. Buat program pertama
@@ -149,7 +155,8 @@ python3 hasil-belajar/hitung_login.py
 
 Kata kunci `def` mendefinisikan fungsi baru.
 Baris `jumlah = 0` menyiapkan variabel penghitung awal.
-Perintah `for` memeriksa setiap elemen, `if` menguji kesamaan, dan `+= 1` menambah satu pada nilai jumlah.
+Perintah `for` mengulangi pekerjaan untuk tiap elemen; `if` memilih tindakan saat syaratnya benar.
+Pada contoh, `==` membandingkan teks, sedangkan `+= 1` menambah satu pada nilai jumlah.
 Kata kunci `return` mengembalikan nilai hasil perhitungan kepada pemanggil fungsi.
 
 Indentasi spasi adalah bagian aturan sintaks Python; gunakan empat spasi untuk satu tingkat indentasi.
@@ -211,6 +218,7 @@ Dalam Python, panggil fungsi pustaka yang tersedia, bukan menggabungkan teks mas
 
 ### 4. Simpan riwayat lokal jika Git tersedia
 
+Perintah Git berikut dapat dijalankan di PowerShell Windows atau terminal Linux/macOS.
 Periksa ketersediaan Git di komputermu dengan perintah `git --version`.
 Jika belum tersedia, kamu boleh melanjutkan bab tanpa Git lalu memasangnya dari sumber resmi saat diperlukan.
 
@@ -224,7 +232,7 @@ git init
 git status
 ```
 
-Buat file baru bernama `catatan.md` menggunakan editor teks dan tulis satu pelajaran yang kamu dapatkan.
+Buat file baru bernama `catatan.md` menggunakan editor teks, tulis satu pelajaran, lalu simpan file.
 Kemudian jalankan perintah penyimpanan riwayat:
 
 ```text
@@ -234,7 +242,7 @@ git -c user.name="Pelajar Lab" -c user.email="pelajar@example.invalid" commit -m
 git log --oneline
 ```
 
-Perintah `git add` menyiapkan file untuk disimpan dalam commit.
+Perintah `git add` menyiapkan isi file saat itu untuk disimpan dalam commit.
 Perintah `git diff --cached` memperlihatkan perubahan isi yang akan disimpan.
 Dua opsi `-c` menyediakan identitas sementara khusus perintah ini tanpa mengubah konfigurasi global komputermu.
 

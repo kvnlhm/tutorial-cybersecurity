@@ -52,10 +52,13 @@ Data pelanggan Laundry Aman tidak boleh dibaca oleh sembarang orang di server.
 Linux membagi hak akses ke dalam tiga pihak.
 
 Pihak pertama adalah **owner**, yaitu pengguna pemilik file atau direktori.
+
 Pihak kedua adalah **group**, yaitu kelompok pengguna yang berbagi hak kerja sama.
+
 Pihak ketiga adalah **others**, yaitu semua pengguna lain di sistem.
 
-Tiap pihak memiliki tiga jenis izin dasar:
+Izin yang diperiksa bergantung apakah pengguna cocok sebagai owner, anggota group, atau others.
+Untuk file biasa, tiga jenis izinnya adalah:
 
 - Huruf `r` berarti membaca (*read*), seperti melihat isi catatan pesanan.
 - Huruf `w` berarti menulis (*write*), seperti mengubah atau menambah isi data.
@@ -67,7 +70,8 @@ Izin `w` membantu mengubah entri, seperti membuat, mengganti nama, atau menghapu
 Izin `x` membantu melewati direktori untuk mengakses isinya.
 
 Menghapus file terutama terkait izin direktori induk, sehingga pemahaman izin file saja belum cukup.
-Jika pengguna memiliki izin `w` dan `x` pada folder induk, ia bisa menghapus file di dalamnya meski file itu berstatus hanya-baca.
+Pada folder latihan biasa, izin `w` dan `x` pada folder induk dapat mengizinkan penghapusan file hanya-baca.
+Pembatas tambahan pada direktori atau sistem file dapat tetap mencegah penghapusan.
 
 Sistem juga menuliskan izin dalam bentuk angka **oktal**, yaitu angka berbasis delapan.
 Angka `4`, `2`, dan `1` mewakili read, write, dan execute.
@@ -80,7 +84,7 @@ Perintah `chmod 644` memberi owner baca/tulis dan pihak lain baca.
 
 Pengaturan yang tepat bergantung fungsi data.
 Memberi `777` ke seluruh folder untuk menghilangkan error akan membuka akses yang tidak diperlukan.
-Tindakan ceroboh itu membuat semua pengguna di server bisa mengubah atau menghapus data Laundry Aman.
+Izin itu memberi hak baca, tulis, dan lewat kepada owner, group, serta others; pembatas lain tetap dapat berlaku.
 
 #### Cukup kenali dulu
 
@@ -91,7 +95,7 @@ Tindakan ceroboh itu membuat semua pengguna di server bisa mengubah atau menghap
 ### Hak istimewa dan menjalankan perintah
 
 Pengguna **root** mempunyai kewenangan luas di seluruh sistem.
-Akun administrator ini dapat membaca atau menghapus file apa pun tanpa halangan.
+Akun ini dapat melewati banyak pemeriksaan izin biasa, tetapi sistem file hanya-baca dan pembatas keamanan lain tetap dapat menghalanginya.
 
 Perintah `sudo` dapat menjalankan perintah dengan identitas lain sesuai kebijakan keamanan.
 Biasanya `sudo` dipakai untuk menjalankan tugas pemeliharaan sistem dengan wewenang root sementara.
@@ -112,9 +116,12 @@ Ketik perintah dengan format berikut di terminal Linux atau PowerShell:
 ssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 
-Ketik `yes` saat terminal menanyakan sidik jari host untuk pertama kali.
-Sidik jari host adalah kode pengenal mesin tujuan agar kamu mengenali server yang sama di lain waktu.
-Lalu masukkan password yang diberikan, misalnya `bandit0`.
+Sidik jari host adalah ringkasan kunci server untuk membantu memeriksa identitas tujuan.
+Bandingkan dengan informasi dari pengelola melalui sumber tepercaya sebelum mengetik `yes`.
+
+Jika belum dapat memverifikasinya, tunda jalur SSH ini. Jangan abaikan peringatan perubahan kunci pada sambungan berikutnya.
+
+Setelah tujuan terverifikasi, masukkan password latihan dari petunjuk resmi, misalnya `bandit0` untuk level awal.
 Karakter password sengaja tidak muncul di layar demi keamanan.
 Setelah selesai, ketik `exit` untuk kembali ke terminal lokalmu.
 
@@ -130,7 +137,7 @@ Setelah selesai, ketik `exit` untuk kembali ke terminal lokalmu.
 ### Cek pemahaman
 
 1. Apa akibat buruk jika kamu memberikan izin `777` pada folder data pelanggan?
-2. Mengapa pengguna tetap bisa menghapus file yang berizin hanya-baca jika ia punya izin tulis pada foldernya?
+2. Mengapa izin file hanya-baca belum cukup mencegah penghapusan dari folder induk yang mengizinkannya?
 3. Berapa angka oktal untuk izin file yang boleh dibaca dan ditulis oleh pemiliknya saja?
 
 ## Praktik
@@ -234,7 +241,7 @@ Pesan error terminal memberi petunjuk langsung perbaikan.
 | `No such file or directory` | Periksa ejaan nama file dan direktori kerja aktif |
 | `Permission denied` | Periksa pemilik file atau izin folder induk dengan `ls -ld .` dan `ls -l pesanan.txt` |
 | `man` tidak ditemukan | Buka dokumentasi manual Linux melalui browser internet |
-| `not booted with systemd` | Lingkungan WSL atau container tidak menjalankan systemd secara bawaan; abaikan pesan ini |
+| `not booted with systemd` | Lingkungan ini belum menjalankan systemd; lewati pemeriksaan layanan opsional dan lanjutkan latihan file |
 
 Gunakan `pwd`, `ls -ld .`, dan `ls -l pesanan.txt` untuk memeriksa sebelum mengubah izin.
 Jangan menjalankan perintah rekursif pada `/` atau home hanya untuk memperbaiki satu file.

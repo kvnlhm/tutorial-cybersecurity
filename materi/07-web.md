@@ -16,17 +16,19 @@ Server bawaan Python cocok untuk demonstrasi lokal ini, bukan untuk layanan prod
 Pelanggan Laundry Aman membuka situs toko untuk memeriksa status cucian mereka.
 Browser meminta halaman nota, lalu server mengirimkan data pakaian yang sudah selesai.
 Komunikasi antara browser dan server mengikuti aturan yang disebut protokol web.
-Selain menampilkan halaman, website juga menyimpan sesi login dan membaca basis data.
+Aplikasi toko juga dapat menyimpan keadaan login dan membaca data pesanan.
 Kita akan mempelajari cara kerja alamat web, pesan permintaan, dan penyimpanan data.
 
 ### Membaca bagian alamat web (URL)
 
-Dalam cara kerja web, program yang kamu pakai dibagi menjadi dua peran utama.
+Saat Bu Rina membuka nota Laundry Aman, browser dan aplikasi toko mempunyai peran berbeda.
 
 Aplikasi browser bertindak sebagai **client** yang meminta sesuatu dari sumber daya web.
 
 Program di komputer tujuan yang melayani permintaan itu disebut **server**.
+
 Pesan permintaan disebut **request**.
+
 Pesan jawaban disebut **response**.
 
 Saat pelanggan membuka alamat `http://127.0.0.1:8000/nota.txt`, alamat tersebut memuat beberapa komponen penting:
@@ -34,7 +36,7 @@ Saat pelanggan membuka alamat `http://127.0.0.1:8000/nota.txt`, alamat tersebut 
 - Skema `http` menyatakan aturan komunikasi pengiriman data.
 - Host `127.0.0.1` menunjukkan alamat komputer server tujuan.
 - Port `8000` menunjukkan pintu layanan aplikasi yang sedang berjalan.
-- Path `/nota.txt` menunjukkan jalur file dokumen yang diminta.
+- Path `/nota.txt` menunjukkan tujuan yang diminta; pada server latihan ini, tujuannya adalah file nota.
 
 Port dapat dihilangkan jika memakai port bawaan skemanya, misalnya port 80 untuk HTTP biasa.
 
@@ -46,33 +48,36 @@ Port dapat dihilangkan jika memakai port bawaan skemanya, misalnya port 80 untuk
 
 ### Mengikuti pertukaran request dan response HTTP
 
-Setiap kali browser meminta halaman, ia mengirim pesan request dan menunggu response dari server.
+Browser Bu Rina meminta nota, lalu server Laundry Aman mengirim jawaban sesuai permintaan itu.
 
-Pesan request mempunyai **method**, tujuan path, deretan header, dan kadang memuat body pesan.
+Pesan request mempunyai **method**, yaitu jenis tindakan yang diminta, bersama tujuan path dan keterangan tambahan.
 Method `GET` biasanya meminta representasi sumber daya tanpa mengubah data di server.
 Method `POST` lazim dipakai untuk mengirim data baru atau memulai tindakan, seperti mengisi formulir pesanan.
-Bagian header berisi keterangan tambahan, misalnya jenis konten dokumen.
-Bagian body membawa isi pesan yang dikirimkan.
+
+Bagian **header** berisi keterangan tambahan, misalnya jenis konten dokumen, seperti keterangan pada amplop kiriman.
+
+Bagian **body** membawa isi pesan yang dikirimkan, seperti isi surat di dalam amplop.
 
 Pesan response dari server mempunyai kode status, response headers, dan body isi data.
 Kode status `200` menunjukkan permintaan berhasil dalam konteks operasi itu.
-Kode status `404` berarti sumber daya atau file yang diminta tidak ditemukan di server.
+Kode status `404` berarti server tidak menemukan sumber daya yang diminta atau tidak mengungkap keberadaannya.
 
 Kode status `500` menyatakan kegagalan atau gangguan di sisi program server.
-Kode `200` saja tidak menjamin logika bisnis benar; itu hanya menandakan komunikasi HTTP berjalan lancar.
+Kode `200` menyatakan keberhasilan menurut jawaban server; kode itu sendiri belum membuktikan logika bisnis benar.
 
 #### Cukup kenali dulu
 
 - **Status code**: kode angka tiga digit penanda hasil pemrosesan permintaan HTTP.
 - **Response header**: keterangan dari server tentang jenis dan ukuran data yang dikirim.
-- **Response body**: isi utama jawaban server yang ditampilkan oleh browser.
+- **Response body**: isi utama jawaban server, seperti teks nota yang diminta.
 
 ### Menjaga ingatan pengguna dengan cookie dan session
 
-Protokol HTTP bersifat mandiri dan tidak otomatis mengingat identitas pengguna di setiap request.
+Bu Rina membuka beberapa halaman setelah login. HTTP tidak otomatis mengingat identitasnya pada tiap permintaan.
 Agar kasir tidak perlu mengetik password di setiap klik halaman, aplikasi memakai mekanisme ingatan khusus.
 
 Aplikasi dapat memakai **cookie**, yaitu data kecil yang browser simpan dan kirim sesuai aturan domain, path, dan atributnya.
+
 Mekanisme **session** biasanya menghubungkan pengenal acak tertentu dengan keadaan login pengguna di server.
 
 Cookie sesi perlu diperlakukan sebagai rahasia penting.
@@ -82,14 +87,17 @@ Cookie tidak sama dengan password, tetapi penguasaannya dapat memberi akses samp
 
 - **Stateless**: sifat protokol yang memperlakukan tiap permintaan secara terpisah tanpa ingatan bawaan.
 - **Masa aktif sesi**: rentang waktu berlakunya sesi login sebelum kedaluwarsa.
-- **Pencabutan sesi**: proses membatalkan izin sesi saat pengguna menekan tombol keluar.
+- **Pencabutan sesi**: pembatalan keadaan login oleh aplikasi; tombol keluar seharusnya memicunya sesuai rancangan sesi.
 
 ### Komponen tampilan dan penyimpanan data di server
 
-Di dalam jendela browser, tiga teknologi saling melengkapi untuk menyajikan halaman:
+Bu Rina melihat judul nota, warna status, dan tombol halaman di browser.
+Tiga teknologi berikut saling melengkapi untuk menyajikannya:
 
 Bahasa **HTML** menyusun struktur dokumen teks, seperti paragraf dan judul nota.
+
 Bahasa **CSS** mengatur tampilan visual, warna, dan tata letak halaman.
+
 Bahasa **JavaScript** menjalankan logika interaktif langsung di komputer pengguna.
 
 Pengguna menguasai penuh browser miliknya, sehingga server tidak boleh mempercayai pembatasan yang hanya berada di tampilan.
@@ -98,11 +106,14 @@ Jika ada pelanggan nakal yang memunculkan kembali tombol itu, server tetap wajib
 
 Di bagian belakang, basis data menyimpan informasi secara teratur.
 Dalam model relasional, komponen **table** seperti lembar data pesanan.
+
 Komponen **row** seperti satu rekaman pesanan pelanggan.
+
 Komponen **column** seperti kolom ID atau status cucian.
 
 Bahasa **SQL** adalah bahasa untuk meminta atau mengubah data di basis data tersebut.
-Sementara itu, **API** menyediakan cara terstruktur bagi program untuk berkomunikasi tanpa antarmuka grafis.
+
+Sementara itu, **API** menyediakan cara terstruktur bagi program untuk berkomunikasi, misalnya browser meminta status pesanan kepada aplikasi.
 API pesanan tetap membutuhkan pemeriksaan identitas dan hak akses, sama seperti halaman web biasa.
 
 <details>
@@ -146,6 +157,7 @@ Status: siap diambil
 Folder ini hanya boleh berisi materi dummy untuk latihan.
 Jangan menyajikan home, folder kerja kantor, atau folder yang mengandung rahasia.
 Python dapat menampilkan daftar folder bila halaman index tidak tersedia.
+Jangan masukkan tautan simbolik, yaitu penghubung ke lokasi file lain; server ini dapat mengikutinya ke luar folder latihan.
 
 ### 2. Nyalakan server lokal
 
@@ -218,6 +230,9 @@ Versi HTTP pada response dapat berbeda dari website lain; yang diamati adalah se
 Bayangkan tabel pesanan di basis data mempunyai kolom `id`, `owner`, dan `status`.
 Query berikut berarti meminta status pesanan bernomor L001:
 
+Blok SQL ini untuk dibaca, bukan diketik di PowerShell atau terminal server.
+Server file latihan ini tidak menjalankan basis data atau fitur login.
+
 ```sql
 SELECT status FROM pesanan WHERE id = 'L001';
 ```
@@ -235,7 +250,8 @@ Jangan meninggalkan proses latihan berjalan tanpa tujuan di komputermu.
 
 ## Hasil yang diharapkan
 
-Kamu mengamati response sukses `200` dan `404`, membaca header serta body pesan, lalu menghentikan server dengan aman.
+Kamu mengamati response sukses `200` dan response file tidak ditemukan `404`, lalu membaca header serta body pesan.
+Setelah itu, kamu menghentikan server dengan aman.
 Catatan jurnalmu menerangkan peran setiap bagian URL dan alasan folder server dibatasi hanya untuk data lab.
 
 ## Jika macet
@@ -265,7 +281,7 @@ Tentukan pemeriksaan pertama untuk masing-masing tanpa mengubah firewall atau me
 
 Pesan `404` berarti kamu mendapat jawaban HTTP dari server; periksa nama file dan folder yang disajikan.
 Gagal tersambung berarti browser belum memperoleh jawaban HTTP tersebut; periksa apakah server masih berjalan serta alamat dan portnya cocok.
-Ini adalah pemeriksaan awal yang aman tanpa mengubah konfigurasi sistem secara drastis.
+Ini pemeriksaan awal yang aman, bukan kesimpulan untuk semua kemungkinan penyebab.
 Mengganti banyak pengaturan sekaligus akan menyulitkan penentuan langkah yang memperbaiki masalah.
 
 </details>

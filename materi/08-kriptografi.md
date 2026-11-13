@@ -19,9 +19,9 @@ Ada data yang dirahasiakan, ada yang dipastikan keasliannya, dan ada password ya
 Satu alat tidak bisa memenuhi seluruh kebutuhan itu sekaligus.
 Kita akan mempelajari perbedaan encoding, hashing, enkripsi, serta pengamanan sambungan web.
 
-### Membedakan empat fungsi pelindung data
+### Membedakan empat cara memperlakukan data
 
-Di dunia keamanan informasi, ada empat cara mendasar dalam memperlakukan data.
+Laundry Aman perlu menyesuaikan bentuk nota, memeriksa perubahan, merahasiakan isi, dan memeriksa asal pembaruan aplikasi.
 
 Pertama, **encoding** mengubah bentuk representasi data agar cocok dikirim atau disimpan di berbagai media.
 Contohnya adalah Base64 yang menyajikan data biner ke dalam deretan teks biasa.
@@ -36,10 +36,9 @@ Karena itu, hash password pendek tetap dapat ditebak.
 Hash file juga tidak membuktikan asal file bila penyerang dapat mengganti file dan nilai hash pembanding sekaligus.
 
 Ketiga, **enkripsi** menyembunyikan isi pesan memakai kunci rahasia.
-Data yang terenkripsi hanya dapat dibaca kembali oleh pihak yang memegang kunci yang sesuai.
+Penerima memakai kunci yang sesuai untuk mengembalikan isi pesan; keamanan tetap bergantung pada penerapan dan perlindungan kuncinya.
 
-Keempat, **tanda tangan digital** memverifikasi asal pesan dan memastikan tidak adanya perubahan data.
-Mekanisme ini memanfaatkan pasangan kunci kriptografi untuk membuktikan keaslian dokumen atau pembaruan program.
+Keempat, **tanda tangan digital** membantu memeriksa asal pesan dan perubahan data memakai pasangan kunci.
 
 Bandingkan keempat fungsi tersebut pada tabel berikut:
 
@@ -53,12 +52,13 @@ Bandingkan keempat fungsi tersebut pada tabel berikut:
 #### Cukup kenali dulu
 
 - **Kerahasiaan**: perlindungan isi data dari pihak yang tidak berhak.
-- **Integritas**: kepastian bahwa isi data tidak diubah pihak lain.
+- **Integritas**: perlindungan keutuhan data dari perubahan yang tidak diizinkan.
 - **Otentikasi**: pembuktian keaslian identitas pihak pengirim.
 
 ### Menggunakan kunci rahasia dan pasangan kunci
 
-Saat menerapkan enkripsi untuk menjaga kerahasiaan, ada dua pendekatan utama:
+Laundry Aman ingin merahasiakan backup dan memeriksa pembaruan dari pembuat aplikasi.
+Kebutuhan ini memakai kunci dengan cara berbeda:
 
 Metode **enkripsi simetris** memakai kunci rahasia yang sama untuk proses enkripsi dan dekripsi.
 Kedua pihak yang berkomunikasi harus saling menjaga kerahasiaan satu kunci tersebut.
@@ -66,6 +66,7 @@ Kedua pihak yang berkomunikasi harus saling menjaga kerahasiaan satu kunci terse
 Metode **kriptografi asimetris** memakai pasangan kunci publik dan privat, dengan operasi yang bergantung pada skema yang dipilih.
 Kunci publik boleh dibagikan kepada siapa saja; kunci privat harus dilindungi dan disimpan rapat oleh pemiliknya.
 Jangan menyederhanakan tanda tangan sebagai “enkripsi dengan kunci privat”; protokol tanda tangan memiliki rancangan dan pemeriksaan tersendiri.
+Untuk memercayai asal pembaruan, pastikan kunci publik pemeriksa benar-benar milik penerbit yang diharapkan.
 
 #### Cukup kenali dulu
 
@@ -78,10 +79,12 @@ Jangan menyederhanakan tanda tangan sebagai “enkripsi dengan kunci privat”; 
 Saat kasir mengakses server aplikasi Laundry Aman melalui internet, koneksi perlu dilindungi dari penyadapan.
 
 Protokol **TLS** melindungi komunikasi antara dua ujung yang terhubung di jaringan.
-Pada koneksi HTTPS, browser memeriksa sertifikat server, lalu pihak-pihak melakukan handshake untuk menyiapkan perlindungan sesi.
+
+Pada koneksi HTTPS, pihak-pihak melakukan handshake, proses menyiapkan perlindungan sesi yang mencakup pemeriksaan sertifikat server oleh browser.
 
 Pihak otoritas penerbit sertifikat disebut **certificate authority**, atau CA.
 CA menandatangani sertifikat yang mengikat identitas seperti nama domain dengan kunci publik menurut aturan validasinya.
+
 Sistem pengelolaan kepercayaan dan sertifikat digital secara menyeluruh disebut **PKI**, singkatan dari *public key infrastructure*.
 
 HTTPS membantu kerahasiaan serta integritas selama pengiriman data, tetapi halaman penipu juga bisa memiliki sertifikat valid untuk domain miliknya.
@@ -90,28 +93,19 @@ Selain itu, TLS juga tidak mencegah server yang sah menyimpan password dengan ca
 
 #### Cukup kenali dulu
 
-- **Handshake**: proses negosiasi parameter keamanan dan pertukaran kunci awal TLS.
-- **Sertifikat digital**: dokumen elektronik resmi yang mengikat nama domain dengan kunci publik server.
-- **Validasi domain**: proses verifikasi oleh CA terhadap kepemilikan domain pemohon.
+- **Sertifikat digital**: catatan elektronik yang mengikat identitas seperti nama domain dengan kunci publik.
+- **Validasi domain**: pemeriksaan oleh CA terhadap kendali pemohon atas nama domain.
 
 ### Menyimpan password pelanggan secara bertanggung jawab
 
-Untuk password, gunakan fungsi khusus yang sengaja membutuhkan biaya komputasi dan memori, seperti Argon2id melalui library yang terawat.
+Laundry Aman perlu memeriksa password saat login tanpa menyimpan teks password aslinya.
+Gunakan fungsi khusus yang membutuhkan kerja komputasi dan memori, seperti Argon2id melalui library yang terawat.
 Fungsi lambat ini memperberat kerja penyerang saat mencoba menebak password.
 
-Komponen **Salt** adalah nilai unik per password yang disimpan bersama hasil hash; tujuannya bukan menjadi rahasia.
+**Salt** adalah nilai unik untuk tiap penyimpanan password yang disimpan bersama hasil hash; tujuannya bukan menjadi rahasia.
+Salt menghambat pemakaian ulang hasil tebakan yang sama untuk banyak akun.
 Parameter biaya perlu disesuaikan dan diperbarui mengikuti panduan resmi.
 Buku ini tidak membangun sistem autentikasi produksi atau menyuruh kamu menciptakan algoritma kriptografi sendiri.
-
-<details>
-<summary>Pendalaman opsional: konsep tabrakan hash (collision)</summary>
-
-Fungsi hash memetakan masukan ukuran berapa pun menjadi deretan angka berukuran tetap.
-Karena variasi masukan tidak terbatas sedangkan panjang keluaran terbatas, secara matematis pasti ada dua data berbeda dengan nilai hash identik.
-Kondisi di mana dua masukan berbeda menghasilkan keluaran hash yang persis sama disebut **collision**.
-Algoritma hash modern yang kuat dirancang agar pencarian collision sengaja menjadi mustahil secara praktis.
-
-</details>
 
 ### Ringkasan
 
@@ -123,7 +117,7 @@ Algoritma hash modern yang kuat dirancang agar pencarian collision sengaja menja
 ### Cek pemahaman
 
 1. Mengapa Base64 sama sekali tidak boleh dipakai untuk menyembunyikan password?
-2. Mengapa sebuah situs phishing tetap bisa memiliki sertifikat TLS yang sah?
+2. Mengapa sebuah situs penipu tetap bisa memiliki sertifikat TLS yang sah?
 3. Apa tujuan utama menambahkan salt unik pada setiap penyimpanan hash password?
 
 ## Praktik
@@ -172,7 +166,7 @@ Metode `hexdigest()` menampilkan hasil sebagai karakter heksadesimal, yaitu tuli
 
 Algoritma SHA-256 menghasilkan 256 bit, yang dalam bentuk ini menjadi 64 karakter heksadesimal.
 Untuk dua contoh nota tersebut, hasil perbandingannya `False`.
-Perbedaan satu angka terakhir saja mengubah seluruh nilai hash secara drastis.
+Pada contoh ini, perubahan satu angka terakhir menghasilkan nilai hash berbeda.
 
 Perubahan spasi, encoding, atau akhir baris juga mengubah byte.
 Dua dokumen yang terlihat sama di layar dapat mempunyai hash berbeda jika karakternya tidak sama persis.
@@ -184,13 +178,13 @@ Buka kembali file `hasil-belajar/cek_hash.py` di editor teks.
 Ganti `nota_ubah` agar sama persis dengan `nota_awal`.
 Jalankan kembali program di terminal.
 
-Perbandingan sekarang bernilai `True`, dan baris assert terakhir gagal menghentikan program.
+Perbandingan sekarang bernilai `True`; assert terakhir gagal dan menghentikan program dengan `AssertionError`.
 Kegagalan itu sesuai perubahan eksperimen; baca baris yang ditunjuk di traceback.
 Kembalikan isi yang berbeda setelah selesai melakukan pengujian.
 
 Satu percobaan ini membuktikan perilaku pada dua masukan.
 Ia tidak membuktikan secara matematis bahwa algoritma bebas collision.
-Istilah **Collision** terjadi ketika dua masukan berbeda menghasilkan hash yang sama; ruang keluaran terbatas berarti collision ada secara teori.
+**Collision** terjadi ketika dua masukan berbeda menghasilkan hash yang sama; ruang keluaran terbatas berarti collision ada secara teori.
 Algoritma kriptografis yang baik membuat pencariannya tidak praktis menurut analisis dan kemampuan yang diketahui.
 
 ### 3. Amati sertifikat situs dokumentasi
@@ -215,7 +209,7 @@ Jika menemui kendala saat menjalankan program atau memeriksa web, gunakan pandua
 | Masalah yang terlihat | Penyebab umum dan tindakan aman |
 |---|---|
 | Pesan `strings must be encoded before hashing` | Berikan data dalam bentuk byte; gunakan `.encode('utf-8')` pada teks |
-| Nilai hash berbeda antarmesin | Karakter akhir baris file berbeda antarsistem; periksa isi byte mentah |
+| Nilai hash berbeda antarmesin | Periksa byte masukan; perbedaan akhir baris adalah salah satu kemungkinan penyebab |
 | Peringatan sertifikat di browser | Periksa kesesuaian jam sistem dan periksa kembali ejaan nama domain |
 
 Jangan pernah menghapus pemeriksaan sertifikat atau memakai algoritma usang hanya demi menghilangkan pesan error.
@@ -238,7 +232,8 @@ Untuk mendeteksi perubahan nota, gunakan fungsi hash dan cocokkan dengan nilai r
 Untuk merahasiakan cadangan, gunakan enkripsi simetris yang kuat dengan kunci rahasia yang disimpan terpisah.
 Untuk pembaruan aplikasi, gunakan tanda tangan digital dengan verifikasi kunci publik resmi penerbit program.
 
-Password memerlukan fungsi lambat dengan salt seperti Argon2id karena penyerang dapat melakukan tebakan jutaan kombinasi kata secara luring (*offline*).
+Password memerlukan fungsi khusus seperti Argon2id dengan salt untuk memperberat tebakan jika penyimpanan hash bocor.
+Kecepatan tebakan bergantung pada fungsi, parameter, dan perangkat yang dipakai.
 
 </details>
 

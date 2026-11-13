@@ -10,21 +10,20 @@ Langkah ini membantumu memeriksa kesehatan dan keamanan komputer kasir Laundry A
 Selesaikan [Bab 01](01-lab.md) untuk menyiapkan terminal dan [Bab 02](02-komputer.md) untuk memahami proses serta memori.
 Bandingkan juga pengelolaan sistem ini dengan Linux pada [Bab 04](04-linux.md).
 
-Gunakan Windows milik kamu untuk menjalankan perintah PowerShell.
+Gunakan Windows milikmu untuk menjalankan perintah PowerShell.
 Pembaca Linux/macOS dapat mengerjakan latihan log sintetis dengan Python pada [Bab 15](15-deteksi.md), lalu kembali ke sini ketika memiliki lingkungan Windows berizin.
 
 ## Konsep
 
-Komputer kasir Laundry Aman menggunakan sistem operasi Windows.
-Kita perlu memeriksa program yang aktif, meninjau layanan latar belakang, dan membaca catatan kejadian sistem.
-PowerShell membantu kita memeriksa data sistem dalam bentuk informasi terstruktur.
-Berkas dan pengaturan Windows punya identitas keamanan sendiri.
-Hak aksesnya juga diatur terpisah.
-Kita akan menyaring data proses, mengenali komponen sistem, dan membaca log keamanan.
+Komputer kasir Laundry Aman memakai Windows.
+Kita akan memeriksa program, layanan latar belakang, dan catatan kejadian.
+PowerShell menyajikan data sistem dalam bentuk terstruktur.
+Windows mengenali akun dengan pengenal khusus dan membatasi aksesnya.
+Kita akan menyaring proses serta membaca log keamanan.
 
 ### Memeriksa proses kasir memakai objek PowerShell
 
-PowerShell mempunyai perintah khusus yang disebut **cmdlet**.
+Untuk memeriksa proses kasir, PowerShell menyediakan **cmdlet**, yaitu perintah dengan fungsi tertentu.
 Penamaan cmdlet biasanya memakai pola kata kerja dan kata benda, seperti `Get-Process`.
 
 Hasil keluaran cmdlet sering berupa **objek** dengan properti bernama, bukan sekadar baris teks mentah.
@@ -46,13 +45,15 @@ Perintah `Get-Help` meminta bantuan panduan lokal.
 Di komputer kasir, banyak komponen bekerja otomatis tanpa membuka jendela aplikasi.
 
 Komponen **Registry** menyimpan banyak konfigurasi Windows dan aplikasi yang terpasang.
-Komponen **Service** menjalankan fungsi latar belakang secara terus-menerus demi kelancaran sistem.
+
+Komponen **Service** menjalankan fungsi latar belakang; layanan dapat berjalan atau berhenti sesuai kebutuhan dan pengaturannya.
+
 Komponen **Scheduled task** menjalankan tugas secara otomatis berdasarkan jadwal waktu atau pemicu tertentu.
 
 Ketiganya memiliki kegunaan sah untuk operasional komputer sehari-hari.
 Namun, ketiganya juga dapat menjadi tempat munculnya perubahan yang perlu diperiksa saat menyelidiki gangguan.
 Sebuah entri yang asing belum cukup untuk menyebutnya berbahaya.
-Kamu selalu memerlukan pemeriksaan fungsi dan asal file program tersebut.
+Periksa fungsi dan asal programnya.
 
 #### Cukup kenali dulu
 
@@ -72,8 +73,8 @@ Untuk melindungi file nota pelanggan, Windows memakai **ACL**, singkatan dari *a
 ACL berisi daftar aturan akses pada objek seperti file dan folder.
 Izin akses pada sebuah file dapat diwariskan dari folder induknya.
 
-Sistem **UAC** (*User Account Control*) memberi pembatas antara aktivitas sehari-hari dan operasi yang membutuhkan elevasi hak.
-Ketika program meminta izin khusus administrator, UAC menampilkan jendela konfirmasi.
+Sistem **UAC** (*User Account Control*) memberi pembatas antara aktivitas sehari-hari dan operasi yang membutuhkan hak lebih tinggi.
+Permintaan hak lebih tinggi dapat memunculkan konfirmasi atau permintaan identitas administrator, sesuai akun dan kebijakan perangkat.
 Tetap periksa asal program sebelum menyetujui permintaannya.
 
 #### Cukup kenali dulu
@@ -84,7 +85,7 @@ Tetap periksa asal program sebelum menyetujui permintaannya.
 
 ### Membaca catatan aktivitas dengan event log
 
-Setiap kali komputer kasir menyala, pengguna masuk, atau terjadi gangguan, sistem membuat catatan.
+Komputer kasir dapat mencatat saat menyala, pengguna masuk, atau terjadi gangguan, sesuai konfigurasi pencatatannya.
 Komponen **Event log** mencatat kejadian dari sumber tertentu yang disebut provider.
 
 Satu event memiliki catatan waktu kejadian, nama provider, nomor ID, tingkat keparahan (*level*), dan rincian pesan.
@@ -92,8 +93,8 @@ Nomor event perlu dibaca bersama providernya.
 Nomor ID yang sama dapat memiliki arti berbeda pada provider yang berbeda.
 
 Tidak semua kejadian otomatis tercatat di komputer.
-Konfigurasi audit, kapasitas penyimpanan, dan masa retensi memengaruhi bukti yang tersedia.
-Event login gagal seperti 4625 menjadi berguna setelah kamu memahami konteks audit dan jenis logon.
+Pengaturan pencatatan, kapasitas penyimpanan, dan retensi atau lama penyimpanan log memengaruhi bukti yang tersedia.
+Event login gagal seperti 4625 perlu dibaca bersama pengaturan audit dan jenis logon atau cara masuk.
 Ketiadaan catatan tidak langsung membuktikan bahwa tidak ada percobaan akses.
 
 <details>
@@ -138,7 +139,7 @@ Get-Service | Select-Object -First 5 Name, Status
 Get-Help Get-Process
 ```
 
-Perintah `Select-Object` memilih properti dan membatasi jumlah objek yang ditampilkan di layar.
+Perintah `Select-Object` memilih properti dan membatasi jumlah objek.
 Perintah `Get-Help` meminta bantuan lokal; isi bantuan mungkin ringkas jika berkas bantuan lengkap belum tersedia.
 Kamu dapat membaca halaman Microsoft Learn tanpa mengubah pengaturan komputer.
 
@@ -163,7 +164,7 @@ Perintah `Where-Object` memilih data yang memenuhi syarat tertentu; parameter `-
 Perintah `Group-Object` mengelompokkan nilai yang sama.
 
 Kamu akan menemukan dua kejadian gagal dan satu berhasil.
-Variabel `$kejadianLab` ini hidup di sesi terminal saat ini; membuka terminal baru tidak otomatis memulihkannya.
+Variabel `$kejadianLab` hanya tersedia dalam sesi ini; terminal baru tidak otomatis memulihkannya.
 
 ### 3. Baca log sistem dengan batas kecil
 
@@ -182,11 +183,13 @@ Jangan memublikasikan pesan lengkap sebelum memeriksa nama mesin, akun, atau pat
 Log Security dapat memerlukan hak lebih tinggi dan kebijakan audit tertentu.
 Kamu tidak perlu mengubah audit atau meminta hak administrator untuk menyelesaikan bab ini.
 Gunakan event sintetis bila perangkat kerja membatasi pembacaan log.
-Event login gagal seperti 4625 menjadi berguna setelah kamu memahami konteks audit dan jenis logon; ketiadaannya tidak membuktikan bahwa tidak ada percobaan akses.
+Gunakan batas penafsiran log yang dijelaskan pada Konsep; ketiadaan catatan belum membuktikan ketiadaan percobaan akses.
 
 ### 4. Baca izin file latihan
 
 Dari folder utama tutorial, jalankan perintah berikut:
+
+File `hasil-belajar/cek-lab.txt` berasal dari Bab 01. Jika belum ada, ulangi langkah pembuatannya di sana.
 
 ```powershell
 Get-Acl hasil-belajar/cek-lab.txt | Format-List
