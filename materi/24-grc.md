@@ -64,7 +64,8 @@ Laundry Aman mempunyai backup, tetapi petugas belum pernah mencoba pemulihannya.
 Kamu mencatat ukuran keberhasilan agar status selesai mempunyai dasar pemeriksaan.
 
 **Residual risk** adalah risiko yang tersisa setelah kontrol diterapkan.
-Seperti pakaian yang masih harus diperiksa setelah pencucian, kamu meninjau bagian masalah yang belum teratasi.
+Seperti mengunci pintu toko tanpa menutup jendela, satu kontrol dapat menyisakan jalur kerugian lain.
+Satu kontrol jarang menutup seluruh sisi masalah.
 Backup mengurangi dampak kehilangan data jika pemulihan berhasil. Backup belum mencegah kebocoran salinan data.
 
 Toko juga membutuhkan **evidence matrix**, hubungan pernyataan kontrol dengan bukti pemeriksaannya.
@@ -98,6 +99,7 @@ Pilih tindakan sesuai kebutuhan toko. Menempelkan nama kerangka pada dokumen bel
 ### 1. Catat tiga masalah toko
 
 Di kertas atau editor, buat risk register untuk tiga masalah fiktif berikut.
+Gunakan [templat register risiko](../lampiran/template.md#register-risiko) sebagai pola, lalu lengkapi kolom sesuai langkah 2.
 Gunakan tabel sebagai fakta awal; jangan menambahkan bukti yang belum kamu periksa.
 
 | ID | Fakta awal | Dampak yang masuk akal |
@@ -196,7 +198,7 @@ Catat bagian yang membuatnya ragu, lalu perbaiki memo.
 - [ ] Saya menyerahkan risk register berisi tiga risiko dengan tindakan dan penanggung jawab.
 - [ ] Saya menetapkan dua target pemulihan dan menyertakan evidence matrix.
 - [ ] Saya menyerahkan memo bisnis dengan syarat keberhasilan yang dapat diperiksa.
-- [ ] Pembaca dapat menjelaskan tindakan yang diminta tanpa menebak istilah teknis.
+- [ ] Pembaca dapat menyebut tindakan, penanggung jawab, serta syarat keberhasilan tanpa menebak istilah teknis.
 
 ### Lanjut belajar
 

@@ -44,7 +44,7 @@ Nomor itu membantu mencari catatan yang sama. Kamu tetap perlu mencocokkan kondi
 Kontrol akses yang keliru adalah contoh jenis kelemahan. Pengenal kerentanan tertentu dan kelompok jenis kelemahan menjawab pertanyaan berbeda.
 
 Versi yang cocok dengan advisori menunjukkan kemungkinan terdampak sesuai kondisi tersebut.
-Untuk menyatakan **kompromi**, yaitu pihak tak berhak berhasil menguasai atau mengakses sesuatu, kamu memerlukan bukti kejadian tambahan.
+Untuk menyatakan **kompromi**, yaitu keberhasilan pihak tak berhak mengakses atau mengubah sistem atau data, kamu memerlukan bukti kejadian tambahan.
 
 ### Telusuri asal kabar sebelum mempercayainya
 
@@ -72,7 +72,8 @@ IOC dapat berubah cepat; kecocokannya sendiri belum membuktikan siapa pelaku ata
 ### Cari catatan eksploitasi dan nama perilaku
 
 Petugas toko ingin tahu apakah kerentanan aplikasi sudah pernah dimanfaatkan.
-**KEV** adalah katalog CISA tentang kerentanan yang diketahui telah dieksploitasi, seperti daftar kejadian yang sudah dikonfirmasi.
+**KEV**, *Known Exploited Vulnerabilities*, adalah katalog CISA tentang kerentanan yang diketahui telah dieksploitasi.
+Bayangkan daftar jenis kunci yang sudah pernah dibobol; daftar itu tidak menyatakan bahwa kunci toko ini juga sudah dibobol.
 Bug yang tidak tercantum tetap dapat berbahaya. Cocokkan entri dengan advisori vendor dan keadaan aset toko.
 
 Setelah membaca log toko, petugas perlu menamai perilaku yang terlihat.
@@ -146,7 +147,7 @@ Hindari angka probabilitas tanpa dasar pengukuran.
 ### 3. Periksa satu advisori nyata
 
 Buka repositori resmi CISA KEV melalui Referensi di browser komputer atau HP.
-Pilih satu entri, lalu buka advisori vendor dari entri tersebut.
+Pilih satu entri dan ikuti tautannya. Jika belum menuju vendor, cari advisori resmi untuk CVE yang sama.
 Catat tanggal pemeriksaan, produk, kondisi terdampak, dan tindakan vendor.
 Hasilnya adalah catatan sumber nyata yang dapat ditelusuri.
 

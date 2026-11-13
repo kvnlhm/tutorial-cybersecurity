@@ -230,12 +230,20 @@ Catat kebutuhan bukti tambahan: konfirmasi pemilik, perangkat, metode MFA, dan a
 
 Rancang deteksi untuk pembacaan pesanan lintas pemilik yang ditolak.
 Catat waktu, actor atau pelaku tindakan, objek, pemilik atau hasil keputusan izin, serta status.
-Tambahkan **correlation ID**, pengenal penghubung catatan dari permintaan yang sama, seperti nomor nota untuk mencocokkan beberapa catatan pekerjaan.
+
+Tambahkan **correlation ID**, pengenal penghubung catatan dari permintaan yang sama, seperti nomor tiket untuk satu permintaan layanan.
+Bedakan dari nomor pesanan: satu pesanan dapat dibaca melalui beberapa permintaan.
+
 Hindari mencatat seluruh isi pesanan.
+Tabel belum memuat semua field itu. Buat kasus normal dan penolakan sintetis dengan field yang diperlukan pada salinan data.
+Tandai field tambahan sebagai data latihan, bukan fakta yang ditemukan pada log.
 
 Uji rule atau aturan deteksi pada kejadian normal dan penolakan.
+Untuk uji manual, tentukan apakah tiap kasus memicu aturan, lalu bandingkan dengan label hasil yang diharapkan.
 Catat hasil masing-masing, termasuk kemungkinan salah alarm dari Bab 15.
+
 Penolakan yang terdeteksi membuktikan kontrol bekerja pada permintaan itu; hasil tersebut belum membuktikan pencurian data berhasil.
+
 Tabel adalah skenario log; program lokal sebelumnya mengembalikan nilai Python dan tidak menjalankan server HTTP.
 
 ### 5. Latih pemulihan dan keputusan bisnis

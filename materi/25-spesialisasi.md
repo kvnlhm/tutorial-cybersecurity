@@ -20,7 +20,7 @@ Semua jalur inti tetap gratis; sertifikasi tidak diwajibkan.
 Laundry Aman membutuhkan orang yang dapat menyelesaikan masalah baru, lalu menjelaskan hasilnya kepada rekan kerja.
 Kamu akan memilih satu jenis masalah untuk didalami tanpa meninggalkan bekal dasar.
 Kita akan membuat dugaan yang bisa diuji, mencoba kasus kecil, lalu mencari bukti yang mendukung atau membantahnya.
-Rekan lain akan mengulang hasilmu sebelum kamu menganggap risetnya selesai.
+Siapkan catatan agar rekan dapat mengulang hasilmu dan memeriksa kesimpulannya.
 
 ### Pilih masalah yang akan kamu tangani lebih dalam
 
@@ -39,9 +39,12 @@ Pemilik Laundry Aman meminta perbaikan akses pesanan, sementara rekan lain menin
 Pilih satu hasil kerja yang ingin kamu kuasai.
 Istilah pada pilihan berikut melanjutkan bab prasyarat yang ditautkan.
 
+**Telemetri** berarti data pengamatan sistem, misalnya log login Laundry Aman.
+Data ini membantu menilai deteksi pada jalur berikut.
+
 - **Web/API dan application security**: pendalaman keamanan aplikasi; ulangi [Bab 13](13-web-api.md) untuk otorisasi, logika bisnis, dan race condition.
   Pelajari juga parser dari [Bab 19](19-memory-safety.md). Buktinya berupa temuan yang dapat diulang, patch, dan regression test.
-- **Detection engineering**: perancangan dan evaluasi deteksi; ulangi [Bab 15](15-deteksi.md) untuk telemetri, yaitu data pengamatan sistem, dan evaluasi rule.
+- **Detection engineering**: perancangan dan evaluasi deteksi; ulangi [Bab 15](15-deteksi.md) untuk membaca telemetri dan menilai aturan deteksi.
   Buktinya mencakup ukuran salah alarm dan kasus terlewat.
 - **DFIR**, *digital forensics and incident response*: pemeriksaan bukti digital dan respons insiden; ulangi [Bab 16](16-respons-insiden.md) dan [Bab 17](17-forensik.md).
   Latih penyusunan timeline serta pengujian hipotesis bersama pekerjaan deteksi.
@@ -73,7 +76,8 @@ Seperti menguji mesin memakai beban yang sama, kamu menjaga kondisi agar orang l
 Perbandingan ini membantu perencanaan; catatan versi dan data uji tetap diperlukan pada program.
 
 Untuk mengulang pemeriksaan label toko, catat **seed**, nilai awal yang membantu mengulang pembangkitan masukan percobaan.
-Bayangkan mencatat titik mulai urutan percobaan. Versi alat dan kondisinya tetap perlu sama agar hasil dapat dibandingkan.
+Bayangkan mencatat titik mulai urutan percobaan.
+Catat versi alat dan kondisi percobaan; seed saja belum menjamin hasil sama jika lingkungan berubah.
 
 Kamu juga dapat menyimpan **corpus**, kumpulan masukan uji, seperti menyimpan satu paket label untuk diperiksa ulang oleh rekan.
 Masukkan contoh normal dan masukan batas agar pemeriksa tidak hanya mengulang kasus yang berhasil.
@@ -82,7 +86,7 @@ Masukkan contoh normal dan masukan batas agar pemeriksa tidak hanya mengulang ka
 
 - **Root-cause analysis**: penjelasan penyebab dasar hasil yang kamu amati.
 - **Walkthrough**: petunjuk langkah penyelesaian; tutup saat menguji kemampuan mengulang sendiri.
-- **Tenant**: batas organisasi atau kelompok pengguna dalam layanan bersama.
+- **Tenant**: ruang layanan yang dikelola terpisah secara logis untuk suatu organisasi atau kelompok pengguna dalam layanan bersama.
 
 ### Nilai hasil dan bagikan dengan aman
 
