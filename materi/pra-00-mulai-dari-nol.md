@@ -1,81 +1,200 @@
-# Pra-bab: Mulai di sini jika Anda belum mengenal IT
+# Pra-bab: Mulai di sini jika kamu belum mengenal komputer
+
+Tahap 1 dari 6: Mulai memakai alat
 
 ## Tujuan dan prasyarat
 
-Anda boleh mulai tanpa mengetahui arti IP, kode, server, atau terminal. Target pertama adalah menemukan file, membuka simulator, dan menjelaskan hasil satu tindakan. Kita menggunakan **Laundry Aman**, toko rekaan yang mempunyai komputer kasir dan catatan pesanan. Data pelanggan dalam latihan juga rekaan.
+Kamu boleh mulai tanpa bekal istilah komputer.
+Target pertama adalah menemukan catatan, membuka halaman latihan, dan menjelaskan hasil satu tindakan.
+Kita memakai Laundry Aman, toko rekaan dengan komputer kasir dan catatan pesanan. Data pelanggannya juga rekaan.
 
-Siapkan HP atau komputer yang dapat membuka browser. **Browser** adalah aplikasi untuk membuka halaman, misalnya Edge, Chrome, Firefox, atau Safari. Sesi pertama dan delapan misi simulator bisa dimulai dari HP tanpa memasang Python, Linux, atau alat keamanan. Untuk latihan file, terminal sistem, Python, dan VM pada tahap berikutnya, gunakan komputer serta keyboard. Anda dapat memulai simulasi sekarang dan melanjutkan praktik komputer saat perangkatnya tersedia.
+Siapkan HP atau komputer yang bisa membuka halaman latihan.
+Sesi pertama dan delapan misi bisa dimulai dari HP tanpa memasang program tambahan.
 
-Bagilah pra-bab menjadi beberapa sesi 15–25 menit. Anda tidak perlu menyelesaikan semuanya hari ini. Waktu tersebut merupakan saran pembagian kerja, bukan batas kecepatan. Jika belum dapat menemukan kembali file yang baru dibuat, ulangi bagian itu sebelum berpindah ke pemrograman.
+Gunakan komputer dengan keyboard untuk latihan membuat catatan dan menjalankan kode pada tahap berikutnya.
+Kamu boleh memulai halaman latihan sekarang, lalu meneruskan praktik komputer ketika perangkat tersedia.
 
-Tidak ada penilaian “bodoh” ketika Anda menemui error. Error memberikan informasi tentang langkah yang belum sesuai. Catat tindakan dan hasilnya agar Anda dapat memperbaiki satu hal pada satu waktu.
+Bagi pra-bab menjadi sesi 15–25 menit. Durasi ini membantu membagi pekerjaan; kamu boleh mengulang sesuai kebutuhan.
+Ulangi latihan menemukan file sebelum beralih ke pemrograman jika lokasi file masih membingungkan.
+
+Pesan kesalahan tidak memberi penilaian “bodoh” pada pelajar.
+Pesan itu menunjukkan langkah yang perlu diperiksa. Catat tindakan dan hasil, lalu perbaiki satu hal setiap kali mencoba.
 
 ## Konsep
 
-### Komputer, aplikasi, dan dokumen
+Kasir Laundry Aman menulis catatan, menyimpannya, lalu membukanya lagi besok.
+Ia perlu tahu tempat catatan disimpan dan tempat mengetik permintaan.
+Kita akan mengikuti pekerjaan kecil itu sebelum memakai perintah.
+Kamu juga akan membedakan percobaan di halaman latihan dari tindakan pada komputer sendiri.
 
-Bayangkan meja kasir. Komputer adalah perangkat di meja. Aplikasi adalah alat kerja yang dibuka kasir, seperti kalkulator atau pengolah nota. Dokumen adalah isi pekerjaan yang disimpan. Menutup aplikasi tidak otomatis menghapus dokumennya; perubahan yang belum disimpan dapat hilang.
+### Menyimpan catatan di meja kasir
 
-**File**, atau berkas, menyimpan data dengan suatu nama. `nota.txt` adalah contoh nama file. **Folder** menampung file dan folder lain. Dalam tutorial, kata **direktori** berarti folder. **Pengelola file** adalah aplikasi untuk melihatnya: File Explorer di Windows, Finder di macOS, atau pengelola file pada Linux.
+Bayangkan meja kasir Laundry Aman.
+Komputer adalah perangkat di meja; aplikasi adalah alat kerja yang dibuka, seperti kalkulator atau pengolah nota.
+Dokumen adalah isi pekerjaan yang disimpan. Menutup aplikasi tidak menghapus dokumen, tetapi perubahan yang belum disimpan dapat hilang.
 
-Bagian akhir nama seperti `.txt`, `.html`, dan `.py` disebut **ekstensi**. `catatan.txt` berisi teks biasa, `index.html` merupakan dokumen halaman, sedangkan `contoh.py` lazim digunakan untuk kode Python. Ekstensi membantu memilih aplikasi pembuka. Nama file bukan bukti bahwa isinya aman; orang dapat memberi nama yang menyesatkan.
+Kasir memberi nama agar catatannya bisa ditemukan lagi.
+**File**, atau berkas, menyimpan data dengan nama, seperti lembar nota bernama `nota.txt`.
 
-Anda akan menemui kata **simpan**, **salin**, dan **pindah**. Menyimpan menulis pekerjaan ke file. Menyalin membuat salinan sambil mempertahankan sumber. Memindah mengubah lokasi. Untuk latihan awal, gunakan salinan agar Anda dapat membandingkan sebelum dan sesudah.
+Agar catatan tidak bercampur, kasir mengelompokkannya.
+**Folder** menampung file dan folder lain, seperti laci untuk menyusun nota. Buku juga memakai kata direktori untuk folder.
 
-### Browser, internet, dan alamat
+Untuk melihat isi laci digital itu, buka **pengelola file**, aplikasi penampil file dan folder.
+Namanya File Explorer di Windows, Finder di macOS, atau pengelola file pada Linux.
 
-Internet adalah jaringan yang menghubungkan banyak perangkat. Website adalah kumpulan halaman yang bisa Anda buka melalui alamatnya. Browser merupakan aplikasinya. Browser juga dapat membuka file halaman dari komputer sendiri. Karena itu membuka browser tidak selalu berarti mengirim data ke internet.
+Contohnya, kamu membuka folder tutorial lalu melihat nama `README.md` dan `index.html`.
+Bagian akhir nama membantu memilih aplikasi untuk membuka file tersebut.
 
-**Address bar**, atau bilah alamat, berada di bagian atas jendela browser. Anda mengisinya dengan alamat seperti `https://docs.python.org/`. Kotak pencarian pada halaman membantu mencari informasi. Keduanya dapat terlihat mirip karena browser juga bisa mengubah teks biasa pada bilah alamat menjadi pencarian. Perhatikan hasilnya: halaman yang diinginkan atau daftar hasil pencarian.
+Bagian akhir seperti `.txt`, `.html`, atau `.py` disebut **ekstensi**, seperti label jenis pada map.
+Label membantu memilih pembuka, tetapi nama file dapat menyesatkan. Nama saja tidak membuktikan isinya aman.
 
-Alamat yang diawali `file:///` menunjuk file lokal. `http://127.0.0.1:8000/` pada latihan nanti menunjuk layanan di komputer sendiri. `https://` menjelaskan jenis koneksi ke suatu alamat; awalan itu sendiri belum membuktikan bahwa pengelola situs dapat dipercaya. Bab berikutnya menjelaskan alasan teknisnya.
+| Nama contoh | Isi yang lazim |
+|---|---|
+| `catatan.txt` | Teks biasa |
+| `index.html` | Dokumen halaman |
+| `contoh.py` | Kode Python |
 
-### Tiga tempat mengetik yang berbeda
+### Membuat salinan sebelum mencoba
 
-| Tempat | Anda mengetik apa? | Contoh |
+Kasir ingin mencoba mengubah catatan tanpa kehilangan sumbernya.
+**Simpan** berarti menulis pekerjaan ke file, seperti memasukkan nota yang sudah ditulis ke map.
+
+**Salin** membuat salinan sambil mempertahankan sumber, seperti menggandakan nota.
+Untuk latihan awal, gunakan salinan agar perubahan bisa dibandingkan dengan sumber.
+
+**Pindah** mengubah lokasi file, seperti memindahkan nota ke laci lain.
+Periksa lokasi sebelum dan sesudah agar file tetap mudah ditemukan.
+
+### Membuka halaman dan membaca alamat
+
+Kasir ingin membuka halaman latihan.
+**Browser** adalah aplikasi pembuka halaman, misalnya Edge, Chrome, Firefox, atau Safari.
+Browser juga bisa membuka file halaman dari komputer sendiri.
+
+**Internet** menghubungkan banyak perangkat dalam jaringan.
+Membuka browser tidak selalu mengirim data ke internet, misalnya saat membuka halaman lokal.
+
+**Website** adalah kumpulan halaman yang dibuka melalui alamatnya, seperti kumpulan lembar informasi toko.
+Untuk menuju halaman, kasir perlu memilih tempat penulisan alamat.
+
+Contohnya, kasir hendak membuka `https://docs.python.org/`.
+Ia mengetik alamat pada bagian atas jendela, bukan di sembarang kotak pada halaman.
+
+**Address bar**, atau bilah alamat, adalah kotak alamat di bagian atas browser, seperti tempat menulis tujuan kiriman.
+Kotak pencarian pada halaman berfungsi mencari informasi.
+Browser juga dapat mengubah teks biasa di bilah alamat menjadi pencarian, sehingga kedua tempat itu bisa terlihat mirip.
+
+Periksa hasil setelah menekan Enter: apakah halaman yang dituju terbuka atau hanya daftar hasil pencarian?
+
+#### Cukup kenali dulu
+
+- **Alamat lokal**: awalan `file:///` menunjuk file pada komputer sendiri.
+- **Alamat layanan sendiri**: `http://127.0.0.1:8000/` pada latihan nanti menunjuk layanan di komputer sendiri.
+- **HTTPS**: awalan `https://` menjelaskan jenis koneksi; pengelola situsnya tetap perlu diperiksa sebelum dipercaya.
+
+### Memilih tempat mengetik
+
+Kasir menulis isi catatan pada **editor teks**, aplikasi untuk menyunting teks, seperti lembar kerja tempat menulis nota.
+Notepad adalah salah satu contohnya.
+
+Untuk meminta pekerjaan lewat perintah teks, kasir membuka **terminal**, jendela tempat memberi perintah dan membaca hasil.
+Bayangkan meja untuk menyerahkan instruksi kerja.
+
+**Shell** adalah program yang mengartikan perintah, seperti petugas pembaca instruksi di meja tadi.
+PowerShell dan Bash adalah dua shell dengan aturan berbeda.
+
+| Tempat | Yang diketik | Contoh |
 |---|---|---|
-| Editor teks | Isi yang ingin disimpan sebagai file | `Catatan latihan pertama` |
-| Bilah alamat browser | Lokasi halaman yang ingin dibuka | `http://127.0.0.1:8000/nota.txt` |
+| Editor teks | Isi untuk disimpan ke file | `Catatan latihan pertama` |
+| Bilah alamat browser | Lokasi halaman | `http://127.0.0.1:8000/nota.txt` |
 | Terminal | Perintah untuk program atau shell | `Get-Location` |
 
-**Terminal** adalah jendela untuk memberi perintah teks dan membaca hasilnya. **Shell** adalah program yang mengartikan perintah tersebut. PowerShell dan Bash merupakan dua shell yang berbeda. Menempelkan kode Python ke bilah alamat browser tidak akan menjalankan latihan Python sebagaimana dimaksud dalam buku.
+Perintah yang kamu berikan disebut **input**, atau masukan, seperti permintaan pekerjaan kepada kasir.
 
-Di simulator, terminal yang Anda lihat adalah **model latihan di halaman**. Perintahnya hanya bekerja pada data virtual yang disediakan simulator. Terminal PowerShell yang Anda buka dari menu Windows merupakan program nyata yang dapat membaca atau mengubah file sesuai perintah. Bedakan keduanya sebelum mencoba sesuatu.
+Jawaban yang muncul disebut **output**, atau hasil, seperti jawaban kasir setelah membaca permintaan.
+Kamu perlu membedakan keduanya saat menjelaskan percobaan.
+
+Penanda bahwa shell siap menerima perintah disebut **prompt**, seperti tanda loket siap melayani.
+Contohnya `PS C:\...>`, yang sering menyertakan lokasi saat ini. Jangan menyalin penanda ini sebagai bagian perintah.
+
+Contohnya, kamu mengetik `Get-Location` di PowerShell dan membaca nama folder sebagai hasilnya.
+Alamat website masuk ke bilah alamat; isi kode Python masuk ke file untuk latihan simpan-lalu-jalankan.
+Menempelkan kode Python ke bilah alamat tidak menjalankan latihan Python dalam buku.
+
+### Mencoba perintah virtual lebih dahulu
+
+Kasir berlatih pada **simulator**, model latihan di halaman dengan data buatan yang sudah disediakan.
+Perintahnya hanya bekerja pada data itu.
+
+Kasir membuka nota **virtual**, yaitu nota dalam model latihan.
+Ia membaca data buatan dan tidak mengakses data pelanggan nyata.
+
+PowerShell yang dibuka dari menu Windows adalah program nyata yang bisa membaca atau mengubah file sesuai perintah.
+Keberhasilan di simulator belum membuktikan bahwa kamu sudah memakai shell Linux nyata.
+Nanti kamu akan memindahkan pemahaman ke file lokal dan kasus baru dengan batas izin yang jelas.
+
+### Ringkasan
+
+- File menyimpan isi; folder membantu menyusun dan menemukan file.
+- Menyalin mempertahankan sumber agar perubahan bisa dibandingkan.
+- Editor, bilah alamat, dan terminal menerima jenis isian yang berbeda.
+- Simulator menjalankan perintah virtual pada data latihan; terminal sistem dapat memengaruhi file komputer.
+
+### Cek pemahaman
+
+1. Di mana kamu mengetik alamat website dan di mana kamu menulis isi catatan?
+2. Mengapa salinan lebih cocok untuk percobaan awal daripada dokumen penting?
+3. Apa perbedaan perintah yang kamu ketik dan hasil yang muncul?
+4. Mengapa perintah simulator perlu dibedakan dari PowerShell nyata?
 
 ## Praktik
 
 ### Sesi 1: hasil pertama dalam kira-kira lima menit
 
-Lima menit merupakan target kecil untuk percobaan awal, bukan batas waktu. Pilih salah satu cara membuka di bawah ini.
+Sisihkan sekitar lima menit untuk percobaan awal. Kamu boleh mengulangnya.
+Pilih jalur sesuai perangkatmu.
 
 **Dari HP atau browser komputer:**
 
-1. Buka [simulator Laundry Aman](https://kvnlhm.github.io/tutorial-cybersecurity/). Internet diperlukan untuk membuka versi online. Anda tidak perlu membuat akun atau mengunduh ZIP.
-2. Halaman pertama menampilkan tugas **Temukan catatan toko**. Mode belajar sudah dipilih. Pada HP, **Pilih misi dan mode** membuka daftar latihan bila Anda membutuhkannya.
-3. Ketuk kotak berlabel **Ketik perintah di sini**, isi `pwd`, lalu ketuk **Jalankan perintah**. Jangan mengetik `pwd` di bilah alamat browser.
-4. Baca lokasi yang muncul pada kotak hasil. Jelaskan: “Saya meminta lokasi folder, simulator menunjukkan ….” Gunakan kalimat Anda sendiri.
-5. Coba `ls` dengan cara yang sama. Jika belum mengerti hasilnya, buka **Pahami istilah dan konsep misi**, lalu gunakan petunjuk bertahap di bawah meja praktik.
-6. Simpan tautan bermain sebagai bookmark atau favorit browser agar dapat dibuka lagi. Progres disimpan di browser ini; berpindah HP, komputer, atau browser tidak memindahkannya secara otomatis.
+1. Buka [simulator Laundry Aman](https://kvnlhm.github.io/tutorial-cybersecurity/). Internet diperlukan untuk versi online; akun dan unduhan ZIP tidak diperlukan.
+2. Halaman pertama menampilkan **Temukan catatan toko** dengan mode belajar terpilih.
+3. Pada HP, ketuk **Pilih misi dan mode** jika perlu membuka daftar latihan.
+4. Ketuk **Ketik perintah di sini**, isi `pwd`, lalu ketuk **Jalankan perintah**. Jangan mengetik `pwd` di bilah alamat browser.
+5. Baca lokasi pada kotak hasil. Jelaskan dengan kalimat sendiri: “Saya meminta lokasi folder, simulator menunjukkan ….”
+6. Coba `ls` dengan cara yang sama. Jika hasilnya belum jelas, buka **Pahami istilah dan konsep misi**, lalu gunakan petunjuk di bawah meja praktik.
+7. Simpan tautan sebagai bookmark atau favorit browser agar mudah dibuka lagi.
+
+Progres tersimpan di browser ini. Berpindah HP, komputer, atau browser tidak memindahkan progres secara otomatis.
 
 **Alternatif: file offline di komputer setelah mengunduh:**
 
-1. Buka pengelola file. Pada Windows, tekan tombol bergambar Windows dan huruf `E` bersama-sama untuk membuka File Explorer. Anda juga dapat memilih ikonnya dari menu Start.
-2. Temukan folder tutorial. Jika seseorang sudah menyiapkan proyek di komputer Anda, buka lokasi yang diberikan. Jangan mengetik contoh path milik penulis sebagai lokasi komputer Anda.
-3. Jika baru mengunduh ZIP dari GitHub, temukan file tersebut di Downloads. Klik kanan, pilih **Extract All** atau **Ekstrak Semua**, lalu buka folder hasil ekstraksi. ZIP adalah paket file; kerjakan latihan dari folder hasil ekstraksi agar berkas pendukung dapat ditemukan.
-4. Di folder tutorial, cari `README.md`, `materi`, `labs`, dan `simulator`. Ini tanda bahwa Anda berada di folder utama. Buka folder `simulator`.
-5. Buka `index.html` dengan browser. Jika klik ganda membukanya di editor teks, klik kanan file tersebut, pilih **Open with** atau **Buka dengan**, lalu pilih browser.
-6. Pilih mode belajar dan misi pertama. Baca tugas sebelum menekan tombol atau mengetik. Gunakan petunjuk yang tersedia jika Anda belum mengetahui langkahnya.
-7. Lakukan satu tindakan, baca hasil di layar, lalu jelaskan: “Saya meminta …, simulator menunjukkan ….” Jangan menilai kemajuan hanya dari warna tombol atau skor.
+ZIP adalah paket file. Jika baru mengunduhnya dari GitHub, temukan di Downloads.
+Kerjakan latihan dari folder hasil ekstraksi agar file pendukung dapat ditemukan.
 
-Anda telah menyelesaikan hasil pertama jika berhasil membuka simulator dan dapat membedakan instruksi Anda dari jawaban simulator. Tidak perlu membuka semua misi sekaligus. Jika memakai unduhan, simpan nama folder atau lokasinya agar Anda dapat membukanya lagi besok. Sesi berikutnya berlatih memakai komputer; pembaca yang saat ini hanya memegang HP dapat melanjutkan misi simulator terlebih dahulu.
+1. Buka pengelola file. Di Windows, tekan tombol bergambar Windows dan `E` bersama-sama, atau pilih ikon File Explorer dari Start.
+2. Temukan folder tutorial pada lokasi yang diberikan jika seseorang sudah menyiapkannya. Jangan memakai contoh path penulis sebagai lokasi komputermu.
+3. Jika masih berupa ZIP, klik kanan dan pilih **Extract All** atau **Ekstrak Semua**. Buka folder hasil ekstraksinya.
+4. Cari `README.md`, `materi`, `labs`, dan `simulator` sebagai penanda folder utama. Buka folder `simulator`.
+5. Buka `index.html` dengan browser. Jika terbuka di editor, klik kanan, pilih **Open with** atau **Buka dengan**, lalu pilih browser.
+6. Pilih mode belajar dan misi pertama. Baca tugas sebelum mengetik; gunakan petunjuk jika perlu.
+7. Lakukan satu tindakan, baca hasil, lalu jelaskan: “Saya meminta …, simulator menunjukkan ….”
 
-Simulator memakai kasus buatan. Membuka nota virtual di sana tidak berarti Anda mengakses data pelanggan nyata. Hasil misi menunjukkan kemampuan pada kasus latihan itu. Nanti Anda akan memindahkan konsep ke file lokal dan kasus baru dengan batas izin yang jelas.
+Hasil pertama selesai ketika simulator terbuka dan kamu bisa membedakan instruksi dari jawabannya.
+Warna tombol atau skor saja tidak cukup untuk menilai pemahaman.
+Kerjakan satu misi dahulu.
+Simpan nama folder unduhan agar bisa dibuka besok. Kamu boleh melanjutkan misi dari HP sebelum praktik komputer tersedia.
 
 ### Sesi 2: buat catatan yang dapat ditemukan kembali
 
-Tutup atau kecilkan browser, lalu kembali ke folder utama tutorial. Pada Windows, klik kanan area kosong, pilih **New → Folder** atau **Baru → Folder**, beri nama `hasil-belajar`, lalu tekan Enter. Jika folder itu sudah ada, buka folder yang sudah ada. Jangan membuat folder kedua dengan nama hampir sama.
+Untuk sesi ini dan latihan file berikutnya, gunakan komputer. Pilih jalur sesuai perangkatmu.
 
-Buka Notepad dari menu Start. Notepad adalah editor teks; Anda tidak perlu memakai Word untuk contoh kode. Ketik:
+**Windows**
+
+1. Tutup atau kecilkan browser, lalu kembali ke folder utama tutorial.
+2. Klik kanan area kosong. Pilih **New → Folder** atau **Baru → Folder**, beri nama `hasil-belajar`, lalu tekan Enter.
+3. Jika folder itu sudah ada, buka yang sudah ada. Hindari membuat folder kedua dengan nama hampir sama.
+4. Buka Notepad dari Start. Untuk contoh ini, gunakan editor teks; Word tidak diperlukan.
+5. Ketik isi berikut:
 
 ```text
 Latihan pertama Laundry Aman
@@ -83,126 +202,244 @@ Saya membuka simulator dari folder tutorial.
 Saya masih ingin memahami perbedaan file dan folder.
 ```
 
-Pilih **File → Save As** atau **Simpan Sebagai**. Masuk ke folder `hasil-belajar`, beri nama `catatan-pertama.txt`, lalu simpan. Tutup Notepad, buka kembali file itu melalui pengelola file, dan baca isinya. Membuka ulang membuktikan bahwa Anda menyimpan ke tempat yang benar.
+6. Pilih **File → Save As** atau **Simpan Sebagai**. Masuk ke `hasil-belajar` dan simpan sebagai `catatan-pertama.txt`.
+7. Tutup Notepad. Buka kembali file lewat pengelola file dan baca isinya untuk memeriksa tempat serta hasil simpan.
 
-Untuk melihat ekstensi pada Windows 11, buka **View → Show → File name extensions** di File Explorer. Pada tampilan Windows lain, cari pilihan **File name extensions** di menu View. Panduan resmi Microsoft memuat letak menu yang dapat Anda cocokkan. [Microsoft: ekstensi nama file](https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/common-file-name-extensions-in-windows).
+Untuk menampilkan ekstensi di Windows 11, pilih **View → Show → File name extensions** pada File Explorer.
+Pada versi Windows lain, cari **File name extensions** di menu View.
+Cocokkan menu melalui [panduan ekstensi Microsoft](https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/common-file-name-extensions-in-windows).
 
-Sekarang salin catatan tadi. Pilih file dengan satu klik, tekan `Ctrl+C`, lalu `Ctrl+V` di folder yang sama. Sistem biasanya memberi nama salinan yang berbeda. Ubah namanya menjadi `catatan-salinan.txt`. Edit salinan dan tambahkan kalimat “Ini salinan untuk latihan.” Buka sumber untuk memastikan sumber belum ikut berubah. Cukup gunakan file latihan ini; jangan mencoba pada dokumen penting.
+Sekarang buat salinan:
 
-Pada macOS gunakan Finder untuk membuat folder dan menyalin file; pintasan salin/tempel umumnya memakai tombol Command. Bila memakai TextEdit untuk kode, pilih format teks biasa melalui **Format → Make Plain Text**. Di Linux, gunakan menu pengelola file dan editor teks yang tersedia. Tujuannya sama: satu file sumber, satu salinan, serta lokasi yang dapat Anda temukan lagi.
+1. Pilih file dengan satu klik, tekan `Ctrl+C`, lalu `Ctrl+V` pada folder yang sama.
+2. Sistem biasanya memberi nama berbeda. Ubah nama salinan menjadi `catatan-salinan.txt`.
+3. Edit salinan dan tambahkan “Ini salinan untuk latihan.”
+4. Buka sumber untuk memastikan isinya tetap. Gunakan file latihan ini; jangan mencoba pada dokumen penting.
+
+**macOS**
+
+Gunakan Finder untuk membuat folder dan menyalin file. Pintasan salin/tempel umumnya memakai Command.
+Jika memakai TextEdit untuk kode, pilih **Format → Make Plain Text** agar tersimpan sebagai teks biasa.
+
+**Linux**
+
+Gunakan menu pengelola file dan editor teks yang tersedia untuk membuat folder, menyimpan catatan, dan membuat salinannya.
+
+Pada semua jalur, periksa hasil yang sama: satu sumber, satu salinan, dan lokasi yang bisa ditemukan kembali.
 
 ### Sesi 3: kenali tombol dan baca satu baris perintah
 
-`Ctrl+C` berarti tahan Ctrl, tekan C, lalu lepaskan. Anda tidak perlu mengetik kata “Ctrl” atau tanda tambah. Di editor, pintasan ini menyalin teks yang dipilih. Di terminal yang sedang menjalankan program, pintasan tersebut lazim dipakai untuk meminta penghentian program. Konteks tempat Anda menekan tombol menentukan tindakannya.
+Kasir ingin menyalin catatan tanpa mengetik ulang.
+`Ctrl+C` berarti tahan Ctrl, tekan C, lalu lepaskan. Jangan mengetik kata “Ctrl” atau tanda tambah.
+Di editor, pintasan ini menyalin teks yang dipilih.
+
+Di terminal yang sedang menjalankan program, `Ctrl+C` lazim meminta program berhenti.
+Tempat kamu menekan tombol menentukan tindakannya.
+
+**Kursor** adalah tanda posisi pengetikan, seperti ujung pena yang menunjukkan tempat tulisan berikutnya.
+
+**Fokus** menentukan kotak atau kontrol yang menerima ketikan.
+Jika teks tidak muncul di kotak yang dimaksud, klik kotak itu dahulu.
+Dengan keyboard, tekan Tab sampai bingkai fokus berada pada kontrol yang dibutuhkan.
 
 | Tombol atau tindakan | Pemakaian awal |
 |---|---|
 | Enter | Mengirim perintah atau mengakhiri isian |
 | Backspace | Menghapus karakter sebelum kursor |
 | Tombol panah | Memindah posisi atau memilih riwayat, sesuai aplikasi |
-| Tab | Berpindah fokus antar kontrol pada halaman; perilaku terminal berbeda |
+| Tab | Berpindah fokus antar kontrol halaman; perilaku terminal berbeda |
 | Ctrl+S | Menyimpan file pada banyak editor |
 | Ctrl+L di browser | Memilih bilah alamat pada browser yang umum |
 
-Kursor adalah tanda posisi pengetikan. Pastikan fokus berada di tempat yang benar sebelum mengetik. Jika mengetik tetapi tidak terlihat apa-apa pada kotak yang Anda maksud, klik kotak itu dahulu. Untuk pengguna keyboard, tekan Tab sampai bingkai fokus berada pada kontrol yang dibutuhkan.
+Baca label blok pada buku sebelum mengetik:
 
-Dalam buku, blok berlabel `powershell` berarti perintah PowerShell. `bash` berarti shell Bash, biasanya di Linux. Blok `python` berisi kode yang umumnya perlu disimpan ke file `.py`, lalu dijalankan melalui Python. Blok `text` sering menunjukkan data atau hasil, bukan perintah. Baca kalimat sebelum blok: apakah Anda diminta “simpan”, “jalankan”, atau “bandingkan hasil”.
+| Label | Isi yang ditunjukkan |
+|---|---|
+| `powershell` | Perintah PowerShell |
+| `bash` | Perintah shell Bash, biasanya di Linux |
+| `python` | Kode yang umumnya disimpan ke file `.py`, lalu dijalankan dengan Python |
+| `text` | Data atau hasil; baca kalimat pengantar sebelum menganggapnya perintah |
+
+Ikuti kata kerja sebelum blok: simpan, jalankan, atau bandingkan hasil.
 
 ### Sesi 4: buka terminal nyata tanpa mengubah pengaturan
 
-Pada Windows, buka menu Start, ketik `PowerShell`, lalu pilih Windows PowerShell. Buka sebagai pengguna biasa. Jendela mungkin berada di dalam Windows Terminal; Windows Terminal merupakan aplikasi penampung sesi, sedangkan PowerShell adalah shell di dalamnya. [Microsoft: memulai PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started).
+Pilih jalur sesuai perangkatmu. Gunakan komputer sendiri atau perangkat yang kamu diizinkan pakai.
 
-Anda akan melihat penanda seperti `PS C:\...>`. Penanda itu disebut **prompt**. Ia menunjukkan bahwa shell siap menerima perintah dan sering menyertakan lokasi saat ini. **Jangan ketik ulang prompt.** Ketik hanya:
+**Windows PowerShell**
+
+Buka Start, ketik `PowerShell`, lalu pilih Windows PowerShell sebagai pengguna biasa.
+Jendela bisa berada di Windows Terminal, aplikasi penampung sesi; shell di dalamnya tetap PowerShell.
+[Microsoft: memulai PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started).
+
+Lihat prompt, misalnya `PS C:\...>`. **Jangan ketik ulang prompt.** Ketik hanya perintah berikut, lalu tekan Enter:
 
 ```powershell
 Get-Location
 ```
 
-Tekan Enter. PowerShell menampilkan folder saat ini. Perintah tersebut membaca lokasi, tanpa memindahkan atau menghapus file. Untuk masuk ke folder tutorial, salin alamat folder dari bilah alamat File Explorer. Di PowerShell ketik `Set-Location -LiteralPath `, lalu masukkan alamat tersebut di dalam kutip tunggal. Bentuknya seperti ini; contoh alamat harus Anda ganti:
+PowerShell menampilkan folder saat ini tanpa memindahkan atau menghapus file.
+Untuk masuk ke folder tutorial, salin alamatnya dari bilah alamat File Explorer.
+Ketik `Set-Location -LiteralPath `, lalu masukkan alamat dalam kutip tunggal. Ganti contoh alamat berikut dengan lokasi foldermu:
 
 ```powershell
 Set-Location -LiteralPath 'C:\Belajar\Tutorial Cybersecurity'
 Get-ChildItem
 ```
 
-Kutip menjaga alamat yang mempunyai spasi sebagai satu nilai. `Set-Location` memilih folder kerja; `Get-ChildItem` membaca isinya. Jika nama folder Anda mengandung tanda petik tunggal, lebih mudah buka terminal dari menu konteks folder atau minta pendamping membantu pengutipan path. Jangan mengganti nama folder yang sedang dipakai aplikasi lain tanpa alasan.
+Kutip menjaga alamat dengan spasi sebagai satu nilai.
+`Set-Location` memilih folder kerja; `Get-ChildItem` membaca isinya.
+Periksa apakah hasil memuat `README.md`, `materi`, dan `labs`.
 
-Pastikan daftar memuat `README.md`, `materi`, dan `labs`. Jika tidak, Anda mungkin satu tingkat terlalu luar atau terlalu dalam. Kembali ke pengelola file, pilih folder yang benar, lalu ulangi. Anda belum perlu menghafal alamat absolut.
+Jika daftar tidak cocok, kamu mungkin satu tingkat terlalu luar atau terlalu dalam.
+Kembali ke pengelola file, pilih folder yang benar, lalu ulangi. Alamat absolut boleh dilihat kembali; kamu tidak perlu menghafalnya.
 
-Pengguna Linux/macOS membuka aplikasi Terminal, memakai `pwd` untuk melihat lokasi, `cd` untuk berpindah, dan `ls` untuk melihat isi. Perintah Bash Bab 04 tetap memerlukan lingkungan Linux yang sesuai. Pada Windows, gunakan langkah WSL opsional di Bab 01 setelah latihan dasar ini terasa jelas; simulator bisa dipakai terlebih dahulu.
+Jika nama folder mengandung petik tunggal, buka terminal melalui menu konteks folder atau minta bantuan pengutipan path.
+Jangan mengganti nama folder yang sedang dipakai aplikasi lain tanpa alasan.
+
+**Linux/macOS**
+
+Buka aplikasi Terminal. Pakai `pwd` untuk membaca lokasi, `cd` untuk berpindah, dan `ls` untuk melihat isi.
+Perintah Bash Bab 04 tetap memerlukan lingkungan Linux yang sesuai.
+
+**Persiapan Linux pada Windows**
+
+Langkah WSL opsional ada di [Bab 01](01-lab.md). Kerjakan setelah latihan dasar ini terasa jelas.
+Kamu boleh memakai simulator lebih dahulu.
 
 ### Sesi 5: siapkan Python ketika akan masuk lab kode
 
-Python adalah bahasa pemrograman sekaligus nama program yang menjalankan kode bahasa itu. Memasang Python menambah kemampuan menjalankan file `.py`; Anda tidak perlu mempelajari seluruh bahasanya sebelum mencoba contoh kecil.
+Kasir ingin menjalankan contoh kode kecil.
+Python adalah bahasa pemrograman sekaligus nama program penjalan kode tersebut.
+Memasangnya menambah kemampuan menjalankan file `.py`; seluruh bahasanya bisa dipelajari bertahap.
 
-Di PowerShell, jalankan `py --version`. Jika muncul Python 3.11 atau lebih baru, lanjutkan latihan buku. Jika `py` tidak ditemukan, coba `python --version`. Jika salah satunya bekerja, pakai perintah itu secara konsisten. Jangan memasang ulang hanya karena nama perintah berbeda.
+Pilih jalur sesuai perangkatmu.
 
-Jika belum tersedia, buka [unduhan resmi Python](https://www.python.org/downloads/) dan pilih jalur Windows. Panduan saat ini menyediakan **Python install manager**. Unduh dari situs resmi, buka berkas pemasang, lalu pilih **Install**. Tutup dan buka kembali PowerShell. Jalankan `python --version`; install manager dapat mengunduh runtime pada pemakaian awal sehingga internet masih diperlukan. Setelah versi tampil, jalankan perintah singkat berikut. Jika perangkat organisasi menolak pemasangan, minta pengelola menyediakan Python dan lanjutkan simulator sambil menunggu. [Panduan resmi Windows](https://docs.python.org/3/using/windows.html).
+**Windows PowerShell**
+
+Jalankan `py --version`. Jika hasil menunjukkan Python 3.11 atau lebih baru, lanjutkan.
+Jika `py` tidak ditemukan, coba `python --version`.
+Pakai nama perintah yang bekerja secara konsisten; nama yang berbeda tidak langsung berarti perlu memasang ulang.
+
+Jika Python belum tersedia:
+
+1. Buka [unduhan resmi Python](https://www.python.org/downloads/) dan pilih jalur Windows.
+2. Unduh **Python install manager** dari situs resmi. Buka pemasang dan pilih **Install**.
+3. Tutup dan buka kembali PowerShell. Jalankan `python --version`.
+4. Internet masih diperlukan jika pengelola pemasangan mengunduh runtime, yaitu program penjalan Python, pada pemakaian awal.
+
+Jika perangkat organisasi menolak pemasangan, minta pengelola menyediakan Python dan lanjutkan simulator sambil menunggu.
+[Panduan resmi Windows](https://docs.python.org/3/using/windows.html) menjelaskan pemasangannya.
+
+Setelah versi tampil, jalankan:
 
 ```powershell
 python -c "print('Saya berhasil menjalankan Python')"
 ```
 
-Hasil yang diharapkan adalah `Saya berhasil menjalankan Python`. `-c` meminta Python menjalankan kode pendek di dalam kutip; `print` menampilkan teks. Perintah ini tidak membuat file baru. Di Linux/macOS, gunakan Python dari sumber resmi atau pengelola paket sistem dan periksa dengan `python3 --version`; langkah pemasangan bergantung sistemnya. Anda dapat meminta bantuan khusus sistem tersebut tanpa mengganti komputer.
+Hasilnya `Saya berhasil menjalankan Python`.
+`-c` meminta Python menjalankan kode pendek dalam kutip; `print` menampilkan teks.
+Perintah ini tidak membuat file baru.
+
+**Linux/macOS**
+
+Gunakan Python dari sumber resmi atau pengelola paket sistem.
+Periksa dengan `python3 --version`; langkah pemasangan bergantung pada sistem.
+Kamu boleh meminta bantuan khusus sistem itu tanpa mengganti komputer.
 
 ### Sesi 6: simpan kode lalu jalankan
 
-Di Notepad, buat file baru berisi satu baris berikut:
+Gunakan komputer dan editor teks. Di Notepad, buat file baru berisi:
 
 ```python
 print('Laundry Aman siap belajar')
 ```
 
-Pilih Save As, masuk ke `hasil-belajar`, pilih jenis **All files** bila tersedia, dan simpan sebagai `halo.py` dengan encoding UTF-8. Pastikan namanya `halo.py`, bukan `halo.py.txt`. Pada editor lain, gunakan pilihan penyimpanan teks biasa. **Encoding** adalah aturan mengubah teks menjadi byte; pilih UTF-8 untuk contoh buku.
+Byte adalah satuan data yang akan dibahas lagi pada Bab 02.
 
-Buka PowerShell pada folder utama tutorial dan jalankan:
+**Encoding** adalah aturan mengubah teks menjadi byte, seperti aturan penulisan yang membantu pembaca mengenali isi.
+Pilih UTF-8 untuk contoh buku; program tetap mengikuti aturan encoding yang dipakai saat membaca file.
+
+Pilih Save As, masuk ke `hasil-belajar`, lalu pilih **All files** bila tersedia.
+Simpan sebagai `halo.py` dengan encoding UTF-8. Periksa agar namanya `halo.py`, bukan `halo.py.txt`.
+Pada editor lain, pilih penyimpanan teks biasa.
+
+Pilih jalur sesuai perangkatmu untuk menjalankan file dari folder utama tutorial.
+
+**Windows PowerShell**
 
 ```powershell
 py hasil-belajar/halo.py
 ```
 
-Ganti `py` dengan `python` jika itu perintah yang bekerja di komputer Anda. Linux/macOS menggunakan `python3`. Anda meminta Python membuka file pada lokasi yang disebutkan. Anda tidak mengetik isi `print(...)` pada baris PowerShell untuk percobaan ini.
+Ganti `py` dengan `python` jika itulah perintah yang bekerja.
+Kamu meminta Python membuka file pada lokasi tersebut; isi `print(...)` tetap berada di file untuk pola latihan ini.
 
-Sekarang ubah teks di file menjadi `Saya bisa membuka file saya sendiri`, simpan, lalu ulangi perintah. Jika hasil lama masih muncul, periksa apakah perubahan tersimpan dan apakah Anda mengedit file yang sama dengan yang dijalankan. Inilah satu latihan awal debugging: mencocokkan niat, file, perintah, dan hasil.
+**Linux/macOS**
+
+Pakai `python3` sebagai pengganti `py` pada perintah di atas.
+
+Ubah teks di file menjadi `Saya bisa membuka file saya sendiri`, simpan, lalu ulangi perintah.
+Jika pesan lama masih muncul, periksa hasil simpan dan cocokkan file yang diedit dengan lokasi pada perintah.
+Ini latihan awal debugging, yaitu memeriksa kecocokan niat, file, perintah, dan hasil.
 
 ## Hasil yang diharapkan
 
-Anda mempunyai simulator yang dapat dibuka, catatan yang dapat ditemukan kembali, serta pemahaman tentang lokasi mengetik. Jika sudah menyiapkan Python, Anda juga mempunyai `halo.py` yang menampilkan pesan baru setelah diedit dan disimpan. Jika Python belum tersedia, catat bagian kode sebagai **belum dikerjakan**; jangan menandainya selesai hanya karena membaca output contoh.
+Kamu bisa membuka simulator, menemukan kembali catatan, dan memilih tempat mengetik yang benar.
+Jika Python siap, `halo.py` menampilkan pesan baru setelah isi diedit dan disimpan.
+Jika Python belum tersedia, tandai bagian kode **belum dikerjakan**. Membaca hasil contoh belum berarti menjalankannya.
 
 ## Jika macet
 
 | Yang terlihat | Periksa satu hal ini dahulu |
 |---|---|
-| Simulator terbuka sebagai kumpulan kode | Pilih Open with lalu browser untuk `index.html` |
-| Tampilan simulator tidak utuh | Ekstrak seluruh ZIP; pertahankan berkas pendamping dalam folder yang sama |
-| Perintah muncul di hasil pencarian internet | Anda mengetik di browser; buka terminal yang diminta |
-| `not recognized` atau `command not found` | Program/perintah belum ditemukan; periksa ejaan, shell, dan pemasangannya |
-| `can't open file` atau file tidak ditemukan | Lihat folder saat ini dan nama lengkap file, termasuk ekstensinya |
-| `halo.py.txt` | Aktifkan tampilan ekstensi, lalu simpan sebagai file `.py` |
-| Teks lama muncul setelah mengedit | Simpan perubahan; cocokkan path file yang diedit dengan perintah |
-| `SyntaxError` | Cocokkan kutip lurus, tanda kurung, dan nomor baris; salin pesan error ke jurnal |
-| `>>>` muncul sebagai prompt | Anda berada di Python interaktif; ketik `exit()` untuk kembali ke shell |
-| Terminal menunggu dan belum muncul prompt | Program mungkin masih berjalan; baca petunjuk sebelum menutupnya |
-| Kemajuan simulator tidak muncul di browser lain | Penyimpanan lokal dapat berbeda menurut browser/lokasi; gunakan ekspor jika tersedia dan catat hasil sendiri |
+| Simulator terbuka sebagai kode | Pilih Open with lalu browser untuk `index.html` |
+| Tampilan simulator tidak utuh | Ekstrak seluruh ZIP; pertahankan file pendamping dalam folder yang sama |
+| Perintah menjadi pencarian internet | Buka terminal yang diminta; kamu tadi mengetik pada browser |
+| `not recognized` atau `command not found` | Periksa ejaan, shell, dan pemasangan program |
+| `can't open file` atau file tidak ditemukan | Periksa folder saat ini dan nama lengkap file, termasuk ekstensi |
+| `halo.py.txt` | Aktifkan tampilan ekstensi, lalu simpan sebagai `.py` |
+| Pesan lama muncul setelah mengedit | Simpan perubahan dan cocokkan path file yang diedit dengan perintah |
+| `SyntaxError` | Periksa kutip lurus, tanda kurung, dan nomor baris; salin pesan kesalahan ke jurnal |
+| Prompt `>>>` | Kamu berada di Python interaktif; ketik `exit()` untuk kembali ke shell |
+| Terminal menunggu tanpa prompt baru | Program mungkin masih berjalan; baca petunjuk sebelum menutupnya |
+| Progres tidak muncul di browser lain | Penyimpanan dapat berbeda menurut browser/lokasi; gunakan ekspor bila tersedia dan catat hasil sendiri |
 
-Minta bantuan dengan kalimat: “Saya sedang mencoba … pada Windows/Linux/macOS. Saya mengetik … di …, berharap …, tetapi mendapat ….” Sertakan pesan error yang sudah diperiksa agar tidak memuat rahasia. Jangan hanya mengirim “tidak bisa”; pendamping perlu tahu tindakan yang ingin Anda lakukan.
+Saat meminta bantuan, jelaskan tempat, tindakan, harapan, dan hasil:
+“Saya sedang mencoba … pada Windows/Linux/macOS. Saya mengetik … di …, berharap …, tetapi mendapat ….”
+Sertakan pesan kesalahan yang sudah diperiksa agar tidak memuat rahasia. Kalimat “tidak bisa” saja belum memberi cukup petunjuk.
 
 ## Latihan
 
-Kerjakan tiga tingkat ini. Beri tanda bantuan yang digunakan, termasuk membaca petunjuk atau bertanya kepada AI.
+Kerjakan tiga tingkat berikut. Catat bantuan yang dipakai, termasuk petunjuk atau jawaban AI.
 
-**Terbimbing:** buka kembali `catatan-pertama.txt` dengan mengikuti sesi 2. Jelaskan mengapa membuka ulang lebih kuat sebagai bukti daripada melihat tombol Save.
+**Terbimbing**
 
-**Sebagian petunjuk:** buat `catatan-kedua.txt` berisi dua hal yang Anda pahami. Kali ini gunakan hanya nama target dan hasil yang diminta, tanpa mengikuti urutan klik. Tutup lalu buka ulang.
+Buka kembali `catatan-pertama.txt` dengan sesi 2.
+Jelaskan mengapa membuka ulang lebih kuat sebagai bukti daripada melihat tombol Save.
 
-**Kasus baru:** buat folder `latihan-cabang-b` di dalam `hasil-belajar`. Simpan file `jadwal.txt` di dalamnya, salin menjadi `jadwal-uji.txt`, lalu ubah hanya salinan. Tunjukkan lokasi kedua file kepada pendamping atau jelaskan kepada rekaman suara pribadi. Jangan menghapus sumber untuk “merapikan”.
+**Sebagian petunjuk**
+
+Buat `catatan-kedua.txt` berisi dua hal yang kamu pahami.
+Gunakan nama target dan hasil yang diminta, tanpa mengikuti urutan klik. Tutup lalu buka ulang.
+
+**Kasus baru**
+
+Buat folder `latihan-cabang-b` dalam `hasil-belajar`.
+Simpan `jadwal.txt`, salin sebagai `jadwal-uji.txt`, lalu ubah hanya salinan.
+Tunjukkan lokasi keduanya kepada pendamping atau jelaskan pada rekaman suara pribadi.
+Jangan menghapus sumber untuk “merapikan”.
 
 <details>
-<summary>Buka pembahasan setelah mencoba</summary>
+<summary>Pembahasan setelah mencoba: sumber, salinan, dan tempat mengetik</summary>
 
-Membuka ulang menguji bahwa isi benar-benar tersimpan pada file yang dapat ditemukan. Pada kasus baru, sumber dan salinan berada di folder yang sama tetapi memiliki nama berbeda. Mengedit salinan tidak semestinya mengubah sumber. Jika keduanya berubah, periksa apakah Anda ternyata membuka file yang sama dua kali. Path relatif dari folder utama tutorial menuju sumber adalah `hasil-belajar/latihan-cabang-b/jadwal.txt`.
+Membuka ulang memeriksa bahwa isi tersimpan pada file yang dapat ditemukan.
+Pada kasus baru, sumber dan salinan berada di folder sama dengan nama berbeda.
+Mengedit salinan seharusnya mempertahankan sumber. Jika keduanya berubah, periksa apakah file yang sama dibuka dua kali.
 
-`Get-Location` masuk ke PowerShell, alamat website masuk ke bilah alamat browser, dan isi `print(...)` masuk ke file Python untuk pola latihan simpan-lalu-jalankan. Simulator mempunyai perintah virtual sendiri; keberhasilan di sana belum membuktikan bahwa Anda telah menjalankan shell Linux nyata.
+Lokasi sumber dihitung dari folder utama, atau path relatifnya, adalah `hasil-belajar/latihan-cabang-b/jadwal.txt`.
+`Get-Location` masuk ke PowerShell; alamat website masuk ke bilah alamat; isi `print(...)` masuk ke file Python untuk pola simpan-lalu-jalankan.
+Perintah virtual simulator tetap berbeda dari shell Linux nyata.
 
 </details>
 
@@ -215,7 +452,13 @@ Membuka ulang menguji bahwa isi benar-benar tersimpan pada file yang dapat ditem
 - [ ] Saya dapat membuat salinan dan memeriksa bahwa sumber tetap utuh.
 - [ ] Saya mencatat bagian yang masih membutuhkan bantuan atau belum dikerjakan.
 
-Anda boleh masuk Bab 00 setelah lima kemampuan pertama dapat diperagakan. Latihan Python boleh diselesaikan bersama Bab 01. Ulangi kasus baru setelah 48 jam tanpa melihat langkah; bila masih perlu bantuan, beri label “terbimbing” lalu ulangi bagian yang belum mantap. Tanda centang ini mengukur persiapan belajar, bukan penguasaan seluruh cybersecurity.
+### Lanjut belajar
+
+Lanjut ke [Bab 00](00-orientasi.md) setelah lima kemampuan pertama bisa diperagakan.
+Latihan Python boleh diselesaikan bersama [Bab 01](01-lab.md).
+Ulangi kasus baru setelah 48 jam tanpa melihat langkah.
+Jika masih membutuhkan bantuan, beri label “terbimbing” dan ulangi bagian terkait.
+Daftar ini mengukur persiapan belajar, bukan penguasaan seluruh keamanan siber.
 
 ## Referensi
 
