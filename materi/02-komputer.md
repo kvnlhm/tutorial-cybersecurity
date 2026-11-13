@@ -66,6 +66,8 @@ Pencetakan juga dapat bekerja di latar belakang.
 Kasir mencari nota lewat nama foldernya.
 Sistem file mengatur nama, folder, isi, dan **metadata**, yaitu keterangan seperti ukuran serta waktu perubahan.
 
+Akar adalah titik awal path lengkap: pada contoh Windows `C:\`, sedangkan pada Linux/macOS `/`.
+
 Lokasi lengkap dari akar disebut **path absolut**, seperti alamat lengkap sebuah rumah.
 Contohnya `C:\lab\nota.txt` atau `/home/pelajar/lab/nota.txt`.
 
@@ -75,7 +77,7 @@ Contohnya `nota.txt`. Kamu sudah memakai cara ini pada Bab 01.
 Nama `nota.txt` membantu memilih aplikasi pembuka lewat ekstensi `.txt`.
 Ekstensi hanya petunjuk: mengganti `.exe` menjadi `.txt` tetap tidak mengubah isi program menjadi dokumen aman.
 
-**Bit** adalah satuan kecil untuk menyatakan data.
+**Bit** adalah satuan data yang bernilai 0 atau 1, seperti pilihan dengan dua kemungkinan.
 
 Untuk membandingkan ukuran nota dan salinannya, kita memakai **byte**, satuan data seperti gram saat menimbang cucian.
 Satu byte terdiri dari delapan bit. Perhatikan satuan yang dicantumkan, bukan hanya angkanya.
@@ -86,7 +88,7 @@ Yang pertama menyebut banyak data; yang kedua menyebut laju pengiriman.
 #### Cukup kenali dulu
 
 - **Kilobyte dan megabyte**: pada produk dapat memakai kelipatan 1.000.
-- **KiB dan MiB**: memakai kelipatan 1.024.
+- **KiB dan MiB**: memakai kelipatan 1.024; 1 KiB = 1.024 byte, sedangkan 1 MiB = 1.024 KiB.
 
 ### Memeriksa satu dugaan setiap kali
 
@@ -135,15 +137,21 @@ ps -eo pid,comm | head -n 6
 Hasil menampilkan kolom PID dan nama. Enam baris mencakup satu judul kolom.
 Nomor PID dan nama proses boleh berbeda dari komputer lain.
 
-Buka aplikasi editor, lalu ulangi pengamatan.
+**macOS**
+
+Buka Activity Monitor melalui pencarian Spotlight. Baca nama proses tanpa menekan tombol penghentian.
+
+Pada semua jalur, buka aplikasi editor, lalu ulangi pengamatan.
 Jika editor tidak muncul pada lima proses pertama, periksa melalui Task Manager di Windows atau monitor sistem Linux.
+Task Manager dapat dicari melalui menu Start.
 Hubungkan aplikasi yang terlihat dengan prosesnya; jangan menghentikan proses atau layanan sistem.
 
 ### 2. Buat file dan periksa ukurannya
 
 Dari folder tutorial, pilih jalur sesuai perangkatmu.
 Perintah menulis file latihan, membaca ukurannya, lalu membuat salinan.
-Jika nama itu sudah dipakai untuk hasil yang ingin disimpan, pertahankan hasil lama sebelum mengulang.
+Periksa `nota.txt` dan `nota-salinan.txt` dahulu; perintah penulisan dan penyalinan bisa menimpa file yang sudah ada.
+Pertahankan hasil lama sebelum mengulang jika masih diperlukan.
 
 **Windows PowerShell**
 

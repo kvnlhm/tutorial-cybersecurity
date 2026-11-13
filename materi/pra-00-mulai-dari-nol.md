@@ -30,8 +30,11 @@ Kamu juga akan membedakan percobaan di halaman latihan dari tindakan pada komput
 ### Menyimpan catatan di meja kasir
 
 Bayangkan meja kasir Laundry Aman.
-Komputer adalah perangkat di meja; aplikasi adalah alat kerja yang dibuka, seperti kalkulator atau pengolah nota.
-Dokumen adalah isi pekerjaan yang disimpan. Menutup aplikasi tidak menghapus dokumen, tetapi perubahan yang belum disimpan dapat hilang.
+Komputer adalah perangkat di meja.
+
+**Aplikasi** adalah alat kerja yang dibuka, seperti kalkulator atau pengolah nota.
+
+**Dokumen** adalah isi pekerjaan yang disimpan. Menutup aplikasi tidak menghapus dokumen, tetapi perubahan yang belum disimpan dapat hilang.
 
 Kasir memberi nama agar catatannya bisa ditemukan lagi.
 **File**, atau berkas, menyimpan data dengan nama, seperti lembar nota bernama `nota.txt`.
@@ -109,9 +112,9 @@ PowerShell dan Bash adalah dua shell dengan aturan berbeda.
 | Bilah alamat browser | Lokasi halaman | `http://127.0.0.1:8000/nota.txt` |
 | Terminal | Perintah untuk program atau shell | `Get-Location` |
 
-Perintah yang kamu berikan disebut **input**, atau masukan, seperti permintaan pekerjaan kepada kasir.
+**Input** berarti masukan bagi program, seperti permintaan pekerjaan kepada kasir. Pada latihan ini, masukannya berupa perintah.
 
-Jawaban yang muncul disebut **output**, atau hasil, seperti jawaban kasir setelah membaca permintaan.
+**Output** berarti hasil program, seperti jawaban kasir setelah membaca permintaan.
 Kamu perlu membedakan keduanya saat menjelaskan percobaan.
 
 Penanda bahwa shell siap menerima perintah disebut **prompt**, seperti tanda loket siap melayani.
@@ -157,14 +160,15 @@ Pilih jalur sesuai perangkatmu.
 **Dari HP atau browser komputer:**
 
 1. Buka [simulator Laundry Aman](https://kvnlhm.github.io/tutorial-cybersecurity/). Internet diperlukan untuk versi online; akun dan unduhan ZIP tidak diperlukan.
-2. Halaman pertama menampilkan **Temukan catatan toko** dengan mode belajar terpilih.
+2. Pada progres baru, halaman menampilkan **Temukan catatan toko** dengan mode belajar terpilih. Jika pernah belajar, pilih kembali misi dan mode itu.
 3. Pada HP, ketuk **Pilih misi dan mode** jika perlu membuka daftar latihan.
 4. Ketuk **Ketik perintah di sini**, isi `pwd`, lalu ketuk **Jalankan perintah**. Jangan mengetik `pwd` di bilah alamat browser.
 5. Baca lokasi pada kotak hasil. Jelaskan dengan kalimat sendiri: “Saya meminta lokasi folder, simulator menunjukkan ….”
 6. Coba `ls` dengan cara yang sama. Jika hasilnya belum jelas, buka **Pahami istilah dan konsep misi**, lalu gunakan petunjuk di bawah meja praktik.
 7. Simpan tautan sebagai bookmark atau favorit browser agar mudah dibuka lagi.
 
-Progres tersimpan di browser ini. Berpindah HP, komputer, atau browser tidak memindahkan progres secara otomatis.
+Jika penyimpanan diizinkan, progres tersimpan pada browser ini. Berpindah HP, komputer, atau browser tidak memindahkan progres secara otomatis.
+Periksa pesan penyimpanan pada halaman. Jika penyimpanan gagal, unduh catatan sebelum menutup tab.
 
 **Alternatif: file offline di komputer setelah mengunduh:**
 
@@ -331,7 +335,8 @@ Jika Python belum tersedia:
 Jika perangkat organisasi menolak pemasangan, minta pengelola menyediakan Python dan lanjutkan simulator sambil menunggu.
 [Panduan resmi Windows](https://docs.python.org/3/using/windows.html) menjelaskan pemasangannya.
 
-Setelah versi tampil, jalankan:
+Setelah versi tampil, jalankan contoh berikut.
+Jika hanya `py` yang bekerja, gunakan nama itu sebagai pengganti `python` pada contoh ini:
 
 ```powershell
 python -c "print('Saya berhasil menjalankan Python')"
@@ -378,6 +383,8 @@ Kamu meminta Python membuka file pada lokasi tersebut; isi `print(...)` tetap be
 **Linux/macOS**
 
 Pakai `python3` sebagai pengganti `py` pada perintah di atas.
+
+Pada kedua jalur, hasil awalnya adalah `Laundry Aman siap belajar`.
 
 Ubah teks di file menjadi `Saya bisa membuka file saya sendiri`, simpan, lalu ulangi perintah.
 Jika pesan lama masih muncul, periksa hasil simpan dan cocokkan file yang diedit dengan lokasi pada perintah.

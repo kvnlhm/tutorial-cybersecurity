@@ -171,7 +171,7 @@ Ikuti petunjuk untuk sistemmu, buka terminal baru, lalu ulangi pemeriksaan.
 
 **Windows PowerShell**
 
-Jika `py` tidak tersedia tetapi `python --version` menunjukkan Python 3, gunakan `python` sebagai pengganti `py`.
+Jika `py` tidak tersedia tetapi `python --version` menunjukkan Python 3.11 atau lebih baru, gunakan `python` sebagai pengganti `py`.
 
 **Linux/macOS**
 
@@ -181,6 +181,7 @@ Gunakan `python3`. Periksa program yang benar-benar berjalan; nama file saja tid
 
 Dari folder tutorial, pilih jalur sesuai perangkatmu. Jalankan baris satu per satu.
 Perintah kedua menimpa isi jika nama file sudah ada. Pakai nama baru bila hasil lama perlu dipertahankan.
+Jika memakai nama baru, sesuaikan nama pada perintah penulisan dan pembacaan agar keduanya menunjuk file yang sama.
 
 **Windows PowerShell**
 
@@ -233,13 +234,13 @@ Gunakan image resmi, yaitu berkas sistem yang penyedia resminya terbitkan, lalu 
 - Matikan **shared clipboard**, fasilitas salin-tempel antara host dan guest, saat bereksperimen.
 - Matikan **shared folder**, folder yang dibagikan antara host dan guest, saat bereksperimen.
 - Buat snapshot kondisi awal.
-- Uji rancangan jaringan pada diagram sebelum memasang aplikasi rentan.
+- Cocokkan pengaturan jaringan VM dengan diagram sebelum memasang aplikasi rentan; gambar saja belum membuktikan isolasi.
 
 Buku tidak membutuhkan Docker, akun cloud berbayar, atau kartu kredit.
 
 ## Hasil yang diharapkan
 
-Terminal menampilkan versi Python 3 dan kalimat `Lab Laundry Aman siap`.
+Terminal menampilkan versi Python 3.11 atau lebih baru dan kalimat `Lab Laundry Aman siap`.
 File `hasil-belajar/cek-lab.txt` ada di folder yang kamu maksud.
 Kamu mengetahui shell yang dipakai dan pilihan lingkungan Linux untuk bab selanjutnya.
 

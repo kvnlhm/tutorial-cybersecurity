@@ -49,7 +49,7 @@ Kasir perlu mengirim ke tujuan yang benar, seperti menulis alamat pada kiriman p
 **IP address**, atau alamat IP, menunjukkan alamat komunikasi perangkat.
 Alamat IP dapat berubah; satu perangkat juga dapat mempunyai beberapa alamat.
 
-Untuk latihan, kita memakai **IPv4**, bentuk alamat dengan empat angka dari 0 sampai 255.
+Untuk latihan, kita memakai **IPv4**, alamat 32 bit yang ditulis sebagai empat angka dari 0 sampai 255.
 Contohnya `192.168.10.20`. IP tidak membuktikan identitas manusia.
 
 Kasir mencoba layanan di laptop sendiri melalui **loopback**, jalur kembali ke perangkat sendiri, seperti berbicara kepada diri sendiri.
@@ -77,7 +77,7 @@ Jangan mengganti alamat bind lab menjadi `0.0.0.0` hanya untuk mengatasi masalah
 Laundry Aman memakai blok `192.168.10.0/24`. Bayangkan deretan rumah yang kita bagi menjadi beberapa blok alamat.
 Pembagian ruang alamat menjadi bagian lebih kecil disebut **subnet**.
 
-Penulisan panjang bagian jaringan disebut **CIDR**: `/24` menandai 24 dari 32 bit IPv4 sebagai bagian jaringan.
+Penulisan seperti `/24` disebut **notasi CIDR**. Angka 24 menandai banyaknya bit jaringan dalam alamat IPv4.
 
 Bagian jaringan disebut **prefix**. Pada `/24`, bagian awal alamat tetap, sementara nomor terakhir membedakan perangkat.
 
@@ -94,8 +94,6 @@ Perangkat pemakai alamat disebut **host**, seperti penghuni bernomor rumah. Pera
 **Broadcast** adalah pengiriman ke seluruh perangkat dalam subnet IPv4, seperti pengumuman untuk satu blok.
 Alamatnya `192.168.10.255`.
 Setelah menyisihkan alamat jaringan dan broadcast, tersedia 254 alamat host.
-
-Laptop kasir memakai nomor di antara `.0` dan `.255`.
 
 **Mask** seperti pembatas pada formulir alamat: ia memisahkan bagian jaringan dari bagian perangkat.
 Untuk `/24`, mask `255.255.255.0` menunjukkan tiga bagian angka awal sebagai bagian jaringan.
@@ -127,9 +125,11 @@ Laptop bertanya kepada **resolver DNS**, layanan penerima pertanyaan nama, seper
 
 Pada contoh toko, server aplikasi berada di jaringan lain.
 
-Jika tujuan di luar jaringan yang terhubung langsung, laptop menuju **default gateway**, router tujuan bawaan, seperti pintu keluar toko.
+Jika tujuan di luar jaringan yang terhubung langsung, laptop memilih jalur pengiriman.
 
-Untuk pengiriman lokal, perangkat memakai **MAC address**, alamat antarmuka pada lapisan link lokal, seperti label sambungan Ethernet atau Wi-Fi.
+**Default gateway** adalah router jalur keluar bawaan, seperti pintu keluar toko. Jalur yang lebih khusus dapat dipakai lebih dahulu.
+
+Untuk komunikasi lokal, perangkat memakai **MAC address**, alamat antarmuka seperti label sambungan Ethernet atau Wi-Fi.
 Alamat ini dapat diacak atau dipalsukan; identitas manusia tetap memerlukan bukti lain.
 
 #### Cukup kenali dulu
@@ -334,8 +334,8 @@ Gambar empat kotak di kertas atau editor:
 4. Server aplikasi.
 
 Hubungkan kotak sesuai perjalanan permintaan. Tulis kapan laptop membutuhkan DNS dan kapan membutuhkan gateway.
-Saat kasir memakai nama aplikasi, laptop bertanya kepada resolver DNS.
-Jika alamat server berada di luar jaringan yang terhubung langsung, laptop mengirim paket melalui gateway.
+Saat mencari alamat nama aplikasi, laptop dapat bertanya kepada resolver DNS.
+Jika server berada di jaringan lain tanpa jalur khusus, laptop memakai default gateway.
 
 Tambahkan perangkat Wi-Fi pelanggan pada bagian terpisah.
 Gambar ini menyatakan rancangan. Untuk membuktikan pemisahan jaringan sudah diterapkan, kamu perlu pemeriksaan tambahan.

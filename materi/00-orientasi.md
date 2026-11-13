@@ -20,7 +20,8 @@ Setelah itu, kamu akan memilih batas latihan dan mencatat bukti hasilnya.
 
 ### Apa yang perlu dijaga di meja kasir?
 
-Laundry Aman adalah usaha rekaan dengan laptop kasir, Wi-Fi pelanggan, aplikasi pesanan, dan cadangan data.
+Laundry Aman adalah usaha rekaan yang menerima pesanan melalui website.
+Tokonya memakai laptop kasir, Wi-Fi pelanggan, aplikasi pesanan, dan cadangan data.
 Semua nama pelanggan dan transaksi latihan juga rekaan.
 Kita dapat mencoba kesalahan tanpa memakai data pelanggan sungguhan.
 
@@ -72,7 +73,7 @@ Pada latihan awal, pakai komputer sendiri atau lingkungan yang penyelenggara sed
 
 #### Cukup kenali dulu
 
-- **Domain**: nama suatu situs; kepemilikan nama itu tidak mencakup izin menguji seluruh layanan terkait.
+- **Domain**: nama internet untuk situs atau layanan lain; kepemilikannya tidak mencakup izin menguji seluruh layanan terkait.
 - **Hacker**: orang yang memahami sistem lalu menemukan cara mengubah perilakunya; buku ini mengajarkan pengujian berizin dan perbaikan.
 - **AI**: alat bantu yang dapat memberi penjelasan atau jawaban; cocokkan jawabannya dengan dokumentasi dan hasil percobaan.
 
@@ -96,7 +97,7 @@ Kemampuan profesional tetap perlu dibuktikan lewat pekerjaan dan latihan di luar
 ### Ringkasan
 
 - Aset adalah sesuatu yang perlu dijaga; satu aset dapat mengalami beberapa jenis kerugian.
-- Ancaman memanfaatkan keadaan tertentu; kerentanan memberi kesempatan terjadinya kerugian.
+- Ancaman dapat merugikan aset; kerentanan adalah kelemahan yang dapat memudahkan terjadinya kerugian.
 - Risiko menghubungkan kemungkinan dengan dampak dalam kasus yang sedang diperiksa.
 - Tentukan izin sebelum memilih alat atau menguji target.
 
@@ -115,6 +116,7 @@ Melalui editor teks, simpan dokumen `00-kontrak-belajar.md` di dalamnya.
 **Markdown** adalah format teks dengan tanda sederhana untuk judul dan daftar; file-nya memakai ekstensi `.md`.
 
 Pakai Notepad atau editor teks, lalu ikuti cara simpan-buka-ulang pada pra-bab.
+Di Notepad, pilih **All files** saat menyimpan. Periksa agar namanya `00-kontrak-belajar.md`, bukan `00-kontrak-belajar.md.txt`.
 Tampilan yang masih berupa teks biasa tetap bisa kamu pakai.
 `localhost` adalah nama untuk komputer sendiri, seperti latihan lokal yang nanti akan kamu jalankan.
 
@@ -150,6 +152,7 @@ Pisahkan kejadian yang terlihat dari dampak yang masih mungkin terjadi.
 
 ### 3. Buat jurnal eksperimen
 
+Buka kembali `00-kontrak-belajar.md` di editor. Tambahkan jurnal di bawah kontrak yang sudah kamu isi.
 Setelah mencoba sesuatu di Laundry Aman, catat tujuan, dugaan awal, langkah, hasil, penjelasan, dan perbaikan.
 Sertakan perintah yang dipakai. Catatan ini membantu orang lain mengikuti alasanmu.
 
