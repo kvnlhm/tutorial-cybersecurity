@@ -11,15 +11,16 @@ Selesaikan [Bab 01](01-lab.md) untuk menyiapkan terminal dan [Bab 02](02-kompute
 Bandingkan juga pengelolaan sistem ini dengan Linux pada [Bab 04](04-linux.md).
 
 Gunakan Windows milik kamu untuk menjalankan perintah PowerShell.
-Pembaca Linux/macOS dapat mengerjakan latihan log sintetis dengan Python pada bab deteksi, lalu kembali ke sini ketika memiliki lingkungan Windows berizin.
+Pembaca Linux/macOS dapat mengerjakan latihan log sintetis dengan Python pada [Bab 15](15-deteksi.md), lalu kembali ke sini ketika memiliki lingkungan Windows berizin.
 
 ## Konsep
 
 Komputer kasir Laundry Aman menggunakan sistem operasi Windows.
 Kita perlu memeriksa program yang aktif, meninjau layanan latar belakang, dan membaca catatan kejadian sistem.
 PowerShell membantu kita memeriksa data sistem dalam bentuk informasi terstruktur.
-Setiap berkas dan pengaturan Windows memiliki identitas keamanan serta hak akses tersendiri.
-Kita akan mempelajari cara menyaring data proses, mengenali komponen sistem, dan membaca log keamanan.
+Berkas dan pengaturan Windows punya identitas keamanan sendiri.
+Hak aksesnya juga diatur terpisah.
+Kita akan menyaring data proses, mengenali komponen sistem, dan membaca log keamanan.
 
 ### Memeriksa proses kasir memakai objek PowerShell
 
@@ -38,7 +39,7 @@ Perintah `Get-Help` meminta bantuan panduan lokal.
 
 - **Properti**: atribut bernama di dalam sebuah objek.
 - **Pipeline**: penyaluran data antarkomando memakai tanda pipa `|`.
-- **Eksekusi interaktif**: menjalankan perintah langsung di terminal.
+- **Perintah interaktif**: perintah yang kamu ketik langsung di terminal, satu demi satu.
 
 ### Meninjau komponen sistem: pengaturan, layanan, dan tugas
 
@@ -77,8 +78,8 @@ Tetap periksa asal program sebelum menyetujui permintaannya.
 
 #### Cukup kenali dulu
 
-- **Hak akses file**: izin operasi file pada NTFS.
-- **Elevasi hak**: peningkatan wewenang pengguna sementara.
+- **Hak akses file**: izin operasi file pada sistem file Windows yang lazim (NTFS).
+- **Elevasi hak**: peningkatan wewenang pengguna sementara, seperti saat UAC meminta konfirmasi.
 - **Akun lokal**: akun pengguna di komputer lokal.
 
 ### Membaca catatan aktivitas dengan event log
@@ -200,7 +201,7 @@ Untuk analisis lanjutan, pertahankan objek mentah sampai operasi penyaringan sel
 
 ## Hasil yang diharapkan
 
-Kamu bisa memilih properti objek, menyaring dua kejadian gagal, dan membaca metadata event atau memakai pengganti sintetis.
+Kamu bisa memilih properti objek, menyaring dua kejadian gagal, dan membaca metadata event, yaitu keterangan tentang kejadian itu, atau memakai pengganti sintetis.
 Kamu dapat menjelaskan bahwa izin file pada ACL berbeda dari status program yang sedang berjalan di memori.
 Simpan ringkasan perintah dan catatan hasil pengamatanmu di jurnal belajar.
 

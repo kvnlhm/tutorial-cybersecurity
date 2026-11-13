@@ -25,7 +25,8 @@ Di dunia keamanan informasi, ada empat cara mendasar dalam memperlakukan data.
 
 Pertama, **encoding** mengubah bentuk representasi data agar cocok dikirim atau disimpan di berbagai media.
 Contohnya adalah Base64 yang menyajikan data biner ke dalam deretan teks biasa.
-Encoding dapat dikembalikan ke bentuk asli tanpa kunci rahasia, sehingga encoding sama sekali tidak melindungi password.
+Encoding dapat dikembalikan ke bentuk asli tanpa kunci rahasia.
+Karena itu encoding sama sekali tidak melindungi password.
 
 Kedua, fungsi **hash** menghasilkan ringkasan berukuran tetap untuk algoritma tertentu.
 Fungsi hash dirancang bekerja satu arah, seperti sidik jari dokumen.
@@ -76,14 +77,14 @@ Jangan menyederhanakan tanda tangan sebagai “enkripsi dengan kunci privat”; 
 
 Saat kasir mengakses server aplikasi Laundry Aman melalui internet, koneksi perlu dilindungi dari penyadapan.
 
-Protokol **TLS** melindungi komunikasi antara endpoint di jaringan.
+Protokol **TLS** melindungi komunikasi antara dua ujung yang terhubung di jaringan.
 Pada koneksi HTTPS, browser memeriksa sertifikat server, lalu pihak-pihak melakukan handshake untuk menyiapkan perlindungan sesi.
 
 Pihak otoritas penerbit sertifikat disebut **certificate authority**, atau CA.
 CA menandatangani sertifikat yang mengikat identitas seperti nama domain dengan kunci publik menurut aturan validasinya.
 Sistem pengelolaan kepercayaan dan sertifikat digital secara menyeluruh disebut **PKI**, singkatan dari *public key infrastructure*.
 
-HTTPS membantu kerahasiaan serta integritas selama transmisi, tetapi halaman penipu juga bisa memiliki sertifikat valid untuk domain miliknya.
+HTTPS membantu kerahasiaan serta integritas selama pengiriman data, tetapi halaman penipu juga bisa memiliki sertifikat valid untuk domain miliknya.
 Periksa selalu nama domain yang kamu tuju di bilah alamat browser.
 Selain itu, TLS juga tidak mencegah server yang sah menyimpan password dengan cara keliru.
 
@@ -165,9 +166,10 @@ py hasil-belajar/cek_hash.py
 python3 hasil-belajar/cek_hash.py
 ```
 
-Awalan `b` membuat literal byte.
+Awalan `b` membuat nilai byte yang ditulis langsung di kode.
 Fungsi hash bekerja pada byte, bukan pada makna kalimat.
-Metode `hexdigest()` menampilkan hasil sebagai karakter heksadesimal.
+Metode `hexdigest()` menampilkan hasil sebagai karakter heksadesimal, yaitu tulisan angka berbasis 16.
+
 Algoritma SHA-256 menghasilkan 256 bit, yang dalam bentuk ini menjadi 64 karakter heksadesimal.
 Untuk dua contoh nota tersebut, hasil perbandingannya `False`.
 Perbedaan satu angka terakhir saja mengubah seluruh nilai hash secara drastis.

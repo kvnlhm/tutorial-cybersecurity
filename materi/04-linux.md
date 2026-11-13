@@ -8,7 +8,7 @@ Kamu akan menavigasi folder, mencari teks, memahami izin file, dan mengamati pro
 Semua langkah ini membantu menjaga server aplikasi Laundry Aman.
 
 Selesaikan [Bab 01](01-lab.md) untuk menyiapkan Linux dan [Bab 02](02-komputer.md) untuk mengenal proses dan file.
-Bekal jaringan dari [Bab 03](03-jaringan.md) akan membantu saat kamu menghubungkan perangkat.
+Bekal alamat dan port dari [Bab 03](03-jaringan.md) akan membantu pada pendalaman SSH opsional nanti.
 
 Gunakan terminal Linux atau WSL.
 Perintah berikut ditujukan untuk Bash pada Linux; jangan menempelkannya ke PowerShell.
@@ -69,11 +69,12 @@ Izin `x` membantu melewati direktori untuk mengakses isinya.
 Menghapus file terutama terkait izin direktori induk, sehingga pemahaman izin file saja belum cukup.
 Jika pengguna memiliki izin `w` dan `x` pada folder induk, ia bisa menghapus file di dalamnya meski file itu berstatus hanya-baca.
 
-Sistem juga menuliskan izin dalam bentuk angka oktal.
+Sistem juga menuliskan izin dalam bentuk angka **oktal**, yaitu angka berbasis delapan.
 Angka `4`, `2`, dan `1` mewakili read, write, dan execute.
 Nilai izin dihitung dari penjumlahan angka tersebut untuk tiap pihak.
 
-Perintah `chmod 600 catatan.txt` memberi owner `4+2`, group `0`, others `0`.
+Perintah `chmod` mengubah izin file atau folder.
+Contoh `chmod 600 catatan.txt` memberi owner `4+2`, group `0`, others `0`.
 Hasilnya pada tampilan daftar adalah `rw-------`.
 Perintah `chmod 644` memberi owner baca/tulis dan pihak lain baca.
 
@@ -112,6 +113,7 @@ ssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 
 Ketik `yes` saat terminal menanyakan sidik jari host untuk pertama kali.
+Sidik jari host adalah kode pengenal mesin tujuan agar kamu mengenali server yang sama di lain waktu.
 Lalu masukkan password yang diberikan, misalnya `bandit0`.
 Karakter password sengaja tidak muncul di layar demi keamanan.
 Setelah selesai, ketik `exit` untuk kembali ke terminal lokalmu.
@@ -152,7 +154,8 @@ cat pesanan.txt
 Tanda `~` menunjuk home pengguna saat ini.
 Perintah `mkdir -p` membuat direktori jika belum ada, `cd` memindahkan direktori kerja, dan `pwd` menunjukkan lokasinya.
 Perintah `printf` menulis tiga baris melalui `>` ke file.
-Redirection `>` menimpa isi lama, sedangkan `>>` menambahkan isi ke bagian akhir.
+Tanda `>` mengalihkan keluaran ke file dan menimpa isi lama.
+Tanda `>>` menambahkan isi ke bagian akhir file.
 Periksa nama sebelum menulis.
 
 Jalankan satu baris dahulu, baca hasilnya, lalu lanjutkan.
@@ -173,7 +176,7 @@ tail -n 1 pesanan.txt
 ```
 
 Perintah `grep -n` mencari baris yang mengandung teks lalu menampilkan nomor baris.
-Perintah `wc -l` menghitung karakter akhir baris, sehingga cocok untuk file latihan yang tiap barisnya diakhiri newline.
+Perintah `wc -l` menghitung karakter akhir baris, sehingga cocok untuk file latihan yang tiap barisnya diakhiri tanda baris baru (*newline*).
 Perintah `head` membaca awal dan `tail` membaca akhir.
 Pada file ini, status selesai ada di baris 1 dan 3, jumlah baris 3, serta baris terakhir `L003 selesai`.
 

@@ -27,6 +27,8 @@ Pemrograman membantu mengulang pekerjaan dengan aturan yang konsisten.
 Kita menggunakan wadah dan aturan dasar untuk menyimpan serta mengolah data.
 
 Sebuah **variabel** memberi nama pada suatu nilai, seperti menempel label pada toples detergen.
+Tanda `=` memberi nilai pada variabel.
+Tanda `==` membandingkan dua nilai.
 
 Sebuah **string** menyimpan teks, seperti nama pelanggan Laundry Aman.
 
@@ -41,6 +43,7 @@ Sebuah **loop** mengulangi langkah kerja untuk setiap data di dalam kelompok.
 Sebuah **kondisi** memilih tindakan berdasarkan syarat yang ditentukan.
 
 Sebuah **fungsi** mengemas pekerjaan agar dapat dipanggil dan diuji dengan masukan berbeda.
+Perintah `assert` memeriksa dugaan hasil di latihan dan menghentikan program jika hasilnya tidak cocok.
 
 #### Cukup kenali dulu
 
@@ -151,7 +154,8 @@ Kata kunci `return` mengembalikan nilai hasil perhitungan kepada pemanggil fungs
 
 Indentasi spasi adalah bagian aturan sintaks Python; gunakan empat spasi untuk satu tingkat indentasi.
 Perintah `assert` memeriksa dugaan hasil dan menghentikan program jika hasil pengujian tidak cocok.
-Assert berguna di latihan, tetapi jangan menjadikannya satu-satunya pemeriksaan keamanan aplikasi karena mode optimasi Python dapat menonaktifkannya.
+Assert berguna di latihan, tetapi jangan menjadikannya satu-satunya pemeriksaan keamanan aplikasi.
+Mode optimasi Python dapat mematikan assert, sehingga pemeriksaan penting tidak boleh mengandalkannya saja.
 
 Ikuti perubahan nilainya di kertas untuk memahami alur eksekusi.
 Fungsi belum menghitung saat baris `def` dibaca; Python hanya menyiapkan definisinya di memori.
@@ -203,7 +207,7 @@ Loop shell di atas menjalankan perintah `printf` sebanyak tiga kali.
 Tanda kutip `"$status"` menjaga nilai variabel tetap menjadi satu argumen utuh.
 
 Untuk masukan dari pengguna luar yang tak tepercaya, hindari menyusunnya langsung menjadi perintah shell.
-Dalam Python, gunakan API langsung bila tersedia, bukan menggabungkan teks masukan ke `os.system`.
+Dalam Python, panggil fungsi pustaka yang tersedia, bukan menggabungkan teks masukan ke perintah seperti `os.system`.
 
 ### 4. Simpan riwayat lokal jika Git tersedia
 

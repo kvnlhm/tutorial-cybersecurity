@@ -4,7 +4,7 @@ Tahap 2 dari 6: Memahami cara sistem bekerja
 
 ## Tujuan dan prasyarat
 
-Kamu akan menjalankan server file di loopback, membaca request dan response HTTP, serta memahami peran browser dan basis data.
+Kamu akan menjalankan server file di loopback, membaca permintaan dan jawaban HTTP, serta memahami peran browser dan basis data.
 Latihan ini membantumu melihat bagaimana aplikasi Laundry Aman melayani pelanggan melalui web.
 
 Selesaikan [Bab 03](03-jaringan.md) untuk memahami port serta IP, dan [Bab 06](06-pemrograman.md) untuk menjalankan perintah Python.
@@ -15,16 +15,19 @@ Server bawaan Python cocok untuk demonstrasi lokal ini, bukan untuk layanan prod
 
 Pelanggan Laundry Aman membuka situs toko untuk memeriksa status cucian mereka.
 Browser meminta halaman nota, lalu server mengirimkan data pakaian yang sudah selesai.
-Komunikasi antara browser dan server terjadi melalui aturan protokol web yang teratur.
+Komunikasi antara browser dan server mengikuti aturan yang disebut protokol web.
 Selain menampilkan halaman, website juga menyimpan sesi login dan membaca basis data.
 Kita akan mempelajari cara kerja alamat web, pesan permintaan, dan penyimpanan data.
 
 ### Membaca bagian alamat web (URL)
 
-Dalam arsitektur web, program yang kamu pakai dibagi menjadi dua peran utama.
+Dalam cara kerja web, program yang kamu pakai dibagi menjadi dua peran utama.
 
 Aplikasi browser bertindak sebagai **client** yang meminta sesuatu dari sumber daya web.
-Program di komputer tujuan yang menerima request dan mengirim response disebut **server**.
+
+Program di komputer tujuan yang melayani permintaan itu disebut **server**.
+Pesan permintaan disebut **request**.
+Pesan jawaban disebut **response**.
 
 Saat pelanggan membuka alamat `http://127.0.0.1:8000/nota.txt`, alamat tersebut memuat beberapa komponen penting:
 
@@ -39,7 +42,7 @@ Port dapat dihilangkan jika memakai port bawaan skemanya, misalnya port 80 untuk
 
 - **URL**: alamat lengkap penunjuk lokasi sumber daya di web.
 - **Skema**: aturan protokol komunikasi yang digunakan, seperti HTTP atau HTTPS.
-- **Path**: jalur file atau endpoint yang dituju di komputer server.
+- **Path**: jalur file atau tujuan yang diminta di komputer server.
 
 ### Mengikuti pertukaran request dan response HTTP
 
@@ -48,7 +51,7 @@ Setiap kali browser meminta halaman, ia mengirim pesan request dan menunggu resp
 Pesan request mempunyai **method**, tujuan path, deretan header, dan kadang memuat body pesan.
 Method `GET` biasanya meminta representasi sumber daya tanpa mengubah data di server.
 Method `POST` lazim dipakai untuk mengirim data baru atau memulai tindakan, seperti mengisi formulir pesanan.
-Bagian header berisi metadata, misalnya jenis konten dokumen.
+Bagian header berisi keterangan tambahan, misalnya jenis konten dokumen.
 Bagian body membawa isi pesan yang dikirimkan.
 
 Pesan response dari server mempunyai kode status, response headers, dan body isi data.
@@ -61,7 +64,7 @@ Kode `200` saja tidak menjamin logika bisnis benar; itu hanya menandakan komunik
 #### Cukup kenali dulu
 
 - **Status code**: kode angka tiga digit penanda hasil pemrosesan permintaan HTTP.
-- **Response header**: informasi metadata dari server tentang jenis dan ukuran data yang dikirim.
+- **Response header**: keterangan dari server tentang jenis dan ukuran data yang dikirim.
 - **Response body**: isi utama jawaban server yang ditampilkan oleh browser.
 
 ### Menjaga ingatan pengguna dengan cookie dan session
@@ -141,7 +144,7 @@ Status: siap diambil
 ```
 
 Folder ini hanya boleh berisi materi dummy untuk latihan.
-Jangan menyajikan home, folder kerja kantor, atau folder yang mengandung secret.
+Jangan menyajikan home, folder kerja kantor, atau folder yang mengandung rahasia.
 Python dapat menampilkan daftar folder bila halaman index tidak tersedia.
 
 ### 2. Nyalakan server lokal
@@ -177,7 +180,7 @@ Hal itu membantu menghubungkan tindakan pada browser dengan proses server.
 Buka Developer Tools melalui menu browser atau tombol F12, pilih tab Network, lalu muat ulang halaman.
 Pilih request `nota.txt`.
 Cari method, URL, status, response headers, serta isi response di panel rincian.
-Browser mungkin meminta favicon; request tambahan itu tidak berasal dari isi nota.
+Browser mungkin meminta favicon, yaitu ikon kecil situs; request tambahan itu tidak berasal dari isi nota.
 
 Ikuti langkah observasi kecil berikut:
 Buka tab Network terlebih dahulu, baru tekan tombol muat ulang halaman.
@@ -221,7 +224,7 @@ SELECT status FROM pesanan WHERE id = 'L001';
 
 Query tersebut belum memeriksa siapa pengguna yang meminta data.
 Jika aplikasi memanggilnya untuk pengguna mana pun, pelanggan lain mungkin memperoleh data yang bukan haknya.
-Bab otorisasi dan web security akan memisahkan dua masalah: keamanan penyusunan query serta pemeriksaan hak atas objek.
+[Bab 09](09-identitas.md) dan [Bab 13](13-web-api.md) akan memisahkan dua masalah: keamanan penyusunan query serta pemeriksaan hak atas objek.
 
 ### 5. Hentikan server
 
@@ -250,7 +253,7 @@ Jangan menghilangkan `--bind 127.0.0.1` atau menonaktifkan firewall sebagai jala
 ## Latihan
 
 Tambahkan file dummy kedua di folder latihan, minta melalui browser, lalu bandingkan path dan ukuran response.
-Jelaskan bagian mana yang akan berubah jika server memerlukan autentikasi login.
+Jelaskan bagian mana yang akan berubah jika server memerlukan pemeriksaan login.
 Sebutkan mengapa status `404` dan tampilan tombol yang tersembunyi belum cukup untuk membuktikan perlindungan data.
 
 **Kasus diagnosis:**
