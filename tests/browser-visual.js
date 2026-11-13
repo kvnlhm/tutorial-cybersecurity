@@ -6,7 +6,7 @@ async(page) => {
     const values=await page.evaluate(()=>{
       const styles=getComputedStyle(document.documentElement);
       const l=hex=>{let c=hex.trim().replace('#','');if(c.length===3)c=[...c].map(x=>x+x).join('');const rgb=[0,2,4].map(i=>parseInt(c.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return .2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2];};
-      return [['--ink','--paper'],['--muted','--paper'],['--muted','--surface'],['--muted','--soft'],['--green','--paper'],['--on-green','--green'],['--danger','--soft'],['--terminal-ink','--terminal']].map(([a,b])=>{const x=l(styles.getPropertyValue(a)),y=l(styles.getPropertyValue(b));return {pair:a+'/'+b,ratio:(Math.max(x,y)+.05)/(Math.min(x,y)+.05)};});
+      return [['--ink','--paper'],['--muted','--paper'],['--muted','--surface'],['--muted','--soft'],['--green','--paper'],['--on-green','--green'],['--danger','--soft'],['--terminal-ink','--terminal'],['--terminal-prompt','--terminal'],['--terminal-muted','--terminal']].map(([a,b])=>{const x=l(styles.getPropertyValue(a)),y=l(styles.getPropertyValue(b));return {pair:a+'/'+b,ratio:(Math.max(x,y)+.05)/(Math.min(x,y)+.05)};});
     });
     for(const item of values){if(!Number.isFinite(item.ratio)||item.ratio<4.5)throw Error(theme+' '+item.pair+' contrast '+item.ratio);ratios.push({theme,...item});}
   }
