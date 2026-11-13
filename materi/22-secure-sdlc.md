@@ -1,16 +1,64 @@
 # Bab 22: Membangun perangkat lunak yang bisa dipercaya
 
+Tahap 5 dari 6: Memeriksa program dan lingkungan
+
 ## Tujuan dan prasyarat
 
-Anda akan mengubah temuan keamanan menjadi requirement, test, perubahan kode, serta bukti rilis. Pahami pemrograman, Git, otorisasi, dan kelemahan web. Latihan memakai rancangan fitur Laundry Aman serta lab lokal yang tersedia dalam repositori.
+Kamu akan mengubah temuan keamanan menjadi requirement, test, perubahan kode, serta bukti rilis.
+Kemampuan ini membantumu memastikan aplikasi Laundry Aman dibangun dan dirilis secara bertanggung jawab.
+
+Bekal utamamu adalah [Git dari Bab 06](06-pemrograman.md) serta [kriptografi dari Bab 08](08-kriptografi.md).
+Pahami juga [otorisasi dari Bab 09](09-identitas.md), [threat modeling dari Bab 11](11-threat-modeling.md), dan [kelemahan web dari Bab 13](13-web-api.md).
+Latihan memakai rancangan fitur Laundry Aman serta lab lokal yang tersedia dalam repositori di `labs/access_demo.py`.
 
 ## Konsep
 
-**SDLC**, Software Development Life Cycle, mencakup pekerjaan sejak kebutuhan aplikasi sampai pemeliharaannya. Tim memasukkan keamanan pada tahap desain, implementasi, pengujian, rilis, dan respons terhadap temuan. Menemukan bug setelah rilis tetap penting, tetapi keputusan awal sering menentukan berapa sulit memperbaikinya.
+Laundry Aman terus memperbarui aplikasi layanannya dengan menambah fitur baru.
+Keamanan tidak bisa hanya dipikirkan saat program selesai dibuat.
+Keputusan rancangan awal menentukan seberapa tahan aplikasi terhadap serangan.
+Alur kerja yang baik menguji keamanan sejak awal dan mencatat rilis teratur.
+Kita akan mempelajari siklus aplikasi, rantai pasok kode, dan pengujian keamanan.
 
-**Supply chain perangkat lunak** mencakup kode, dependency, pembuat paket, sistem build, dan jalur distribusi. Aplikasi aman dapat menerima risiko dari paket yang keliru, akun maintainer yang diambil alih, atau build yang berubah tanpa review. Mengetahui asal sebuah berkas membantu penyelidikan, tetapi asal tepercaya tidak membuktikan seluruh kodenya bebas cacat.
+### Mengintegrasikan keamanan ke dalam siklus SDLC
 
-Beberapa istilah yang akan Anda temui:
+Keamanan perangkat lunak adalah bagian dari seluruh tahapan pembuatan aplikasi.
+
+Kerangka kerja **SDLC**, singkatan dari *Software Development Life Cycle*, mencakup pekerjaan sejak kebutuhan aplikasi sampai pemeliharaannya.
+Tim memasukkan keamanan pada tahap desain, implementasi, pengujian, rilis, dan respons terhadap temuan.
+Menemukan bug setelah rilis tetap penting, tetapi keputusan awal sering menentukan berapa sulit memperbaikinya.
+
+#### Cukup kenali dulu
+
+- **Security requirement**: syarat keamanan yang wajib dipenuhi oleh suatu fitur baru.
+- **Rancangan aman**: keputusan arsitektur yang membatasi hak akses sejak awal pembuatan program.
+- **Regression test**: pengujian ulang otomatis untuk memastikan perbaikan tidak merusak fitur lain.
+
+### Mengamankan rantai pasok perangkat lunak
+
+Aplikasi modern memanfaatkan banyak pustaka dan modul luar yang saling terhubung.
+
+Konsep **supply chain perangkat lunak** mencakup kode, dependency, pembuat paket, sistem build, dan jalur distribusi.
+Aplikasi aman dapat menerima risiko dari paket yang keliru, akun maintainer yang diambil alih, atau build yang berubah tanpa review.
+Mengetahui asal sebuah berkas membantu penyelidikan, tetapi asal tepercaya tidak membuktikan seluruh kodenya bebas cacat.
+
+#### Cukup kenali dulu
+
+- **Kunci versi**: penguncian versi pustaka luar agar proses build selalu menghasilkan kode identik.
+- **Pipeline build**: alur otomatis yang menguji dan membangun paket kode di lingkungan terisolasi.
+- **Integritas paket**: verifikasi sidik hash paket untuk memastikan file tidak diubah di perjalanan.
+
+### Memilih alat bantu pengujian keamanan kode
+
+Untuk memeriksa keamanan aplikasi, tim menggunakan beragam alat bantu pengujian:
+
+Pendekatan **SAST** memeriksa pola berisiko yang tampak pada teks kode sumber sebelum program dijalankan.
+Pendekatan **DAST** mengamati perilaku berisiko yang tampak ketika aplikasi sedang berjalan di lingkungan uji.
+
+Analisis **SCA** memeriksa komponen pihak ketiga yang dipakai dan diketahui memiliki kerentanan.
+Dokumen **SBOM** menyajikan daftar bahan lengkap penyusun komponen perangkat lunak.
+Bukti **Provenance** menjelaskan dari sumber repositori dan proses build mana artefak berasal.
+
+Bandingkan fokus kelima pendekatan tersebut pada tabel berikut:
 
 | Istilah | Pertanyaan yang dibantu |
 |---|---|
@@ -20,11 +68,38 @@ Beberapa istilah yang akan Anda temui:
 | SBOM | Apa daftar bahan penyusun perangkat lunak ini? |
 | Provenance | Dari sumber dan proses build mana artefak berasal? |
 
-Alat tersebut menjawab pertanyaan berbeda. Pemindai dependency tidak membuktikan otorisasi pesanan benar. Signature dapat membantu memverifikasi penerbit atau integritas sesuai mekanismenya, tetapi tidak menjamin bahwa kode yang ditandatangani aman.
+Alat tersebut menjawab pertanyaan berbeda.
+Pemindai dependency tidak membuktikan otorisasi pesanan benar.
+Signature dapat membantu memverifikasi penerbit atau integritas sesuai mekanismenya, tetapi tidak menjamin bahwa kode yang ditandatangani aman.
+
+<details>
+<summary>Pendalaman opsional: mengamankan masukan model AI</summary>
+
+Untuk aplikasi yang memakai model AI, perlakukan jawaban model dan dokumen yang diambilnya sebagai input tak tepercaya.
+Pemeriksaan izin serta pembatasan alat tetap berada pada kode aplikasi.
+Isi dokumen pelanggan tidak boleh mengubah hak pengguna atau kebijakan ekspor.
+
+</details>
+
+### Ringkasan
+
+- SDLC memasukkan pertimbangan keamanan sejak tahap perancangan hingga rilis dan pemeliharaan.
+- Supply chain perangkat lunak mencakup seluruh pustaka dan alur build yang membentuk aplikasi.
+- SAST, DAST, SCA, SBOM, dan provenance menjawab aspek pengujian yang saling melengkapi.
+- Pengujian izin hak akses di server tidak boleh digantikan oleh pemeriksaan di peramban.
+
+### Cek pemahaman
+
+1. Mengapa pemindai pustaka (SCA) yang menyatakan hijau belum menjamin aplikasi bebas dari celah otorisasi?
+2. Mengapa tanda tangan digital pada file rilis belum membuktikan bahwa kode di dalamnya bebas dari bug?
+3. Mengapa jawaban dari model AI wajib diperlakukan sebagai masukan tak tepercaya oleh server?
 
 ## Praktik
 
-Laundry Aman akan menambah fitur ekspor transaksi. Mulai dari kebutuhan: kasir boleh mengekspor transaksi cabangnya, supervisor boleh mengekspor cabang yang dikelolanya, dan pelanggan tidak mendapat fitur ekspor seluruh transaksi.
+Laundry Aman akan menambah fitur ekspor transaksi.
+Mulai dari kebutuhan: kasir boleh mengekspor transaksi cabangnya, supervisor boleh mengekspor cabang yang dikelolanya, dan pelanggan tidak mendapat fitur ekspor seluruh transaksi.
+
+### 1. Tetapkan invariant aturan bisnis
 
 Ubah kebutuhan menjadi empat **invariant**, yaitu aturan yang harus tetap benar:
 
@@ -33,7 +108,10 @@ Ubah kebutuhan menjadi empat **invariant**, yaitu aturan yang harus tetap benar:
 3. Ekspor tidak memuat kolom yang tidak diperlukan untuk pekerjaan peminta.
 4. Log mencatat siapa mengekspor apa dan kapan tanpa menyimpan seluruh isi data.
 
-Jangan menerima `role=admin` dari body permintaan sebagai bukti peran. Nilai dari pengguna merupakan input; server perlu mencari hak yang sah dari sumber identitasnya.
+Jangan menerima `role=admin` dari body permintaan sebagai bukti peran.
+Nilai dari pengguna adalah input; server perlu mencari hak yang sah dari sumber identitasnya.
+
+### 2. Susun matriks pengujian kasus
 
 Buat rancangan test berikut sebelum menulis fungsi:
 
@@ -46,7 +124,23 @@ Buat rancangan test berikut sebelum menulis fungsi:
 | Sesi sudah berakhir | Penolakan autentikasi |
 | Ekspor sah selesai | Audit event tercatat tanpa isi pelanggan |
 
-Gunakan `labs/access_demo.py` untuk mengulang konsep pemeriksaan pemilik objek. Jalankan dari folder proyek dengan `py labs/access_demo.py`, atau `python3` pada Linux/macOS. Baca sumber contoh, lalu jelaskan bagian mana yang dapat berkembang menjadi pemeriksaan cabang. Contoh lokal adalah model pembelajaran; penanganan sesi, penyimpanan, serta audit produksi memerlukan rancangan tambahan.
+Gunakan `labs/access_demo.py` untuk mengulang konsep pemeriksaan pemilik objek.
+Jalankan dari folder proyek dengan:
+
+**Windows PowerShell**
+
+```powershell
+py labs/access_demo.py
+```
+
+**Linux/macOS**
+
+Ganti `py` dengan `python3` pada perintah di atas.
+
+Baca sumber contoh, lalu jelaskan bagian mana yang dapat berkembang menjadi pemeriksaan cabang.
+Contoh lokal adalah model pembelajaran; penanganan sesi, penyimpanan, serta audit produksi memerlukan rancangan tambahan.
+
+### 3. Audit alur rilis dan buat catatan rilis
 
 Selanjutnya, audit jalur rilis fiktif berikut:
 
@@ -59,9 +153,14 @@ Developer mengubah kode
   -> server memasang berkas tanpa pencatatan hash
 ```
 
-Tandai titik yang menyulitkan pengulangan dan pertanggungjawaban. Contoh: test hari ini mungkin memakai versi dependency berbeda; akun bersama mengaburkan pelaku; artefak build sulit ditautkan dengan commit yang diuji.
+Tandai titik yang menyulitkan pengulangan dan pertanggungjawaban:
+Test hari ini mungkin memakai versi dependency berbeda karena tidak terkunci.
+Akun bersama mengaburkan identitas pelaku rilis.
+Artefak build sulit ditautkan dengan commit yang diuji.
 
-Rancang alur pengganti: review perubahan, dependency terkunci serta ditinjau, test otomatis, build pada lingkungan terkendali, identitas rilis terbatas, lalu pencatatan commit dan digest artefak. Sebelum memasang, verifikasi bukti asal yang disediakan proses build. Tentukan pula cara menarik rilis bermasalah dan memulihkan versi sebelumnya.
+Rancang alur pengganti: review perubahan, dependency terkunci serta ditinjau, test otomatis, build pada lingkungan terkendali, identitas rilis terbatas, lalu pencatatan commit dan digest artefak.
+Sebelum memasang, verifikasi bukti asal yang disediakan proses build.
+Tentukan pula cara menarik rilis bermasalah dan memulihkan versi sebelumnya.
 
 Buat catatan rilis latihan:
 
@@ -75,27 +174,54 @@ Pemilik: penanggung jawab rilis fiktif
 Keterbatasan: belum menguji data produksi atau kapasitas besar
 ```
 
-Jangan memasukkan secret ke commit, hasil test, atau screenshot. Jika secret benar-benar bocor, penghapusan teks dari commit terakhir tidak mencabut nilainya. Pemilik perlu melakukan pencabutan atau rotasi, meninjau pemakaian, dan membersihkan lokasi penyimpanan yang relevan.
-
-Untuk aplikasi yang memakai model AI, perlakukan jawaban model dan dokumen yang diambilnya sebagai input tak tepercaya. Pemeriksaan izin serta pembatasan alat tetap berada pada kode aplikasi. Isi dokumen pelanggan tidak boleh mengubah hak pengguna atau kebijakan ekspor.
+Jangan memasukkan secret ke commit, hasil test, atau screenshot.
+Jika secret benar-benar bocor, penghapusan teks dari commit terakhir tidak mencabut nilainya.
+Pemilik perlu melakukan pencabutan atau rotasi, meninjau pemakaian, dan membersihkan lokasi penyimpanan yang relevan.
 
 ## Hasil yang diharapkan
 
-Anda menghasilkan aturan fitur yang bisa diuji, matriks izin, serta diagram rilis dengan bukti sumber dan artefak. Temuan keamanan berubah menjadi kondisi kelulusan test yang jelas. Anda dapat menjelaskan siapa yang menangani temuan setelah produk dipakai.
+Kamu menghasilkan aturan fitur yang bisa diuji, matriks izin, serta diagram rilis dengan bukti sumber dan artefak.
+Temuan keamanan berubah menjadi kondisi kelulusan test yang jelas.
+Kamu dapat menjelaskan siapa yang menangani temuan setelah produk dipakai.
 
 ## Jika macet
 
-- Test hanya menguji akses yang diizinkan: tambahkan perpindahan pengguna, cabang, peran, dan sesi kedaluwarsa.
-- Scanner memberi ratusan hasil: validasi keterjangkauan dan dampak sebelum memilih prioritas; simpan alasan penundaan.
-- Versi terkunci dianggap aman selamanya: lakukan pembaruan terencana dan pantau advisori resmi komponen yang dipakai.
+| Yang terlihat | Pemeriksaan atau langkah aman |
+|---|---|
+| Test hanya menguji akses berhasil | Tambahkan kasus negatif: perpindahan cabang, peran palsu, dan sesi kedaluwarsa |
+| Pemindai memberi ratusan peringatan | Validasi keterjangkauan dan dampak nyata sebelum menentukan skala prioritas |
+| Versi pustaka terkunci usang | Lakukan pembaruan terencana secara berkala dan pantau advisori keamanan resmi |
 
 ## Latihan
 
-Tambahkan fitur hapus transaksi dengan pembatalan yang tercatat. Tentukan siapa yang boleh melakukan, batas umur transaksi, dan jejak audit. Susun test untuk menghindari penghapusan lintas cabang serta test bahwa kegagalan tidak meninggalkan data setengah berubah.
+Tambahkan fitur hapus transaksi dengan pembatalan yang tercatat.
+Tentukan siapa yang boleh melakukan, batas umur transaksi, dan jejak audit.
+Susun test untuk menghindari penghapusan lintas cabang serta test bahwa kegagalan tidak meninggalkan data setengah berubah.
+
+<details>
+<summary>Pembahasan setelah mencoba: fitur pembatalan transaksi</summary>
+
+Pembatalan transaksi memerlukan verifikasi cabang dan peran supervisor.
+Pengujian negatif memastikan kasir cabang lain atau kasir biasa tidak dapat membatalkan pesanan.
+Pemeriksaan konsistensi memastikan status pesanan diperbarui secara atomik bersamaan dengan pencatatan log audit.
+
+</details>
 
 ## Bukti kelulusan
 
-Serahkan threat model kecil, test negatif dan positif, serta catatan rilis. Anda lulus jika reviewer dapat menautkan satu risiko ke requirement, perubahan, dan bukti test yang menutupnya.
+- [ ] Saya menyimpan berkas threat model kecil, rancangan test positif dan negatif, serta catatan rilis.
+- [ ] Saya dapat menghubungkan satu risiko keamanan ke requirement fitur dan pengujian otomatisnya.
+- [ ] Saya dapat menerangkan peran SAST, DAST, SCA, SBOM, dan provenance dalam alur build.
+- [ ] Saya memahami langkah penanganan saat secret atau kunci API tidak sengaja masuk ke repositori.
+
+### Lanjut belajar
+
+Kamu telah menyelesaikan seluruh materi Tahap 5: Memeriksa program dan lingkungan (Bab 18 sampai 22).
+Di tahap ini, kamu sudah mempelajari analisis program, keamanan memori, identitas Active Directory, arsitektur cloud, dan secure SDLC.
+
+Pada tahap terakhir (Tahap 6: Mengambil keputusan dan membuktikan kemampuan), kamu akan beralih ke penilaian risiko tingkat lanjut dan proyek akhir.
+Lanjutkan ke [Bab 23: Threat Intelligence](23-intelijen.md) untuk mempelajari pengumpulan informasi ancaman keamanan.
+Untuk mengulang pemodelan ancaman aplikasi, buka kembali [Bab 11](11-threat-modeling.md) dan [Bab 13](13-web-api.md).
 
 ## Referensi
 
