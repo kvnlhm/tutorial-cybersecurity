@@ -149,3 +149,23 @@ simulator/ maupun tests/; rincian di [laporan QA](simulator-qa.md).
 | Cakupan assertion kontras dan :has() (RENDAH) | NOT_RUN | Pasangan --terminal-prompt/--terminal dan --terminal-muted/--terminal belum dijaga test (lolos hari ini); :has() menyebabkan kursor ganda di browser lama | Perbaikan di tangan thread implementasi | Polesan opsional, tanpa kegagalan test |
 | Studi pengguna awam dan screen reader | NOT_RUN | Tidak ada peserta manusia pada sesi ini | Memerlukan peserta nyata | Tidak mengklaim validasi usability |
 | Browser/OS lain | NOT_RUN | Hanya Chrome emulasi di Windows | Lingkungan QA | Firefox/Safari/HP fisik belum diuji; [CATAT] pada 390px terverifikasi programatik saja |
+
+## Penyederhanaan materi dan teks simulator
+
+Tanggal: 12 sampai 13 November 2026. Pemilik menilai susunan materi dan bahasanya
+terlalu membingungkan. Seluruh kursus ditulis ulang mengikuti
+[panduan gaya](../panduan-gaya.md) dan [rancangan](rancangan-materi.md), lalu
+tiap bab ditinjau penulis kedua terhadap versi `7996351`. Baris pertama mencatat
+rilis tampilan terminal yang belum tercatat.
+
+| TASK | STATUS (PASS/FAIL/NOT_RUN) | EVIDENCE | BLOCKER | RESULT |
+|---|---|---|---|---|
+| Rilis tampilan terminal (12 November) | PASS | `git push origin main` d6286e2..7996351; build GitHub Pages `built`; enam file `simulator/` di halaman publik ber-hash sama dengan commit | Halaman publik tidak dibuka di browser pada sesi itu | Tampilan terminal tayang |
+| Panduan gaya dan rancangan | PASS | `docs/panduan-gaya.md`: 14 aturan, templat bab, daftar periksa; `docs/ai/rancangan-materi.md`: enam tahap, rantai prasyarat, catatan per bab | Penilaian mudah dipahami berasal dari penulis dan coordinator | Pegangan penulisan ulang; `AGENTS.md` menunjuk ke sana |
+| Penulisan ulang pra-bab, 27 bab, README, lima lampiran, panduan lab | PASS | Pembanding mekanis terhadap `7996351` pada 37 file: blok kode, kode sebaris, tautan, delapan judul wajib. FAIL hanya README (catatan pemelihara pindah ke `docs/pemeliharaan.md`, 13 dari 13 butir ada) dan kamus (rasio kata) | Pembanding tidak menilai kebenaran klaim | Perintah, kode, dan tautan lama utuh |
+| Tinjauan kebenaran semua bab | PASS | Penulis kedua membandingkan tiap bab dengan versi lama dan sumber resmi; lebih dari 300 titik diperbaiki; klaim keliru atau terlalu mutlak yang muncul saat penulisan ulang dibuang; syarat yang hilang dipulihkan | Review penulis, bukan uji peserta | Pra-bab dan Bab 00 sampai 26 ditinjau |
+| Kamus | PASS | 525 entri dan 166 alias; inventaris: 525 dari 525 istilah tebal tertampung | Coordinator hanya membaca 46 entri | Tiap istilah tebal punya entri atau alias |
+| Teks dan polesan simulator | PASS | `node --test tests/simulator.test.cjs` 35 lulus; `tests/browser-simulator.js` 31 alur; `tests/browser-visual.js` 20 pasangan kontras 5,76 sampai 17,01:1; `tests/browser-resilience.js` dan `tests/browser-mobile.js` lulus; screenshot di `artifacts/teks-sim-lanjutan/` | Chrome dengan emulasi ponsel | Sapaan kamu; jarak fokus prompt, kelas `typing` pengganti `:has()`, dan fallback tema beres |
+| Pemeriksaan akhir | PASS | `py tools/build_book.py`: 65.165 kata; `py tools/check_docs.py`: PASS, 48 Markdown, 27 bab, 1654 tautan lokal, buku sinkron; `py -m unittest discover -s tests`: 16 OK; `node --test tests/simulator.test.cjs`: 35 lulus | Tidak ada | Buku gabungan sinkron dengan sumber |
+| Jalur Linux/macOS, alat luar, lab daring | NOT_RUN | Bash Bab 04, Clang/AddressSanitizer Bab 19, Nmap, Wireshark, PortSwigger/Burp, dan sambungan Bandit tidak dijalankan | Lingkungan Windows tanpa alat itu | Perintahnya dipertahankan sama persis dari versi lama |
+| Uji pembaca manusia, HP fisik, Safari/Firefox, screen reader | NOT_RUN | Tidak ada peserta atau perangkat pada sesi ini | Memerlukan peserta nyata | Tidak mengklaim validasi usability |

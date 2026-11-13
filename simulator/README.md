@@ -120,7 +120,9 @@ untuk mencoba simulator.
 
 Terminal hanya mengenali beberapa perintah virtual.
 Simulasi pencarian data hanya mengolah tiga masukan yang tersedia pada kasus. Aturan jaringan dan
-identitas merupakan model sederhana. Pemeriksaan awal memakai kumpulan bukti
+identitas adalah model sederhana.
+
+Pemeriksaan awal memakai kumpulan bukti
 kecil yang disiapkan penulis. Pemulihan membandingkan isi teks, bukan mengukur
 pemulihan penyimpanan data toko sungguhan. Lulus semua misi menunjukkan kemampuan pada
 kasus-kasus ini; gunakan buku, lab kode, dan proyek lanjutan untuk memperluas
