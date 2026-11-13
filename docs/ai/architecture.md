@@ -108,3 +108,10 @@ Pages selesai, uji URL publik beserta asetnya, dan jalankan misi melalui emulasi
 ponsel dengan sentuhan. Periksa menu, pergantian mode, hasil, tautan bab, console,
 serta overflow. Jangan menyamakan emulasi dengan pengujian perangkat fisik.
 Rujukan konfigurasi: [GitHub Pages publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+## Penyederhanaan materi (12 November 2026)
+
+Rencana susunan, prasyarat, paket penulis, risiko, dan verifikasi ada di [rancangan materi](rancangan-materi.md).
+[Panduan gaya dan templat bab](../panduan-gaya.md) mengatur bahasa serta struktur; Bab 03 dan 13 menjadi contoh penerapannya.
+Isi teknis, perintah, kode, dan batas latihan dipertahankan; stack, DB/API, serta fungsi simulator tidak berubah.
+Pemeriksaan mencakup perbandingan sumber lama, pembacaan sebagai pemula, contoh lokal, dan `py tools/check_docs.py` sebelum integrasi buku.
