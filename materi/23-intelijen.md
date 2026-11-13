@@ -1,22 +1,107 @@
 # Bab 23: OSINT dan intelijen ancaman yang dapat diperiksa
 
+Tahap 6 dari 6: Mengambil keputusan dan membuktikan kemampuan
+
 ## Tujuan dan prasyarat
 
-Anda akan menilai informasi ancaman, memisahkan fakta dari penafsiran, dan menentukan tindakan untuk Laundry Aman. Pahami log, kerentanan, serta sumber jaringan. Praktik menggunakan kartu kasus fiktif; Anda tidak perlu mencari data pribadi atau menghubungi infrastruktur mencurigakan.
+Kamu akan membuat catatan satu halaman untuk menentukan tindakan Laundry Aman setelah menerima kabar kerentanan.
+Kamu juga akan memeriksa satu pemberitahuan vendor nyata tanpa menguji produknya.
+
+Bekalmu adalah [aset dan risiko pada Bab 11](11-threat-modeling.md), serta [kelemahan jalur file pada Bab 13](13-web-api.md).
+Ulangi [pembacaan log pada Bab 15](15-deteksi.md) dan [penilaian kejadian pada Bab 16](16-respons-insiden.md).
+
+Gunakan kertas atau editor untuk kasus fiktif. Browser di komputer atau HP cukup untuk membaca sumber nyata.
+Jangan mencari data pribadi, menghubungi infrastruktur mencurigakan, atau menguji target di luar izin.
 
 ## Konsep
 
-**OSINT**, Open Source Intelligence, menggunakan sumber yang tersedia secara terbuka untuk menjawab pertanyaan tertentu. Membuka banyak situs belum menghasilkan intelijen yang berguna. Mulailah dari keputusan: apakah Laundry Aman perlu memprioritaskan pembaruan komponen tertentu, atau apakah sebuah alamat dalam log memerlukan penyelidikan?
+Pemilik Laundry Aman membaca kabar bahwa aplikasi laporannya bermasalah.
+Ia perlu tahu apakah toko memakai versi yang terdampak dan pekerjaan apa yang harus didahulukan.
+Kita akan memeriksa asal kabar, mencocokkannya dengan keadaan toko, lalu memisahkan fakta dari dugaan.
+Setelah itu, kita menentukan tindakan beserta orang yang bertanggung jawab.
 
-**Threat intelligence** menghubungkan informasi ancaman dengan konteks aset dan keputusan. **IOC**, indicator of compromise, adalah petunjuk seperti hash atau domain yang berhubungan dengan aktivitas tertentu. **TTP**, tactics, techniques, and procedures, menjelaskan pola tindakan pelaku. IOC dapat berubah cepat; pola perilaku membantu merancang deteksi yang tidak bergantung pada satu alamat.
+### Mulai dari keputusan pemilik toko
 
-**CVE** memberi pengenal bagi kerentanan tertentu. **CWE** mengelompokkan jenis kelemahan, seperti kontrol akses yang keliru. Nomor CVE tidak berarti komponen Laundry Aman pasti terdampak. Anda perlu memeriksa produk, versi, konfigurasi, keterjangkauan, dan mitigasi yang berlaku.
+Pemilik bertanya apakah aplikasi perlu diperbarui hari ini.
+**OSINT**, singkatan dari *Open Source Intelligence*, memakai sumber terbuka untuk menjawab pertanyaan tertentu.
+Kamu mencari informasi seperti petugas toko yang memeriksa pengumuman pemasok sebelum menerima barang.
+Membuka banyak situs saja belum menjawab keputusan pemilik.
 
-Sumber primer berasal dari pihak yang mengamati atau memelihara objek terkait, misalnya advisori vendor. Dua artikel yang menyalin satu laporan bukan dua bukti independen. Simpan asal informasi agar pembaca dapat melacaknya.
+**Threat intelligence** menghubungkan informasi ancaman dengan aset dan keputusan yang perlu diambil.
+Seperti mencocokkan pengumuman pemasok dengan barang di gudang, kamu memeriksa apakah kabar itu berlaku bagi toko.
+Kamu juga bisa memakai cara ini untuk menentukan apakah alamat dalam log perlu diselidiki.
+
+### Cocokkan kabar dengan aplikasi yang terpasang
+
+Kasir menemukan pemberitahuan vendor tentang aplikasi laporan.
+**Advisori** adalah pemberitahuan teknis tentang masalah, kondisi terdampak, dan tindakan yang disarankan.
+Catat produk, versi, konfigurasi, siapa yang dapat menjangkau fitur, serta perlindungan sementara yang berlaku.
+
+Advisori dapat menyebut **CVE**, pengenal untuk kerentanan tertentu, seperti nomor tiket satu kerusakan.
+Nomor itu membantu mencari catatan yang sama. Kamu tetap perlu mencocokkan kondisi teknisnya dengan aplikasi Laundry Aman.
+
+**CWE** mengelompokkan jenis kelemahan, seperti kategori kerusakan pada buku servis.
+Kontrol akses yang keliru adalah contoh jenis kelemahan. Pengenal kerentanan tertentu dan kelompok jenis kelemahan menjawab pertanyaan berbeda.
+
+Versi yang cocok dengan advisori menunjukkan kemungkinan terdampak sesuai kondisi tersebut.
+Untuk menyatakan **kompromi**, yaitu pihak tak berhak berhasil menguasai atau mengakses sesuatu, kamu memerlukan bukti kejadian tambahan.
+
+### Telusuri asal kabar sebelum mempercayainya
+
+Pemilik menerima dua artikel dengan kalimat serupa tentang aplikasi toko.
+**Sumber primer** berasal dari pihak yang mengamati atau memelihara objek terkait, misalnya vendor yang menulis advisori.
+Bayangkan dua fotokopi nota yang sama: keduanya tetap berasal dari satu transaksi.
+Dua artikel yang menyalin satu laporan juga bukan dua bukti independen.
+
+Simpan asal informasi agar pembaca bisa menelusurinya.
+Lalu beri **tingkat keyakinan**, penilaian seberapa kuat bukti mendukung satu klaim.
+Kecocokan versi dapat memiliki keyakinan tinggi ketika inventaris dan advisori sepakat.
+Dugaan kompromi tetap lemah jika kamu hanya melihat satu permintaan yang ditolak.
+
+### Bedakan alamat petunjuk dari pola tindakan
+
+Petugas Laundry Aman melihat sebuah domain pada laporan ancaman.
+**IOC**, singkatan dari *indicator of compromise*, adalah petunjuk seperti hash atau domain yang terkait aktivitas tertentu.
+Petunjuk ini seperti nomor kendaraan pada laporan kejadian: kamu masih perlu memeriksa waktu dan konteksnya.
+
+Petugas juga ingin mengenali tindakan serupa jika pelaku mengganti alamat.
+**TTP**, singkatan dari *tactics, techniques, and procedures*, menjelaskan tujuan, cara, dan rincian pola tindakan pelaku.
+Seperti mencatat cara seseorang masuk gudang, pola perilaku membantu merancang deteksi yang tidak bergantung pada satu alamat.
+IOC dapat berubah cepat; kecocokannya sendiri belum membuktikan siapa pelaku atau apa yang berhasil dilakukan.
+
+### Cari catatan eksploitasi dan nama perilaku
+
+Petugas toko ingin tahu apakah kerentanan aplikasi sudah pernah dimanfaatkan.
+**KEV** adalah katalog CISA tentang kerentanan yang diketahui telah dieksploitasi, seperti daftar kejadian yang sudah dikonfirmasi.
+Bug yang tidak tercantum tetap dapat berbahaya. Cocokkan entri dengan advisori vendor dan keadaan aset toko.
+
+Setelah membaca log toko, petugas perlu menamai perilaku yang terlihat.
+**ATT&CK** adalah kumpulan pengetahuan perilaku penyerang dari MITRE, seperti daftar kategori tindakan untuk mencocokkan catatan kejadian.
+Pemetaan memberi nama pada perilaku yang didukung bukti; pemetaan sendiri belum membuktikan tindakan lain dalam rangkaian serangan.
+
+#### Cukup kenali dulu
+
+- **Traffic Light Protocol**: aturan penandaan batas berbagi informasi; rujukan FIRST membantu menentukan penerima yang sesuai.
+
+### Ringkasan
+
+- Mulai dari pertanyaan keputusan, lalu cocokkan kabar dengan aset toko.
+- Pisahkan pengenal kerentanan, jenis kelemahan, dan bukti kejadian.
+- Telusuri sumber asal dan tulis keyakinan untuk tiap klaim.
+- Pilih tindakan yang tetap berguna ketika informasi belum lengkap.
+
+### Cek pemahaman
+
+1. Mengapa dua artikel yang menyalin satu advisori belum menjadi dua bukti independen?
+2. Mengapa versi terdampak dan satu permintaan ditolak belum membuktikan kompromi?
+3. Apa manfaat pola perilaku ketika alamat dalam laporan berubah?
 
 ## Praktik
 
-Gunakan paket latihan berikut. Nama produk dan advisori seluruhnya fiktif.
+### 1. Baca kartu kasus
+
+Di kertas atau editor, siapkan catatan kasus Laundry Aman.
+Blok berikut adalah data untuk dibaca, bukan perintah. Nama produk dan advisori seluruhnya fiktif.
 
 ```text
 Aset: Laundry-Report 2.4.1
@@ -37,7 +122,9 @@ Versi 2.4.1 terpasang. Aplikasi kasir memakai import setiap sore.
 Pemilik aplikasi dapat menjadwalkan uji pembaruan malam ini.
 ```
 
-Kerjakan enam langkah:
+### 2. Susun keputusan dari bukti
+
+Pada catatanmu, kerjakan enam langkah berikut:
 
 1. Tulis pertanyaan: “Apakah kita terdampak dan tindakan apa yang perlu dilakukan hari ini?”
 2. Catat fakta: versi masuk rentang; fitur aktif; permintaan tercatat sebagai ditolak; aplikasi punya ketergantungan pada import.
@@ -46,19 +133,41 @@ Kerjakan enam langkah:
 5. Pilih tindakan: koordinasikan pembatasan import atau jalur pemakaiannya, amankan log, uji pembaruan, dan periksa aktivitas import di sekitar waktu kejadian.
 6. Tetapkan pemilik, tenggat, serta kondisi penutupan: versi baru terpasang dan test fungsi import serta test penolakan path lulus.
 
-Tulis ringkasan seperti ini:
+Periksa apakah tiap fakta menunjuk sumber A, B, C, atau log pada kartu.
+Tulis ringkasan seperti contoh ini:
 
 > Inventaris menunjukkan versi dan fitur kita cocok dengan kondisi terdampak pada advisori latihan. Kita belum memiliki bukti kompromi. Tim aplikasi perlu menguji pembaruan malam ini. Sambil menunggu, pemilik toko menyetujui pembatasan import dan memeriksa kebutuhan kerja cabang. Tim investigasi menyimpan log serta menelusuri permintaan terkait.
 
-Tambahkan **tingkat keyakinan** beserta alasannya. Anda dapat memakai tinggi untuk kecocokan versi karena inventaris dan advisori sepakat, serta rendah untuk dugaan kompromi karena hanya ada satu event penolakan. Hindari angka probabilitas yang tidak memiliki dasar pengukuran.
+Tambahkan tingkat keyakinan beserta alasannya untuk tiap klaim penting.
+Gunakan tinggi untuk kecocokan versi karena inventaris dan advisori sepakat.
+Gunakan rendah untuk dugaan kompromi karena hanya ada satu kejadian penolakan.
+Hindari angka probabilitas tanpa dasar pengukuran.
 
-Untuk latihan sumber nyata, buka repositori resmi CISA KEV melalui tautan referensi. Pilih satu entri, lalu buka advisori vendor dari entri tersebut. Catat tanggal pemeriksaan, produk, kondisi terdampak, dan tindakan vendor. Tidak perlu mengunduh proof-of-concept atau menjalankan apa pun. KEV membantu mengenali kerentanan yang telah dieksploitasi, tetapi ketidakhadiran sebuah bug dari katalog tidak membuktikan bahwa bug itu aman.
+### 3. Periksa satu advisori nyata
 
-Pemetaan ATT&CK membantu memberi nama perilaku. Kaitkan hanya perilaku yang memang didukung bukti. Jangan mengisi seluruh rantai serangan hanya karena satu teknik tampak mungkin. Pemetaan yang jujur dapat berisi “belum diketahui”.
+Buka repositori resmi CISA KEV melalui Referensi di browser komputer atau HP.
+Pilih satu entri, lalu buka advisori vendor dari entri tersebut.
+Catat tanggal pemeriksaan, produk, kondisi terdampak, dan tindakan vendor.
+Hasilnya adalah catatan sumber nyata yang dapat ditelusuri.
+
+Kamu hanya membaca sumber. Jangan mengunduh demonstrasi eksploitasi atau menjalankan pengujian target.
+Ketidakhadiran sebuah bug dari KEV tidak membuktikan bug itu aman.
+Jika belum membaca sumber nyata, tandai bagian ini `NOT_RUN` beserta alasannya.
+
+### 4. Batasi pemetaan perilaku
+
+Pada catatan kasus, tulis perilaku yang didukung bukti sebelum mencari nama teknik dalam ATT&CK.
+Jangan mengisi seluruh rantai serangan hanya karena satu teknik tampak mungkin.
+Kamu boleh menulis “belum diketahui” jika kartu belum memberi bukti yang cukup.
 
 ## Hasil yang diharapkan
 
-Anda menghasilkan catatan intelijen satu halaman dengan pertanyaan, fakta, dugaan, sumber, keyakinan, dan tindakan. Pembaca dapat membedakan “terdampak kerentanan” dari “terbukti mengalami kompromi”. Keduanya menuntut respons yang berhubungan tetapi tidak identik.
+Kamu mempunyai catatan intelijen satu halaman berisi pertanyaan, fakta, dugaan, sumber, keyakinan, dan tindakan.
+Pembaca bisa membedakan “terdampak kerentanan” dari “terbukti mengalami kompromi”.
+Keduanya memerlukan respons sesuai bukti: perbaikan kondisi rentan dan penyelidikan kejadian dapat berjalan bersama.
+
+Simpan verifikasi advisori nyata atau catatan `NOT_RUN` jika belum dikerjakan.
+Catatan itu belum menggantikan syarat kelulusan verifikasi sumber nyata.
 
 ## Jika macet
 
@@ -68,11 +177,24 @@ Anda menghasilkan catatan intelijen satu halaman dengan pertanyaan, fakta, dugaa
 
 ## Latihan
 
-Ubah kasus sehingga versi aplikasi 2.5.0, tetapi inventaris terakhir berumur enam bulan. Tentukan kesimpulan yang masih boleh dibuat dan pemeriksaan pertama yang paling berguna. Buat juga catatan distribusi: siapa perlu tahu rincian teknis, siapa hanya membutuhkan keputusan bisnis.
+Ubah kasus sehingga versi aplikasi 2.5.0, tetapi inventaris terakhir berumur enam bulan.
+Tentukan kesimpulan yang masih boleh dibuat dan pemeriksaan pertama yang paling berguna.
+Gunakan umur catatan sebagai petunjuk untuk menilai keyakinanmu.
+
+Buat juga catatan distribusi: siapa perlu tahu rincian teknis, siapa hanya membutuhkan keputusan bisnis.
+Periksa apakah penerima dapat menjalankan tanggung jawabnya dengan informasi yang kamu pilih.
 
 ## Bukti kelulusan
 
-Serahkan satu brief kasus fiktif dan satu verifikasi advisori nyata tanpa pengujian target. Anda lulus jika semua klaim penting memiliki sumber atau label dugaan, serta rekomendasi mempertimbangkan aset Laundry Aman.
+- [ ] Saya menyerahkan satu catatan ringkas kasus fiktif dan satu verifikasi advisori nyata tanpa pengujian target.
+- [ ] Saya memberi sumber atau label dugaan pada semua klaim penting.
+- [ ] Saya menyertakan alasan tingkat keyakinan dan rekomendasi yang mempertimbangkan aset Laundry Aman.
+
+### Lanjut belajar
+
+Kembali ke [Bab 22](22-secure-sdlc.md) untuk meninjau bukti pembaruan komponen.
+Jika fakta dan dugaan masih tercampur, ulangi [Bab 16](16-respons-insiden.md), lalu nilai kembali satu klaim pada kartu.
+Setelah bukti siap, lanjut ke [Bab 24: keputusan risiko](24-grc.md).
 
 ## Referensi
 
