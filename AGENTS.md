@@ -12,6 +12,13 @@ indikator kelulusan pada bab. Bedakan materi pengantar dari pendalaman spesialis
 Latihan memakai data sintetis, localhost, atau platform latihan berizin.
 Jangan menambah layanan berbayar atau memublikasikan tanpa instruksi pengguna.
 
+Tulis materi dan teks simulator mengikuti docs/panduan-gaya.md: bahasa
+sehari-hari, sapaan kamu, templat bab, dan daftar periksanya. Susunan enam tahap
+belajar dan catatan per bab ada di docs/ai/rancangan-materi.md. Langkah untuk
+pemelihara ada di docs/pemeliharaan.md. Penulisan ulang hanya mengubah bahasa
+dan susunan: periksa tiap fakta baru terhadap sumber resmi, dan jangan mengubah
+perintah atau blok kode.
+
 Command verifikasi yang telah dijalankan: `py -m unittest discover -s tests -v` dan
 `py tools/check_docs.py`. Status eksekusi ada di docs/ai/task-log.md.
 Saat mengubah contoh, uji output yang dijanjikan dalam tutorial.
