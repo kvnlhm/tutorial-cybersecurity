@@ -5,35 +5,43 @@ Tahap 3 dari 6: Menjaga dan menguji akses
 ## Tujuan dan prasyarat
 
 Kamu akan membaca percakapan jaringan latihan dan merancang segmentasi Laundry Aman.
-Hasilnya berupa matriks komunikasi antarzona dan, bila alat tersedia, satu capture traffic loopback.
+Hasilnya berupa tabel izin komunikasi antarkelompok perangkat dan, bila alat tersedia, satu rekaman paket pada loopback.
 
 Bekalmu adalah [alamat dan port dari Bab 03](03-jaringan.md) serta [HTTP dari Bab 07](07-web.md).
 Ulangi juga [TLS dari Bab 08](08-kriptografi.md), [akses dari Bab 09](09-identitas.md), dan [server loopback dari Bab 12](12-pentest.md).
+
 Siapkan 3–5 sesi.
 Wireshark opsional untuk praktik paket.
-Rancangan jaringan dapat dikerjakan tanpa memasang alat.
+Rancangan jaringan dapat dikerjakan di kertas atau HP tanpa memasang alat.
+Gunakan komputer untuk merekam paket dengan Wireshark.
 Jangan merekam traffic kantor, Wi-Fi umum, atau komunikasi keluarga.
 
 ## Konsep
 
-Kasir, tamu, dan printer berada di jaringan yang sama terlalu sering.
-Kita perlu memisahkan siapa boleh bicara kepada siapa.
-Kita juga perlu membaca satu percakapan latihan di komputer sendiri.
-Setelah itu kamu menghubungkan observasi paket dengan aturan segmentasi toko.
+Laundry Aman ingin memisahkan akses kasir, tamu, dan printer sesuai tugasnya.
+Kita akan menentukan perangkat mana yang boleh saling menghubungi.
+Kita juga akan merekam satu percakapan latihan di komputer sendiri.
+Setelah itu kamu menghubungkan hasil pengamatan dengan aturan pemisahan jaringan toko.
 
 ### Apa yang terlihat saat kita merekam paket?
 
-**Packet capture** adalah rekaman paket yang terlihat pada titik pengamatan.
+Kasir membuka nota latihan, lalu kamu ingin memeriksa perjalanan permintaannya.
+**Packet capture**, atau capture, adalah rekaman paket yang terlihat pada titik pengamatan.
+
+Lalu lintas paket ini juga disebut traffic.
 Wireshark membantu membaca alamat, protokol, waktu, dan sebagian isi.
 Rekaman tidak selalu melihat seluruh komunikasi.
-Pemilihan interface, lokasi sensor, enkripsi, dan kehilangan paket memengaruhi kesimpulan.
 
-Traffic TLS biasanya menyembunyikan isi aplikasi, meski pengamat masih dapat melihat sebagian metadata.
+Pemilihan antarmuka jaringan, lokasi alat perekam, enkripsi, dan kehilangan paket memengaruhi kesimpulan.
+Antarmuka atau interface adalah sambungan jaringan yang kamu kenali pada Bab 03.
+
+Traffic TLS biasanya menyembunyikan isi aplikasi, meski pengamat masih dapat melihat sebagian metadata, seperti alamat dan waktu komunikasi.
 Capture tanpa paket HTTP tidak membuktikan bahwa pengguna tidak mengakses situs.
 Bayangkan kamera di satu lorong toko: lorong lain tidak terekam.
 
 ### Filter mana yang membatasi rekaman, mana yang hanya tampilan?
 
+Kamu hanya ingin merekam percakapan latihan kasir, lalu memilih paket tertentu untuk dibaca.
 **Capture filter** membatasi paket yang direkam.
 
 **Display filter** memilih paket yang ditampilkan dari rekaman yang sudah ada.
@@ -47,32 +55,44 @@ Display filter seperti memutar ulang potongan yang sudah tersimpan.
 
 ### Bagaimana jaringan toko dipisah menurut kebutuhan?
 
+Tamu laundry perlu internet, tetapi tidak perlu membuka komputer kasir.
 **Segmentasi** memisahkan kelompok perangkat dan mengendalikan komunikasi antarkelompok.
 Laundry dapat memisahkan jaringan tamu, komputer kasir, dan perangkat seperti printer atau kamera.
-VLAN mengelompokkan jaringan pada lapisan tertentu, tetapi keamanan antarkelompok tetap memerlukan aturan routing dan firewall.
+Bayangkan ruang toko dengan pintu penghubung: tiap pintu hanya mengizinkan perjalanan yang diperlukan.
+Di jaringan, aturan komunikasi harus diterapkan dan diuji; gambar ruangan saja belum membuktikan pemisahan.
+
+**VLAN** mengelompokkan perangkat ke jaringan lokal yang terpisah secara logis.
+
+Keamanan antarkelompok tetap memerlukan aturan penerusan antarjaringan, atau routing, dan firewall.
 Mengubah nama Wi-Fi saja tidak menjamin pemisahan.
 
-DMZ adalah segmen untuk layanan yang perlu berhubungan dengan jaringan kurang tepercaya.
-Jump server menjadi titik administrasi yang terkontrol.
-VPN membuat kanal terlindungi menuju jaringan atau layanan, tetapi akun VPN tetap memerlukan pembatasan akses.
+Pemilik yang mengakses toko dari jauh dapat memakai VPN sebagai kanal terlindungi menuju jaringan atau layanan.
+Akun VPN tetap memerlukan pembatasan akses.
 “Sudah masuk VPN” tidak semestinya memberi izin membaca seluruh database.
-
-### Apa yang perlu dijaga pada Wi-Fi toko?
-
-Pada Wi-Fi, lindungi administrasi access point, perbarui firmware, dan pilih protokol keamanan yang masih didukung perangkat.
-WPA3 memberi peningkatan dibanding generasi lama, tetapi kualitas konfigurasi dan kompatibilitas tetap perlu diperiksa.
-WEP sudah tidak layak untuk melindungi jaringan.
-WPS memperkenalkan jalur pengaturan yang perlu dinilai atau dinonaktifkan jika tidak diperlukan.
 
 #### Cukup kenali dulu
 
-- **WPA3**: protokol keamanan Wi-Fi yang lebih baru dari generasi sebelumnya.
+- **DMZ**: segmen untuk layanan yang perlu berhubungan dengan jaringan kurang tepercaya.
+- **Jump server**: titik administrasi yang terkontrol untuk mengakses sistem lain.
+
+### Apa yang perlu dijaga pada Wi-Fi toko?
+
+Kasir dan tamu memakai titik akses Wi-Fi, atau access point, untuk terhubung ke jaringan toko.
+Lindungi akses pengaturannya dan pilih protokol keamanan yang masih didukung perangkat.
+
+**Firmware** adalah software yang menjalankan fungsi perangkat jaringan tersebut.
+Perbarui sesuai petunjuk pembuatnya.
+
+#### Cukup kenali dulu
+
+- **WPA3**: protokol keamanan Wi-Fi dengan peningkatan perlindungan dibanding generasi lama; periksa kualitas konfigurasi dan kecocokan perangkat.
 - **WEP**: protokol lama yang sudah tidak layak dipakai untuk melindungi jaringan.
 - **WPS**: jalur pengaturan cepat pada access point; nilai ulang atau nonaktifkan bila tidak perlu.
-- **Access point**: titik akses Wi-Fi yang menghubungkan perangkat ke jaringan.
+- **Deauthentication**: pemutusan sambungan Wi-Fi perangkat; pengujiannya mencoba memutus sambungan tersebut.
+- **Evil twin**: peniruan titik akses agar perangkat terhubung ke tiruannya.
 
-Pengujian deauthentication, evil twin, atau peniruan access point dapat mengganggu orang lain.
-Bab ini memakai rancangan dan pengamatan milik sendiri.
+Pengujian pemutusan sambungan atau peniruan access point dapat mengganggu orang lain.
+Bab ini hanya memakai rancangan dan pengamatan milik sendiri; jangan menjalankan pengujian tersebut pada jaringan orang lain.
 
 ### Ringkasan
 
@@ -108,7 +128,9 @@ Tulis siapa yang mengelola aturan dan bagaimana memeriksa pengecualian.
 
 ### 2. Siapkan traffic latihan
 
-Gunakan server loopback Bab 12 yang menyajikan `index.txt`.
+Jalankan server loopback melalui Praktik 2 [Bab 12](12-pentest.md), yang menyajikan `index.txt`.
+Jika Wireshark atau dukungan perekamannya belum tersedia, kerjakan rancangan dan tandai capture `NOT_RUN`.
+Bukti membaca alamat serta port dari rekaman belum terpenuhi sampai kamu menjalankan bagian ini.
 Jangan merekam interface kantor, Wi-Fi umum, atau komunikasi anggota keluarga.
 Buka Wireshark yang sudah terpasang dan pilih interface loopback; namanya bergantung OS.
 
@@ -128,7 +150,9 @@ Gunakan interface loopback yang tersedia melalui dukungan capture setempat.
 
 ### 3. Mulai capture dan buat satu permintaan
 
-Buka alamat lokal `http://127.0.0.1:8000/index.txt`, lalu hentikan capture.
+Di Wireshark, mulai capture pada antarmuka loopback yang sudah kamu pilih.
+Setelah capture berjalan, buka alamat lokal `http://127.0.0.1:8000/index.txt` di browser.
+Pastikan teks latihan muncul, lalu hentikan capture di Wireshark.
 Masukkan display filter berikut pada kotak filter Wireshark:
 
 ```text
@@ -136,7 +160,9 @@ tcp.port == 8000
 ```
 
 Filter ini menampilkan paket dengan salah satu port TCP bernilai 8000.
-Pilih paket, buka bagian Internet Protocol dan Transmission Control Protocol, lalu catat alamat sumber, tujuan, dan port.
+Pilih paket, lalu buka bagian Internet Protocol untuk membaca alamat IP.
+Buka Transmission Control Protocol untuk membaca port TCP.
+Catat alamat sumber, tujuan, dan port.
 Port sementara pada sisi browser boleh berbeda pada tiap percobaan.
 [Dokumentasi display filter Wireshark](https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html).
 
@@ -171,6 +197,7 @@ Tandai capture `NOT_RUN` jika dukungan setempat belum siap.
 
 Tambahkan mesin pembayaran ke diagram.
 Tentukan layanan minimum yang dibutuhkan dan siapa yang boleh mengadministrasinya.
+Kasus uji negatif adalah percobaan yang seharusnya ditolak atau dibatasi.
 Buat dua kasus pengujian negatif: tamu mencoba mencapai kasir dan kamera mencoba membuka koneksi baru ke kasir.
 Tulis hasil yang diharapkan tanpa menjalankan pengujian pada jaringan nyata.
 

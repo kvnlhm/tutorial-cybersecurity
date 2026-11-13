@@ -4,13 +4,16 @@ Tahap 3 dari 6: Menjaga dan menguji akses
 
 ## Tujuan dan prasyarat
 
-Kamu akan membuat baseline perangkat Laundry Aman dan menguji pemulihan file latihan.
-Hasilnya berupa inventaris, lima pemeriksaan, hash, dan catatan waktu restore.
+Kamu akan mencatat keadaan awal perangkat Laundry Aman dan menguji pemulihan file latihan.
+Hasilnya berupa daftar aset, lima pemeriksaan, hash, dan catatan waktu pemulihan.
 
-Bekalmu adalah [proses dan file dari Bab 02](02-komputer.md) serta [izin dari Bab 04–05](04-linux.md).
+Bekalmu adalah [proses dan file dari Bab 02](02-komputer.md) serta [izin dari Bab 04](04-linux.md) dan [Bab 05](05-windows.md).
 Ulangi juga [hash dari Bab 08](08-kriptografi.md) dan [akun dari Bab 09](09-identitas.md).
+
 **Hardening** adalah mengurangi kesempatan sistem disalahgunakan melalui konfigurasi yang sesuai.
 Sediakan 2–3 sesi. Latihan file tidak memerlukan administrator.
+
+Gunakan komputer untuk praktik pemulihan. Di HP, kamu bisa membuat inventaris, yaitu daftar aset, dan rancangan pemeriksaannya.
 Jangan mengubah komputer kantor tanpa persetujuan pemilik.
 
 ## Konsep
@@ -22,6 +25,7 @@ Setelah itu kamu menguji pemulihan file latihan tanpa menghapus data asli.
 
 ### Bagian mana yang bisa dijangkau penyerang?
 
+Komputer kasir Laundry Aman hanya membutuhkan aplikasi untuk tugas toko.
 Setiap aplikasi yang terpasang menambah pintu masuk potensial.
 **Attack surface** adalah bagian sistem yang bisa dijangkau atau dipengaruhi penyerang.
 Kamu menguranginya dengan menghapus software yang tidak diperlukan, menutup akses yang tidak dipakai, dan membatasi hak pengguna.
@@ -29,47 +33,59 @@ Bayangkan toko yang hanya membuka pintu yang dipakai karyawan; pintu lain dikunc
 
 ### Keadaan awal apa yang disepakati bersama?
 
+Pemilik laundry perlu memeriksa apakah pengaturan komputer kasir berubah.
 Tanpa catatan bersama, “sudah aman” sulit diperiksa ulang.
 **Baseline** adalah keadaan awal yang disepakati: aplikasi apa yang boleh berjalan, siapa administrator, kapan pembaruan dipasang, dan bagaimana bukti dikumpulkan.
 Tanpa baseline, kamu sulit membedakan perubahan sah dengan masalah.
 Simpan versi baseline dan pemiliknya.
 
-Patching memperbaiki kelemahan atau bug melalui pembaruan.
+Saat aplikasi kasir mendapat pembaruan, pemilik perlu merencanakan pemasangannya.
+**Patching** memperbaiki kelemahan atau bug melalui pembaruan.
 Jadwal yang baik mencakup pemeriksaan kompatibilitas, pemasangan, verifikasi, dan jalan pemulihan jika aplikasi bisnis berhenti bekerja.
 Prioritas mengikuti paparan dan dampak.
 Server yang menerima permintaan internet memerlukan perhatian berbeda dari mesin latihan yang terputus dari jaringan.
 
 ### Alat pertahanan apa yang saling melengkapi?
 
-Firewall membatasi komunikasi berdasarkan aturan.
-Antivirus membantu mengenali file atau perilaku berbahaya.
-Hasil alat tersebut memerlukan pemeriksaan manusia.
+Komputer kasir perlu membatasi komunikasi sekaligus memeriksa file yang dibuka pegawai.
+Firewall membatasi komunikasi berdasarkan aturan, misalnya alamat dan port.
+Antivirus membantu mengenali file atau perilaku berbahaya di komputer.
+Hasil alat pertahanan tetap memerlukan pemeriksaan dan keputusan manusia.
 
 #### Cukup kenali dulu
 
-- **EDR**: *endpoint detection and response*; memberi visibilitas serta tindakan respons pada perangkat.
-- **IDS**: memberi peringatan terhadap aktivitas mencurigakan.
-- **IPS**: dapat memblokir aktivitas dalam jalur lalu lintas.
+- **EDR** (*endpoint detection and response*): membantu memantau perangkat dan melakukan tindakan respons.
+- **IDS** (*intrusion detection system*): memberi peringatan terhadap aktivitas mencurigakan.
+- **IPS** (*intrusion prevention system*): dapat memblokir aktivitas dalam jalur lalu lintas.
 
 Produk yang terpasang tetapi tidak mengirim log atau tidak diperbarui memberi perlindungan yang berbeda dari asumsi pemiliknya.
 
 ### Bagaimana cadangan membantu saat komputer rusak?
 
-Backup menyimpan salinan untuk pemulihan.
+Komputer kasir bisa rusak setelah menerima pesanan baru.
+**Backup** menyimpan salinan untuk pemulihan, seperti fotokopi buku kas yang disimpan terpisah.
+
+**Restore** berarti memulihkan data dari salinan tersebut.
+Salinan hanya membantu sampai halaman atau transaksi yang sudah disalin.
+
 Snapshot VM berguna untuk kembali ke keadaan latihan, tetapi tidak menggantikan cadangan yang terpisah dari perangkat asal.
 Jika disk rusak, snapshot yang tersimpan pada disk itu juga terancam.
 
 Rencana backup perlu memikirkan salinan terpisah, pembatasan akses, enkripsi, dan pengujian restore.
-**RPO** menyatakan kehilangan data yang dapat diterima menurut waktu.
-**RTO** menyatakan target waktu pemulihan layanan.
-Laundry yang mencadangkan transaksi sekali sehari dapat kehilangan perubahan sejak cadangan terakhir.
-Bayangkan fotokopi buku kas: salinan membantu, tetapi hanya sampai halaman yang sudah difotokopi.
+
+**RPO** (*recovery point objective*) menyatakan batas kehilangan data yang dapat diterima, diukur sebagai rentang waktu.
+Jika pemilik menetapkan RPO satu jam, rencana pemulihan harus membatasi kehilangan data hingga satu jam sebelum gangguan.
+
+**RTO** (*recovery time objective*) menyatakan target waktu pemulihan agar layanan kembali beroperasi.
+
+Jika cadangan terakhir pukul 12.00 dan komputer rusak pukul 16.00, transaksi antara kedua waktu itu bisa hilang.
+Kembali ke cadangan tersebut dapat kehilangan empat jam perubahan dan belum memenuhi RPO satu jam tadi.
 
 ### Ringkasan
 
 - Kurangi permukaan yang bisa dijangkau dengan menghapus yang tidak perlu dan membatasi hak.
 - Baseline memberi acuan bersama untuk memeriksa ulang.
-- Cadangan baru berguna jika restore pernah diuji dan salinannya terpisah.
+- Uji restore untuk memeriksa kegunaan cadangan, dan pisahkan salinannya dari perangkat asal.
 - RPO dan RTO membantu membicarakan kehilangan data dan lama pemulihan.
 
 ### Cek pemahaman
@@ -82,6 +98,7 @@ Bayangkan fotokopi buku kas: salinan membantu, tetapi hanya sampai halaman yang 
 
 ### 1. Buat inventaris fiktif
 
+Buka catatan di editor atau buku tulis.
 Tulis tiga aset: komputer kasir, laptop pemilik, dan server latihan.
 Isi pemilik, fungsi, data yang disimpan, akses administrator, sumber pembaruan, dan cara backup.
 Tandai fakta yang belum kamu ketahui sebagai `UNKNOWN`.
@@ -128,6 +145,7 @@ Jalur ini melatih pemulihan tanpa memerlukan perintah shell tambahan.
 
 Catat waktu mulai dan selesai pemulihan.
 Nyatakan apakah kamu memenuhi target latihan RTO lima menit.
+Ini mengukur pemulihan satu file; pemulihan layanan kasir secara utuh memerlukan pengujian tersendiri.
 Jika pesanan baru masuk setelah backup, tulis data mana yang hilang ketika kembali ke cadangan tersebut.
 
 ## Hasil yang diharapkan
@@ -175,4 +193,5 @@ Setelah bukti siap, lanjut ke [Bab 11: memetakan ancaman](11-threat-modeling.md)
 ## Referensi
 
 - [CIS Controls v8](https://www.cisecurity.org/controls/v8): kerangka kontrol pertahanan yang dapat dinilai.
+- [NIST: RPO](https://csrc.nist.gov/glossary/term/recovery_point_objective) dan [RTO](https://csrc.nist.gov/glossary/term/recovery_time_objective): sasaran kehilangan data dan waktu pemulihan.
 - [Microsoft Get-FileHash](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-7.5): pemeriksaan integritas file.
