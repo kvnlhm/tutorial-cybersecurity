@@ -1,24 +1,117 @@
 # Bab 06: Menulis skrip kecil dan mencatat perubahan
 
+Tahap 2 dari 6: Memahami cara sistem bekerja
+
 ## Tujuan dan prasyarat
 
-Anda akan menulis Python untuk menghitung kejadian sintetis, mengenali Bash, dan menyimpan perubahan dengan Git. Selesaikan latihan folder dan terminal sebelumnya. Anda belum perlu hafal sintaks; baca setiap baris dan ubah satu hal untuk melihat pengaruhnya.
+Kamu akan menulis Python untuk menghitung kejadian sintetis, mengenali Bash, dan menyimpan perubahan dengan Git.
+Kemampuan ini membantumu mengolah data operasional Laundry Aman dengan cepat dan rapi.
+
+Selesaikan latihan folder dan terminal pada [Bab 01](01-lab.md) serta [Bab 02](02-komputer.md).
+Kamu juga bisa membandingkan perintah terminal dengan [Bab 04](04-linux.md) dan [Bab 05](05-windows.md).
+
+Kamu belum perlu menghafal sintaks bahasa pemrograman.
+Baca setiap baris kode dengan tenang, lalu ubah satu hal untuk melihat pengaruhnya.
 
 ## Konsep
 
-Pemrograman membantu mengulang pekerjaan dengan aturan yang konsisten. Di Laundry Aman, petugas dapat membaca sepuluh baris log secara manual. Untuk ribuan baris, skrip dapat menghitung dan memilih data yang perlu diperiksa manusia.
+Di Laundry Aman, kasir memeriksa catatan nota dan rekaman login setiap sore.
+Jika jumlah catatan hanya sepuluh baris, kita bisa membacanya satu per satu.
+Namun, ketika ada ribuan catatan, memeriksa secara manual memakan waktu dan melelahkan.
+Skrip program membantu kita menghitung dan menyaring kejadian penting secara otomatis.
+Kita akan mempelajari cara menulis program kecil, menguji hasilnya, dan menyimpan riwayat kerja.
 
-**Variabel** memberi nama pada nilai. **String** menyimpan teks, **integer** menyimpan bilangan bulat, dan **list** menyimpan urutan nilai. **Dictionary** menghubungkan kunci dengan nilai, mirip label pada laci. **Loop** mengulangi langkah. **Kondisi** memilih tindakan berdasarkan syarat. **Fungsi** mengemas pekerjaan agar dapat dipanggil dan diuji dengan masukan berbeda.
+### Mengolah data toko dengan aturan yang konsisten
 
-Python cocok untuk pengolahan data dan otomasi. Bash membantu merangkai perintah Linux. PowerShell mengolah objek Windows. JavaScript penting untuk memahami browser, SQL untuk basis data, dan C membantu memahami memori pada materi lanjutan. Mulai dengan satu bahasa sampai Anda mampu membaca error dan menguji hasil.
+Pemrograman membantu mengulang pekerjaan dengan aturan yang konsisten.
+Kita menggunakan wadah dan aturan dasar untuk menyimpan serta mengolah data.
 
-**Git** mencatat versi file. Sebuah **commit** menyimpan potret perubahan beserta pesan. **Repository** adalah folder kerja beserta riwayat Git-nya. Git dapat dipakai tanpa GitHub dan tanpa internet. GitHub adalah salah satu layanan untuk berbagi repository. File yang masuk riwayat dapat tetap tersedia dalam commit lama setelah Anda menghapus versi terbarunya, jadi cegah rahasia masuk sejak awal.
+Sebuah **variabel** memberi nama pada suatu nilai, seperti menempel label pada toples detergen.
+
+Sebuah **string** menyimpan teks, seperti nama pelanggan Laundry Aman.
+
+Sebuah **integer** menyimpan bilangan bulat, seperti jumlah pesanan baju.
+
+Sebuah **list** menyimpan urutan nilai, seperti daftar status pesanan pakaian.
+
+Sebuah **dictionary** menghubungkan kunci dengan nilai, mirip label pada laci penyimpanan nota.
+
+Sebuah **loop** mengulangi langkah kerja untuk setiap data di dalam kelompok.
+
+Sebuah **kondisi** memilih tindakan berdasarkan syarat yang ditentukan.
+
+Sebuah **fungsi** mengemas pekerjaan agar dapat dipanggil dan diuji dengan masukan berbeda.
+
+#### Cukup kenali dulu
+
+- **Tipe data**: kategori nilai di komputer, seperti teks, angka bulat, atau daftar.
+- **Kunci dan nilai**: pasangan data di dictionary untuk mencari informasi dengan cepat.
+- **Parameter**: nilai masukan yang diterima oleh fungsi untuk diolah.
+
+### Memilih alat pemrograman untuk keamanan
+
+Setiap bahasa pemrograman memiliki kegunaan tersendiri dalam pekerjaan keamanan komputer:
+
+- Python cocok untuk pengolahan data dan otomasi tugas berulang.
+- Bash membantu merangkai perintah pada sistem operasi Linux.
+- PowerShell mengolah objek terstruktur pada lingkungan Windows.
+- JavaScript penting untuk memahami cara kerja halaman browser.
+- SQL dipakai untuk mengelola dan mencari data di basis data.
+- Bahasa C membantu memahami alokasi memori pada materi lanjutan nanti.
+
+Mulai belajar dengan satu bahasa terlebih dahulu sampai kamu mampu membaca pesan error dan menguji hasil.
+
+#### Cukup kenali dulu
+
+- **Sintaks**: aturan penulisan kode pada suatu bahasa pemrograman.
+- **Otomasi**: menjalankan tugas berulang secara mandiri melalui program.
+- **Traceback**: laporan baris kesalahan saat program Python berhenti tiba-tiba.
+
+### Menyimpan riwayat perubahan dengan Git
+
+Saat menulis program atau laporan catatan, kamu perlu menyimpan kemajuan pekerjaan secara teratur.
+
+Perangkat lunak **Git** mencatat versi perubahan file dari waktu ke waktu.
+Sebuah **commit** menyimpan potret perubahan file beserta pesan penjelasannya.
+Sebuah **repository** adalah folder kerja beserta riwayat Git yang merekam jejaknya.
+
+Git dapat dipakai tanpa GitHub dan tanpa sambungan internet di komputermu sendiri.
+Layanan GitHub adalah salah satu tempat di internet untuk berbagi repository dengan orang lain.
+
+File yang masuk riwayat dapat tetap tersedia dalam commit lama setelah kamu menghapus versi terbarunya.
+Oleh karena itu, cegah rahasia seperti password masuk ke Git sejak awal.
+
+<details>
+<summary>Pendalaman opsional: mengapa rahasia tidak boleh masuk Git</summary>
+
+Saat kamu membuat commit, Git mencatat isi file secara permanen ke dalam basis datanya.
+Menghapus file pada commit berikutnya tidak menghapus catatan lama dari riwayat.
+Siapa pun yang memiliki akses ke repository dapat membuka commit lama dan menemukan password tersebut.
+Gunakan file pengecualian atau simpan rahasia di luar folder yang dilacak Git.
+
+</details>
+
+### Ringkasan
+
+- Variabel, tipe data, kondisi, dan loop adalah fondasi dasar untuk mengolah data otomatis.
+- Fungsi mengemas tugas berulang agar mudah diuji dengan berbagai masukan data.
+- Git mencatat riwayat perubahan secara lokal di komputermu tanpa perlu internet.
+- Jangan pernah memasukkan password atau data rahasia ke dalam commit Git.
+
+### Cek pemahaman
+
+1. Apa perbedaan cara kerja `=` (pemberian nilai) dan `==` (perbandingan)?
+2. Mengapa menghapus file rahasia dari folder kerja belum tentu menghapusnya dari riwayat Git?
+3. Mengapa `assert` hanya cocok untuk pengujian latihan dan bukan satu-satunya pertahanan aplikasi produksi?
 
 ## Praktik
 
+Siapkan editor teks dan buka terminal di folder latihan komputermu.
+Ikuti langkah-langkah berikut secara berurutan.
+
 ### 1. Buat program pertama
 
-Di editor, simpan file `hasil-belajar/hitung_login.py` dengan isi:
+Di editor teks, simpan file `hasil-belajar/hitung_login.py` dengan isi berikut:
 
 ```python
 def hitung_gagal(hasil_login):
@@ -36,21 +129,34 @@ assert hitung_gagal(["berhasil"]) == 0
 assert hitung_gagal(["gagal", "gagal"]) == 2
 ```
 
-Dari folder tutorial, Windows PowerShell:
+Jalankan program dari folder utama tutorial.
+Pilih jalur sesuai sistem operasi yang kamu gunakan:
+
+**Windows PowerShell**
 
 ```powershell
 py hasil-belajar/hitung_login.py
 ```
 
-Linux/macOS:
+**Linux/macOS**
 
 ```bash
 python3 hasil-belajar/hitung_login.py
 ```
 
-`def` mendefinisikan fungsi. `jumlah = 0` menyiapkan penghitung. `for` memeriksa setiap elemen, `if` menguji kesamaan, dan `+= 1` menambah satu. `return` mengembalikan nilai. Indentasi merupakan bagian sintaks Python; gunakan empat spasi untuk satu tingkat. `assert` memeriksa dugaan hasil dan menghentikan program jika tidak cocok. Assert berguna di latihan, tetapi jangan menjadikannya satu-satunya pemeriksaan keamanan aplikasi karena mode optimasi Python dapat menonaktifkannya.
+Kata kunci `def` mendefinisikan fungsi baru.
+Baris `jumlah = 0` menyiapkan variabel penghitung awal.
+Perintah `for` memeriksa setiap elemen, `if` menguji kesamaan, dan `+= 1` menambah satu pada nilai jumlah.
+Kata kunci `return` mengembalikan nilai hasil perhitungan kepada pemanggil fungsi.
 
-**Ikuti perubahan nilainya di kertas.** Fungsi belum menghitung saat baris `def` dibaca; Python menyiapkan definisinya. Pemanggilan `hitung_gagal(kejadian)` memberikan list ke nama `hasil_login`, lalu Python menjalankan isi fungsi. Tabel berikut menunjukkan satu putaran untuk setiap anggota list:
+Indentasi spasi adalah bagian aturan sintaks Python; gunakan empat spasi untuk satu tingkat indentasi.
+Perintah `assert` memeriksa dugaan hasil dan menghentikan program jika hasil pengujian tidak cocok.
+Assert berguna di latihan, tetapi jangan menjadikannya satu-satunya pemeriksaan keamanan aplikasi karena mode optimasi Python dapat menonaktifkannya.
+
+Ikuti perubahan nilainya di kertas untuk memahami alur eksekusi.
+Fungsi belum menghitung saat baris `def` dibaca; Python hanya menyiapkan definisinya di memori.
+Pemanggilan `hitung_gagal(kejadian)` memberikan list ke nama `hasil_login`, lalu Python menjalankan isi fungsi.
+Tabel berikut menunjukkan satu putaran untuk setiap anggota list:
 
 | Elemen yang sedang dibaca | Nilai `jumlah` sebelumnya | Apakah sama dengan `gagal`? | Nilai setelah langkah |
 |---|---:|---|---:|
@@ -60,19 +166,32 @@ python3 hasil-belajar/hitung_login.py
 | `berhasil` | 2 | Tidak | 2 |
 | `gagal` | 2 | Ya | 3 |
 
-`=` memberi nilai, sedangkan `==` membandingkan dua nilai. Kedua tanda itu melakukan pekerjaan berbeda. Pada list kosong, loop tidak melakukan putaran sehingga fungsi mengembalikan nol. Cocokkan penjelasan tersebut dengan pengujian pertama sebelum mengubah kode.
+Tanda `=` memberi nilai, sedangkan `==` membandingkan dua nilai.
+Kedua tanda itu melakukan pekerjaan berbeda yang tidak boleh tertukar.
+Pada list kosong, loop tidak melakukan putaran sehingga fungsi mengembalikan nol.
+Cocokkan penjelasan tersebut dengan pengujian pertama sebelum mengubah kode.
 
-Keluaran yang diharapkan adalah `Login gagal: 3`. Program tidak mencetak hasil assert yang lulus. Ubah satu elemen dari `gagal` menjadi `berhasil`; prediksi angka sebelum menjalankan kembali.
+Keluaran yang diharapkan di layar adalah `Login gagal: 3`.
+Program tidak mencetak teks apa pun untuk pengujian assert yang lulus.
+Ubah satu elemen dari `gagal` menjadi `berhasil`; prediksi angka hasilnya sebelum kamu menjalankan kembali program.
 
 ### 2. Bedakan data valid dan data asing
 
-Tambahkan teks `GAGAL` dengan huruf besar ke list. Hitungan tidak naik karena fungsi mencari teks `gagal` persis. Ini keputusan definisi data. Pada sistem nyata, Anda perlu memutuskan apakah nilai berbeda itu dianggap sah, perlu normalisasi, atau merupakan kesalahan format. Jangan mengubah semua input tanpa memahami kontraknya.
+Tambahkan teks `GAGAL` dengan huruf besar ke dalam list data.
+Hitungan tidak naik karena fungsi mencari teks `gagal` huruf kecil secara persis.
+Ini adalah keputusan mengenai definisi data pada program.
 
-Tambahkan pengujian `assert hitung_gagal(["GAGAL"]) == 0`. Hasil ini mendokumentasikan perilaku sekarang. Jika aturan bisnis berubah agar keduanya sama, tulis harapan baru dahulu, lihat kegagalannya, lalu ubah fungsi dan jalankan seluruh pemeriksaan lagi.
+Pada sistem nyata, kamu perlu memutuskan perlakuan data tersebut:
+Apakah nilai berbeda itu dianggap sah, perlu normalisasi bentuk, atau termasuk kesalahan format.
+Jangan mengubah semua input tanpa memahami kontrak aturan datanya.
+
+Tambahkan pengujian `assert hitung_gagal(["GAGAL"]) == 0`.
+Hasil pengujian ini mendokumentasikan perilaku program saat ini.
+Jika aturan bisnis berubah agar keduanya dianggap sama, tulis harapan baru dahulu, lihat kegagalannya, lalu perbarui fungsi dan jalankan seluruh pemeriksaan lagi.
 
 ### 3. Kenali skrip shell kecil
 
-Di Linux Bash, jalankan:
+Pada Linux Bash, kamu bisa membuat perulangan sederhana di terminal:
 
 ```bash
 for status in berhasil gagal gagal; do
@@ -80,18 +199,29 @@ for status in berhasil gagal gagal; do
 done
 ```
 
-Loop menjalankan `printf` tiga kali. Kutip `"$status"` menjaga nilai sebagai satu argumen. Untuk input tak tepercaya, hindari menyusunnya menjadi perintah shell. Dalam Python, gunakan API langsung bila tersedia, bukan menggabungkan teks masukan ke `os.system`.
+Loop shell di atas menjalankan perintah `printf` sebanyak tiga kali.
+Tanda kutip `"$status"` menjaga nilai variabel tetap menjadi satu argumen utuh.
+
+Untuk masukan dari pengguna luar yang tak tepercaya, hindari menyusunnya langsung menjadi perintah shell.
+Dalam Python, gunakan API langsung bila tersedia, bukan menggabungkan teks masukan ke `os.system`.
 
 ### 4. Simpan riwayat lokal jika Git tersedia
 
-Periksa `git --version`. Jika belum tersedia, Anda boleh melanjutkan bab tanpa Git lalu memasangnya dari sumber resmi saat diperlukan. Buat folder latihan terpisah melalui pengelola file, misalnya `git-latihan-laundry`, lalu buka terminal di dalamnya. Jangan menjalankan `git init` di home atau di repository lain.
+Periksa ketersediaan Git di komputermu dengan perintah `git --version`.
+Jika belum tersedia, kamu boleh melanjutkan bab tanpa Git lalu memasangnya dari sumber resmi saat diperlukan.
+
+Buat folder latihan terpisah melalui pengelola file, misalnya `git-latihan-laundry`, lalu buka terminal di dalamnya.
+Jangan menjalankan `git init` di home atau di repository lain.
+
+Jalankan perintah inisialisasi berikut di dalam folder baru:
 
 ```text
 git init
 git status
 ```
 
-Buat `catatan.md` menggunakan editor dan tulis satu pelajaran. Kemudian:
+Buat file baru bernama `catatan.md` menggunakan editor teks dan tulis satu pelajaran yang kamu dapatkan.
+Kemudian jalankan perintah penyimpanan riwayat:
 
 ```text
 git add catatan.md
@@ -100,32 +230,68 @@ git -c user.name="Pelajar Lab" -c user.email="pelajar@example.invalid" commit -m
 git log --oneline
 ```
 
-`git add` menyiapkan file untuk commit. `git diff --cached` memperlihatkan isi yang akan disimpan. Dua opsi `-c` menyediakan identitas dummy khusus perintah ini tanpa mengubah konfigurasi global. Alamat `.invalid` memang dipakai sebagai contoh, bukan alamat pengiriman. Jangan menjalankan push; latihan ini selesai secara lokal.
+Perintah `git add` menyiapkan file untuk disimpan dalam commit.
+Perintah `git diff --cached` memperlihatkan perubahan isi yang akan disimpan.
+Dua opsi `-c` menyediakan identitas sementara khusus perintah ini tanpa mengubah konfigurasi global komputermu.
+
+Alamat `.invalid` memang dipakai sebagai domain contoh pengujian, bukan alamat email pengiriman nyata.
+Jangan menjalankan perintah push ke internet; latihan ini selesai sepenuhnya di komputermu secara lokal.
 
 ## Hasil yang diharapkan
 
-Program menghitung tiga kegagalan, pengujian contoh lulus, dan perubahan data mengubah keluaran sesuai prediksi. Jika mengerjakan bagian Git, Anda memiliki satu commit lokal dengan file yang sudah diperiksa isinya.
+Program berhasil menghitung tiga kegagalan, pengujian assert lulus tanpa pesan error, dan perubahan data mengubah keluaran sesuai prediksi.
+Jika mengerjakan bagian Git, kamu memiliki satu commit lokal dengan file catatan yang sudah diperiksa isinya.
 
 ## Jika macet
 
-`SyntaxError` meminta pemeriksaan tanda baca dan struktur; `IndentationError` meminta pemeriksaan spasi. `NameError` biasanya berarti nama variabel belum tersedia atau salah eja. Bacalah baris terakhir traceback, kemudian nomor baris yang ditunjuk. Perbaiki satu kesalahan dan jalankan ulang.
+Jika program berhenti dan menampilkan pesan kesalahan, baca panduan tabel berikut.
+
+| Pesan kesalahan | Penyebab umum dan tindakan aman |
+|---|---|
+| `SyntaxError` | Periksa tanda kurung, titik dua, dan tanda petik pada kode |
+| `IndentationError` | Samakan jumlah spasi indentasi; gunakan empat spasi konsisten |
+| `NameError` | Periksa ejaan nama variabel atau fungsi yang belum dibuat |
+
+Bacalah baris terakhir laporan traceback, kemudian periksa nomor baris kode yang ditunjuk.
+Perbaiki satu kesalahan dengan teliti, lalu simpan file dan jalankan ulang.
 
 ## Latihan
 
-Buat fungsi `hitung_berhasil` dan uji list kosong, satu keberhasilan, serta campuran hasil. Tulis juga alasan hitungan gagal total tidak bisa menentukan apakah ada serangan: Anda masih memerlukan waktu kejadian, sumber, pola, dan konteks penggunaan.
+Buat fungsi `hitung_berhasil` dan uji dengan list kosong, satu keberhasilan, serta campuran hasil.
+Jelaskan alasan hitungan gagal total belum cukup menentukan adanya serangan.
+Kamu masih memerlukan informasi waktu kejadian, sumber alamat, pola, dan konteks akun.
 
-**Kurangi bantuan:** salin fungsi pertama dengan nama `hitung_berhasil`, lalu tentukan sendiri bagian kondisi yang perlu berubah. **Pindah kasus:** Laundry Aman mempunyai status `dicuci`, `selesai`, `selesai`, dan `diantar`. Tulis fungsi penghitung status selesai tanpa membuka solusi, lalu uji list kosong dan list tanpa status selesai.
+**Kurangi bantuan:**
+Salin fungsi pertama dengan nama `hitung_berhasil`, lalu tentukan sendiri bagian kondisi yang perlu berubah.
+
+**Pindah kasus:**
+Laundry Aman mempunyai catatan status pesanan `dicuci`, `selesai`, `selesai`, dan `diantar`.
+Tulis fungsi penghitung status selesai tanpa membuka solusi, lalu uji dengan list kosong dan list tanpa status selesai.
 
 <details>
 <summary>Pembahasan penelusuran dan pindah kasus</summary>
 
-Untuk `hitung_berhasil`, bandingkan tiap elemen dengan string `berhasil`; pola loop dan penghitung tetap sama. Pada kasus status laundry, dua elemen cocok dengan `selesai`, sehingga hasilnya dua. List kosong dan list tanpa kecocokan sama-sama menghasilkan nol. Mengganti judul output saja tidak mengubah aturan hitung; kondisi di dalam fungsi yang menentukan kecocokan. Jika Anda menulis nama fungsi baru tetapi masih memanggil fungsi lama, perubahan hasil belum menguji fungsi baru tersebut.
+Untuk `hitung_berhasil`, bandingkan tiap elemen dengan string `berhasil`; pola loop dan penghitung tetap sama.
+Pada kasus status laundry, dua elemen cocok dengan `selesai`, sehingga hasilnya dua.
+List kosong dan list tanpa kecocokan sama-sama menghasilkan nol.
+
+Mengganti judul output saja tidak mengubah aturan hitung; kondisi di dalam fungsi yang menentukan kecocokan.
+Jika kamu menulis nama fungsi baru tetapi masih memanggil fungsi lama, perubahan hasil belum menguji fungsi baru tersebut.
 
 </details>
 
 ## Bukti kelulusan
 
-Anda dapat menerangkan fungsi tanpa membaca komentar, membuat satu pengujian yang gagal karena bug sengaja, lalu memperbaikinya. Simpan versi sebelum dan sesudah melalui Git atau salinan file yang diberi nama jelas.
+- [ ] Saya dapat menerangkan alur fungsi Python tanpa membaca komentar kode.
+- [ ] Saya dapat membuat satu pengujian yang sengaja dibuat gagal karena bug, lalu memperbaikinya.
+- [ ] Saya menyimpan versi file sebelum dan sesudah melalui Git atau salinan file bernama jelas.
+- [ ] Saya memahami alasan mengapa hitungan login gagal saja belum membuktikan adanya serangan.
+
+### Lanjut belajar
+
+Jika konsep loop atau fungsi masih terasa asing, buat variasi data baru dan telusuri nilainya di kertas.
+Buka kembali [Bab 01](01-lab.md) jika perlu memastikan cara menjalankan Python di terminal.
+Setelah bukti kelulusan siap, lanjutkan ke [Bab 07: Web](07-web.md) untuk mempelajari cara kerja aplikasi web dan pertukaran pesan HTTP.
 
 ## Referensi
 

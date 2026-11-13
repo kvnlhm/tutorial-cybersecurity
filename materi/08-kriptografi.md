@@ -1,12 +1,46 @@
 # Bab 08: Hash, enkripsi, TLS, dan penyimpanan password
 
+Tahap 2 dari 6: Memahami cara sistem bekerja
+
 ## Tujuan dan prasyarat
 
-Anda akan membedakan encoding, hashing, enkripsi, serta tanda tangan digital. Anda juga akan menguji perubahan hash dengan data buatan sendiri. Selesaikan Bab 06 dan 07. Tidak perlu matematika tingkat lanjut untuk mengikuti praktik ini.
+Kamu akan membedakan encoding, hashing, enkripsi, serta tanda tangan digital.
+Kamu juga akan menguji perubahan nilai hash menggunakan data buatan sendiri di Python.
+Pengetahuan ini menjadi bekal penting untuk melindungi data transaksi dan akun pelanggan Laundry Aman.
+
+Selesaikan [Bab 06](06-pemrograman.md) untuk dasar Python dan [Bab 07](07-web.md) untuk memahami protokol web.
+Kamu tidak membutuhkan rumus matematika rumit untuk mengikuti praktik dasar ini.
 
 ## Konsep
 
-Laundry Aman mengirim nota melalui internet dan menyimpan data pelanggan. Kebutuhannya berbeda: menjaga isi pesan agar tidak terbaca pihak lain, mengetahui apakah file berubah, serta memastikan pesan berasal dari pihak yang diharapkan. Satu alat tidak otomatis memenuhi seluruh kebutuhan itu.
+Laundry Aman mengirim nota melalui internet dan menyimpan akun pelanggan.
+Kita menghadapi kebutuhan perlindungan yang berbeda untuk setiap situasi data.
+Ada data yang dirahasiakan, ada yang dipastikan keasliannya, dan ada password yang disimpan aman.
+Satu alat tidak bisa memenuhi seluruh kebutuhan itu sekaligus.
+Kita akan mempelajari perbedaan encoding, hashing, enkripsi, serta pengamanan sambungan web.
+
+### Membedakan empat fungsi pelindung data
+
+Di dunia keamanan informasi, ada empat cara mendasar dalam memperlakukan data.
+
+Pertama, **encoding** mengubah bentuk representasi data agar cocok dikirim atau disimpan di berbagai media.
+Contohnya adalah Base64 yang menyajikan data biner ke dalam deretan teks biasa.
+Encoding dapat dikembalikan ke bentuk asli tanpa kunci rahasia, sehingga encoding sama sekali tidak melindungi password.
+
+Kedua, fungsi **hash** menghasilkan ringkasan berukuran tetap untuk algoritma tertentu.
+Fungsi hash dirancang bekerja satu arah, seperti sidik jari dokumen.
+
+Namun, penyerang dapat menebak masukan yang mudah lalu membandingkan hasil hash-nya.
+Karena itu, hash password pendek tetap dapat ditebak.
+Hash file juga tidak membuktikan asal file bila penyerang dapat mengganti file dan nilai hash pembanding sekaligus.
+
+Ketiga, **enkripsi** menyembunyikan isi pesan memakai kunci rahasia.
+Data yang terenkripsi hanya dapat dibaca kembali oleh pihak yang memegang kunci yang sesuai.
+
+Keempat, **tanda tangan digital** memverifikasi asal pesan dan memastikan tidak adanya perubahan data.
+Mekanisme ini memanfaatkan pasangan kunci kriptografi untuk membuktikan keaslian dokumen atau pembaruan program.
+
+Bandingkan keempat fungsi tersebut pada tabel berikut:
 
 | Istilah | Fungsi | Contoh pemakaian |
 |---|---|---|
@@ -15,17 +49,86 @@ Laundry Aman mengirim nota melalui internet dan menyimpan data pelanggan. Kebutu
 | Enkripsi | Menyembunyikan isi dengan kunci | Melindungi data saat disimpan atau dikirim |
 | Tanda tangan digital | Memverifikasi asal pesan dan perubahan dengan pasangan kunci | Memeriksa pembaruan perangkat lunak |
 
-Base64 dapat dikembalikan tanpa rahasia sehingga tidak melindungi password. Hash dirancang sebagai fungsi satu arah, tetapi penyerang dapat menebak masukan yang mudah lalu membandingkan hash-nya. Karena itu hash password pendek tetap dapat ditebak. Hash file juga tidak membuktikan asal file bila penyerang dapat mengganti file dan nilai hash pembanding sekaligus.
+#### Cukup kenali dulu
 
-**Enkripsi simetris** memakai kunci rahasia yang sama untuk enkripsi dan dekripsi. **Kriptografi asimetris** memakai pasangan kunci publik dan privat, dengan operasi yang bergantung pada skema yang dipilih. Kunci publik boleh dibagikan; kunci privat harus dilindungi. Jangan menyederhanakan tanda tangan sebagai “enkripsi dengan kunci privat”; protokol tanda tangan memiliki rancangan dan pemeriksaan tersendiri.
+- **Kerahasiaan**: perlindungan isi data dari pihak yang tidak berhak.
+- **Integritas**: kepastian bahwa isi data tidak diubah pihak lain.
+- **Otentikasi**: pembuktian keaslian identitas pihak pengirim.
 
-**TLS** melindungi komunikasi antara endpoint. Pada koneksi HTTPS, browser memeriksa sertifikat server, lalu pihak-pihak melakukan handshake untuk menyiapkan perlindungan sesi. **Certificate authority**, atau CA, menandatangani sertifikat yang mengikat identitas seperti nama domain dengan kunci publik menurut aturan validasinya. **PKI** mencakup sistem pengelolaan kepercayaan dan sertifikat tersebut.
+### Menggunakan kunci rahasia dan pasangan kunci
 
-HTTPS membantu kerahasiaan serta integritas selama transmisi, tetapi halaman penipu juga bisa memiliki sertifikat valid untuk domain miliknya. Periksa nama domain yang Anda tuju. TLS juga tidak mencegah server yang sah menyimpan password dengan cara keliru.
+Saat menerapkan enkripsi untuk menjaga kerahasiaan, ada dua pendekatan utama:
 
-Untuk password, gunakan fungsi khusus yang sengaja membutuhkan biaya komputasi dan memori, seperti Argon2id melalui library yang terawat. **Salt** adalah nilai unik per password yang disimpan bersama hasil hash; tujuannya bukan menjadi rahasia. Parameter biaya perlu disesuaikan dan diperbarui mengikuti panduan resmi. Buku ini tidak membangun sistem autentikasi produksi atau menyuruh Anda menciptakan algoritma kriptografi sendiri.
+Metode **enkripsi simetris** memakai kunci rahasia yang sama untuk proses enkripsi dan dekripsi.
+Kedua pihak yang berkomunikasi harus saling menjaga kerahasiaan satu kunci tersebut.
+
+Metode **kriptografi asimetris** memakai pasangan kunci publik dan privat, dengan operasi yang bergantung pada skema yang dipilih.
+Kunci publik boleh dibagikan kepada siapa saja; kunci privat harus dilindungi dan disimpan rapat oleh pemiliknya.
+Jangan menyederhanakan tanda tangan sebagai “enkripsi dengan kunci privat”; protokol tanda tangan memiliki rancangan dan pemeriksaan tersendiri.
+
+#### Cukup kenali dulu
+
+- **Kunci publik**: kunci yang boleh dibagikan secara bebas.
+- **Kunci privat**: kunci rahasia yang harus dilindungi pemiliknya.
+- **Dekripsi**: proses membuka kembali pesan terenkripsi memakai kunci.
+
+### Mengamankan komunikasi web dengan TLS dan sertifikat
+
+Saat kasir mengakses server aplikasi Laundry Aman melalui internet, koneksi perlu dilindungi dari penyadapan.
+
+Protokol **TLS** melindungi komunikasi antara endpoint di jaringan.
+Pada koneksi HTTPS, browser memeriksa sertifikat server, lalu pihak-pihak melakukan handshake untuk menyiapkan perlindungan sesi.
+
+Pihak otoritas penerbit sertifikat disebut **certificate authority**, atau CA.
+CA menandatangani sertifikat yang mengikat identitas seperti nama domain dengan kunci publik menurut aturan validasinya.
+Sistem pengelolaan kepercayaan dan sertifikat digital secara menyeluruh disebut **PKI**, singkatan dari *public key infrastructure*.
+
+HTTPS membantu kerahasiaan serta integritas selama transmisi, tetapi halaman penipu juga bisa memiliki sertifikat valid untuk domain miliknya.
+Periksa selalu nama domain yang kamu tuju di bilah alamat browser.
+Selain itu, TLS juga tidak mencegah server yang sah menyimpan password dengan cara keliru.
+
+#### Cukup kenali dulu
+
+- **Handshake**: proses negosiasi parameter keamanan dan pertukaran kunci awal TLS.
+- **Sertifikat digital**: dokumen elektronik resmi yang mengikat nama domain dengan kunci publik server.
+- **Validasi domain**: proses verifikasi oleh CA terhadap kepemilikan domain pemohon.
+
+### Menyimpan password pelanggan secara bertanggung jawab
+
+Untuk password, gunakan fungsi khusus yang sengaja membutuhkan biaya komputasi dan memori, seperti Argon2id melalui library yang terawat.
+Fungsi lambat ini memperberat kerja penyerang saat mencoba menebak password.
+
+Komponen **Salt** adalah nilai unik per password yang disimpan bersama hasil hash; tujuannya bukan menjadi rahasia.
+Parameter biaya perlu disesuaikan dan diperbarui mengikuti panduan resmi.
+Buku ini tidak membangun sistem autentikasi produksi atau menyuruh kamu menciptakan algoritma kriptografi sendiri.
+
+<details>
+<summary>Pendalaman opsional: konsep tabrakan hash (collision)</summary>
+
+Fungsi hash memetakan masukan ukuran berapa pun menjadi deretan angka berukuran tetap.
+Karena variasi masukan tidak terbatas sedangkan panjang keluaran terbatas, secara matematis pasti ada dua data berbeda dengan nilai hash identik.
+Kondisi di mana dua masukan berbeda menghasilkan keluaran hash yang persis sama disebut **collision**.
+Algoritma hash modern yang kuat dirancang agar pencarian collision sengaja menjadi mustahil secara praktis.
+
+</details>
+
+### Ringkasan
+
+- Encoding mengubah format representasi data, sedangkan enkripsi mengunci kerahasiaan memakai kunci.
+- Hash memeriksa integritas data; gunakan fungsi lambat dengan salt untuk menyimpan password.
+- Kriptografi simetris memakai satu kunci bersama, sedangkan asimetris memakai pasangan kunci publik dan privat.
+- TLS mengamankan saluran komunikasi HTTPS melalui sertifikat CA; periksa nama domain dengan teliti.
+
+### Cek pemahaman
+
+1. Mengapa Base64 sama sekali tidak boleh dipakai untuk menyembunyikan password?
+2. Mengapa sebuah situs phishing tetap bisa memiliki sertifikat TLS yang sah?
+3. Apa tujuan utama menambahkan salt unik pada setiap penyimpanan hash password?
 
 ## Praktik
+
+Kamu akan menjalankan skrip Python untuk membuktikan kepekaan fungsi hash terhadap perubahan data kecil.
+Siapkan terminal di komputermu.
 
 ### 1. Bandingkan dua hash
 
@@ -47,47 +150,111 @@ assert hashlib.sha256(nota_awal).hexdigest() == hash_awal
 assert hash_awal != hash_ubah
 ```
 
-Windows PowerShell:
+Jalankan skrip dari folder utama tutorial.
+Pilih jalur sesuai perangkatmu:
+
+**Windows PowerShell**
 
 ```powershell
 py hasil-belajar/cek_hash.py
 ```
 
-Linux/macOS:
+**Linux/macOS**
 
 ```bash
 python3 hasil-belajar/cek_hash.py
 ```
 
-Awalan `b` membuat literal byte. Fungsi hash bekerja pada byte, bukan pada makna kalimat. `hexdigest()` menampilkan hasil sebagai karakter heksadesimal. SHA-256 menghasilkan 256 bit, yang dalam bentuk ini menjadi 64 karakter. Untuk dua contoh nota tersebut, hasil perbandingannya `False`.
+Awalan `b` membuat literal byte.
+Fungsi hash bekerja pada byte, bukan pada makna kalimat.
+Metode `hexdigest()` menampilkan hasil sebagai karakter heksadesimal.
+Algoritma SHA-256 menghasilkan 256 bit, yang dalam bentuk ini menjadi 64 karakter heksadesimal.
+Untuk dua contoh nota tersebut, hasil perbandingannya `False`.
+Perbedaan satu angka terakhir saja mengubah seluruh nilai hash secara drastis.
 
-Perubahan spasi, encoding, atau akhir baris juga mengubah byte. Dua dokumen yang terlihat sama dapat mempunyai hash berbeda. Saat memeriksa file unduhan, bandingkan hash dari file yang tepat dan sumber pembanding yang dipercaya.
+Perubahan spasi, encoding, atau akhir baris juga mengubah byte.
+Dua dokumen yang terlihat sama di layar dapat mempunyai hash berbeda jika karakternya tidak sama persis.
+Saat memeriksa file unduhan, bandingkan hash dari file yang tepat dan sumber pembanding yang dipercaya.
 
 ### 2. Uji dugaan tentang hash
 
-Ganti `nota_ubah` agar sama persis dengan `nota_awal`. Perbandingan sekarang `True`, dan assert terakhir gagal. Kegagalan itu sesuai perubahan eksperimen; baca baris yang ditunjuk. Kembalikan isi yang berbeda setelah selesai.
+Buka kembali file `hasil-belajar/cek_hash.py` di editor teks.
+Ganti `nota_ubah` agar sama persis dengan `nota_awal`.
+Jalankan kembali program di terminal.
 
-Satu percobaan ini membuktikan perilaku pada dua masukan. Ia tidak membuktikan secara matematis bahwa algoritma bebas collision. **Collision** terjadi ketika dua masukan berbeda menghasilkan hash yang sama; ruang keluaran terbatas berarti collision ada secara teori. Algoritma kriptografis yang baik membuat pencariannya tidak praktis menurut analisis dan kemampuan yang diketahui.
+Perbandingan sekarang bernilai `True`, dan baris assert terakhir gagal menghentikan program.
+Kegagalan itu sesuai perubahan eksperimen; baca baris yang ditunjuk di traceback.
+Kembalikan isi yang berbeda setelah selesai melakukan pengujian.
+
+Satu percobaan ini membuktikan perilaku pada dua masukan.
+Ia tidak membuktikan secara matematis bahwa algoritma bebas collision.
+Istilah **Collision** terjadi ketika dua masukan berbeda menghasilkan hash yang sama; ruang keluaran terbatas berarti collision ada secara teori.
+Algoritma kriptografis yang baik membuat pencariannya tidak praktis menurut analisis dan kemampuan yang diketahui.
 
 ### 3. Amati sertifikat situs dokumentasi
 
-Buka situs dokumentasi resmi melalui HTTPS, misalnya `https://docs.python.org/`. Gunakan informasi koneksi pada browser untuk melihat sertifikat. Catat nama domain, penerbit, dan masa berlaku tanpa menyalin informasi akun. Letak menu berbeda antarbrowser. Jangan melanjutkan melewati peringatan sertifikat untuk menyelesaikan latihan; periksa jam sistem serta domain yang diketik.
+Buka situs dokumentasi resmi melalui HTTPS, misalnya `https://docs.python.org/`.
+Gunakan informasi koneksi pada browser untuk melihat sertifikat.
+Catat nama domain, penerbit, dan masa berlaku tanpa menyalin informasi akun.
+
+Letak menu sertifikat berbeda antarbrowser; biasanya berada di samping bilah alamat web.
+Jangan melanjutkan melewati peringatan sertifikat untuk menyelesaikan latihan; periksa jam sistem serta domain yang diketik.
 
 ## Hasil yang diharapkan
 
-Anda mendapat dua hash berbeda sepanjang 64 karakter dan dapat mengubah eksperimen hingga assert gagal dengan alasan yang dipahami. Anda juga dapat membaca identitas domain dari sertifikat atau mencatat bagian sertifikat sebagai belum dikerjakan jika sedang offline.
+Kamu mendapat dua hash berbeda sepanjang 64 karakter dan dapat mengubah eksperimen hingga assert gagal dengan alasan yang dipahami.
+Kamu juga dapat membaca identitas domain dari sertifikat atau mencatat bagian sertifikat sebagai belum dikerjakan jika sedang offline.
+Simpan catatan perbandingan hash di jurnal belajarmu.
 
 ## Jika macet
 
-Error “strings must be encoded before hashing” berarti Anda memberi teks ketika fungsi memerlukan byte. Untuk variabel teks, gunakan `.encode('utf-8')`. Hash file berbeda antarmesin dapat berasal dari akhir baris, bukan kerusakan alat. Jangan menghapus pemeriksaan sertifikat atau memakai algoritma lama untuk menyembunyikan error.
+Jika menemui kendala saat menjalankan program atau memeriksa web, gunakan panduan berikut.
+
+| Masalah yang terlihat | Penyebab umum dan tindakan aman |
+|---|---|
+| Pesan `strings must be encoded before hashing` | Berikan data dalam bentuk byte; gunakan `.encode('utf-8')` pada teks |
+| Nilai hash berbeda antarmesin | Karakter akhir baris file berbeda antarsistem; periksa isi byte mentah |
+| Peringatan sertifikat di browser | Periksa kesesuaian jam sistem dan periksa kembali ejaan nama domain |
+
+Jangan pernah menghapus pemeriksaan sertifikat atau memakai algoritma usang hanya demi menghilangkan pesan error.
 
 ## Latihan
 
-Terangkan pilihan untuk tiga kebutuhan: mendeteksi perubahan nota, merahasiakan isi backup, dan memeriksa asal pembaruan aplikasi. Jawaban harus mencakup pengelolaan kunci atau sumber hash yang dipercaya, bukan hanya nama algoritma. Jelaskan juga alasan password membutuhkan perlakuan berbeda dari hash file.
+Terangkan pilihan solusi untuk tiga kebutuhan pengamanan di Laundry Aman berikut:
+
+1. Mendeteksi perubahan catatan nota pesanan secara cepat.
+2. Merahasiakan isi file cadangan data pelanggan di media penyimpanan.
+3. Memeriksa keaslian asal file pembaruan aplikasi kasir.
+
+Jawaban harus mencakup pengelolaan kunci atau sumber hash yang dipercaya, bukan hanya menyebut nama algoritma.
+Jelaskan juga alasan mengapa password membutuhkan perlakuan khusus yang berbeda dari hash file biasa.
+
+<details>
+<summary>Pembahasan setelah mencoba: memilih fungsi kriptografi</summary>
+
+Untuk mendeteksi perubahan nota, gunakan fungsi hash dan cocokkan dengan nilai ringkasan dari sumber terpercaya.
+Untuk merahasiakan cadangan, gunakan enkripsi simetris yang kuat dengan kunci rahasia yang disimpan terpisah.
+Untuk pembaruan aplikasi, gunakan tanda tangan digital dengan verifikasi kunci publik resmi penerbit program.
+
+Password memerlukan fungsi lambat dengan salt seperti Argon2id karena penyerang dapat melakukan tebakan jutaan kombinasi kata secara luring (*offline*).
+
+</details>
 
 ## Bukti kelulusan
 
-Anda lulus jika dapat membedakan empat konsep pada tabel, menjelaskan batas hash tanpa sumber pembanding tepercaya, serta menyebutkan fungsi salt. Simpan kode eksperimen dan hasil yang membuktikan perubahan satu byte dapat mengubah hash contoh.
+- [ ] Saya dapat membedakan encoding, hash, enkripsi, dan tanda tangan digital.
+- [ ] Saya memahami batas hash jika tidak didukung oleh sumber pembanding yang terpercaya.
+- [ ] Saya dapat menjelaskan fungsi penambahan salt pada penyimpanan password.
+- [ ] Saya menyimpan kode eksperimen dan membuktikan bahwa perubahan satu byte mengubah hash contoh.
+
+### Lanjut belajar
+
+Kamu telah menyelesaikan seluruh materi Tahap 2: Memahami cara sistem bekerja (Bab 03 sampai 08).
+Di tahap ini, kamu mempelajari perjalanan jaringan, Linux, Windows, Python, web, dan dasar kriptografi.
+
+Pada tahap berikutnya (Tahap 3: Menjaga dan menguji akses), kita berpindah ke penerapan keamanan nyata.
+Kamu akan belajar mengatur hak akses akun pada [Bab 09: Identitas](09-identitas.md).
+Untuk menyegarkan dasar web, buka kembali [Bab 07](07-web.md).
 
 ## Referensi
 
